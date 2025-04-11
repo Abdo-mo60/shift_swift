@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shiftswift/bottom_navigation_bar.dart' show CustomBottomNavigationBar;
+import 'package:shiftswift/company/bottom_bar_company.dart';
 import 'package:shiftswift/home/presentation/view/widgets/home_view_body.dart';
 
 
@@ -18,7 +20,7 @@ class Shiftswift extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeViewBody(),
+      home: CustomBottomCompanyBar(),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.blue),
       ),

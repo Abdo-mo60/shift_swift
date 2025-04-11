@@ -1,28 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shiftswift/company/my_jop/widget/my_jop_view_company.dart';
+import 'package:shiftswift/company/my_jop/widget/myjop_company.dart';
 import 'package:shiftswift/core/app_colors.dart';
 import 'package:shiftswift/core/styles.dart';
 import 'package:shiftswift/home/presentation/view/home_view.dart';
+import 'package:shiftswift/home/presentation/view/widgets/custom_floating_action_button.dart';
+
 import 'package:shiftswift/profile/Profile%20All/profile_home.dart';
 
-import 'home/presentation/view/widgets/custom_floating_action_button.dart';
-import 'my_job/presentation/view/my_job_view.dart';
 
-class CustomBottomNavigationBar extends StatefulWidget {
-  const CustomBottomNavigationBar({super.key});
+
+class CustomBottomCompanyBar extends StatefulWidget {
+  const CustomBottomCompanyBar({super.key});
 
   @override
-  State<CustomBottomNavigationBar> createState() =>
+  State<CustomBottomCompanyBar> createState() =>
       _CustomBottomNavigationBarState();
 }
 
-class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
+class _CustomBottomNavigationBarState extends State<CustomBottomCompanyBar> {
   int _selectedIndex = 0;
 
   static final List<Widget> _pages = [
-    const HomeView(),
+   const HomeView() ,
     const ProfileHome(),
-   const MyJobView(),
+   const MyJobViewCompany(),
   ];
 
   void _onItemTapped(int index) {
