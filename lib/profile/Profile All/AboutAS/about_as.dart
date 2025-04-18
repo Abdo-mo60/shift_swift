@@ -39,7 +39,6 @@ class AboutUsScreen extends StatelessWidget {
       ),
     );
   }
-// hello
 
   // دالة لإنشاء عنصر قائمة منسدلة
   Widget _buildExpansionTile(String title, String content) {

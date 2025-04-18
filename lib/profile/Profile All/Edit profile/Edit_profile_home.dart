@@ -17,32 +17,32 @@ class  EditProfileScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Container(
-            color: Colors.blue.shade800,
-            padding: EdgeInsets.all(16),
-            child: Row(
-              children: [
-                CircleAvatar(
-                  radius: 30,
-                  backgroundImage: AssetImage('assets/profile.jpg'), // استبدلها بالصورة الفعلية
-                ),
-                SizedBox(width: 12),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Abdelrahman mohamed",
-                      style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      "Elmansora, Egypt",
-                      style: TextStyle(fontSize: 14, color: Colors.white70),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
+          // Container(
+          //   color: Colors.blue.shade800,
+          //   padding: EdgeInsets.all(16),
+          //   child: Row(
+          //     children: [
+          //       CircleAvatar(
+          //         radius: 30,
+          //         backgroundImage: AssetImage('asstes/three.png'), // استبدلها بالصورة الفعلية
+          //       ),
+          //       SizedBox(width: 12),
+          //       Column(
+          //         crossAxisAlignment: CrossAxisAlignment.start,
+          //         children: [
+          //           Text(
+          //             "Abdelrahman mohamed",
+          //             style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
+          //           ),
+          //           Text(
+          //             "Elmansora, Egypt",
+          //             style: TextStyle(fontSize: 14, color: Colors.white70),
+          //           ),
+          //         ],
+          //       ),
+          //     ],
+          //   ),
+          // ),
          
          
           ListTile(
