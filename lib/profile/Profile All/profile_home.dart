@@ -3,12 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shiftswift/core/app_colors.dart';
 import 'package:shiftswift/login/authentication%20cubit/auth_cubit.dart';
 import 'package:shiftswift/login/login_home.dart';
-import 'package:shiftswift/profile/Models/user_info_model.dart';
-import 'package:shiftswift/profile/Profile%20All/AboutAS/about_as.dart';
+import 'package:shiftswift/profile/Profile%20All/AboutUS/about_us.dart';
 import 'package:shiftswift/profile/Profile%20All/Edit%20profile/Edit_profile_home.dart';
 import 'package:shiftswift/profile/Profile%20All/HelpCenter/help_center.dart';
 import 'package:shiftswift/profile/Profile%20All/Settting/settting_home_user.dart';
-import 'package:shiftswift/profile/user%20info%20cubit/user_info_cubit.dart';
+import 'package:shiftswift/profile/widgets/user_profile_data.dart';
 
 class ProfileHome extends StatelessWidget {
   const ProfileHome({super.key});
@@ -25,10 +24,9 @@ class ProfileScreen extends StatelessWidget {
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is LogOutStateSuccessfully) {
-          Navigator.pushAndRemoveUntil(
+          Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => LoginHome()),
-            (route) => false,
           );
         } else if (state is FailedToLogOutState) {
           showDialog(
@@ -55,21 +53,22 @@ class ProfileScreen extends StatelessWidget {
             // القسم العلوي (صورة المستخدم والاسم والبريد)
             Container(
               color: Color.fromRGBO(43, 91, 141, 1),
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+              padding: const EdgeInsets.symmetric(
+                vertical: 20,
+                horizontal: 16,
+              ),
               child: Row(
                 children: [
                   CircleAvatar(
                     radius: 35,
-                    backgroundImage: AssetImage(
-                      'asstes/three.png',
-                    ), 
+                    backgroundImage: AssetImage('asstes/three.png'),
                   ),
                   const SizedBox(width: 15),
                   UserProfileData(),
                 ],
               ),
             ),
-
+    
             // القائمة الرئيسية
             Expanded(
               child: ListView(
@@ -88,7 +87,7 @@ class ProfileScreen extends StatelessWidget {
                     SettingsScreen(),
                   ),
                   SizedBox(height: 15),
-
+    
                   _buildProfileOption(
                     Icons.help,
                     "Help Center",
@@ -141,68 +140,4 @@ Widget _buildProfileOption(
       }
     },
   );
-}
-
-class UserProfileData extends StatefulWidget {
-  const UserProfileData({super.key});
-
-  @override
-  State<UserProfileData> createState() => _UserProfileDataState();
-}
-
-class _UserProfileDataState extends State<UserProfileData> {
-  @override
-  void initState() {
-    super.initState();
-    BlocProvider.of<UserInfoCubit>(context).getUserInfo();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<UserInfoCubit, UserInfoState>(
-      builder: (context, state) {
-        if (state is UserInfoSuccess) {
-          UserInfoModel usermodel =
-              BlocProvider.of<UserInfoCubit>(context).userModel!;
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                usermodel.userName,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                usermodel.email,
-                style: TextStyle(color: Colors.white70, fontSize: 14),
-              ),
-            ],
-          );
-        } else if (state is UserInfoFailure) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "No user name",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                "No Email",
-                style: TextStyle(color: Colors.white70, fontSize: 14),
-              ),
-            ],
-          );
-        } else {
-          return CircularProgressIndicator();
-        }
-      },
-    );
-  }
 }

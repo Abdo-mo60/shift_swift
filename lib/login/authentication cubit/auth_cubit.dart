@@ -31,12 +31,30 @@ class AuthCubit extends Cubit<AuthState> {
         },
       );
       Map<String, dynamic> responseBody = jsonDecode(response.body);
-      if (responseBody['isSuccess'] == true) {
+      if (response.statusCode == 200) {
         await CacheNetwork.insertToCache(
-          key: cacheTokenKey,
-          value: responseBody['data']['token'],
+        key: cacheTokenKey,
+        value: responseBody['data']['token'],
+      );
+      token = responseBody['data']['token'];
+      await CacheNetwork.insertToCache(
+        key: cacheAccountTypeKey,
+        value: accountType,
+      );
+      accType = accountType;
+      if (accountType == 'Member') {
+        await CacheNetwork.insertToCache(
+          key: cacheMemberIdKey,
+          value: responseBody['data']['memberResponse']['memberId'],
         );
-        token = responseBody['data']['token'];
+        memberId = responseBody['data']['memberResponse']['memberId'];
+      } else {
+        await CacheNetwork.insertToCache(
+          key: cacheMemberIdKey,
+          value: responseBody['data']['companyResponse']['companyId'],
+        );
+        companyId = responseBody['data']['companyResponse']['companyId'];
+      }
         emit(RegisterSuccessState());
       } else {
         dynamic errorData = responseBody['data'];
@@ -49,7 +67,7 @@ class AuthCubit extends Cubit<AuthState> {
         }
       }
     } on Exception catch (e) {
-    //  print('Error: $e');
+      //  print('Error: $e');
       emit(
         FailedToRegisterState(
           errorMessage: 'An error occurred while registering.',
@@ -74,13 +92,32 @@ class AuthCubit extends Cubit<AuthState> {
 
     Map<String, dynamic> responseBody = jsonDecode(response.body);
     if (response.statusCode == 200) {
-    //  print('tokenAfterLogin=>${responseBody['data']['token']}');
+      //  print('tokenAfterLogin=>${responseBody['data']['token']}');
       await CacheNetwork.insertToCache(
         key: cacheTokenKey,
         value: responseBody['data']['token'],
       );
       token = responseBody['data']['token'];
-    //  print('tokenAfterCacheSet=>$token');
+      await CacheNetwork.insertToCache(
+        key: cacheAccountTypeKey,
+        value: accountType,
+      );
+      accType = accountType;
+      if (accountType == 'Member') {
+        await CacheNetwork.insertToCache(
+          key: cacheMemberIdKey,
+          value: responseBody['data']['memberResponse']['memberId'],
+        );
+        memberId = responseBody['data']['memberResponse']['memberId'];
+      } else {
+        await CacheNetwork.insertToCache(
+          key: cacheCompanyIdKey,
+          value: responseBody['data']['companyResponse']['companyId'],
+        );
+        companyId = responseBody['data']['companyResponse']['companyId'];
+      }
+
+      //  print('tokenAfterCacheSet=>$token');
       emit(LoginSuccessState());
     } else {
       List<dynamic> erorrData = responseBody['data'];
@@ -93,7 +130,7 @@ class AuthCubit extends Cubit<AuthState> {
       Uri.parse('$accountBaseUrl/LogOutAccoount'),
       headers: {'Authorization': 'Bearer $token'},
     );
-  //  print('Log Out Response => ${response.statusCode}');
+    //  print('Log Out Response => ${response.statusCode}');
 
     if (response.statusCode == 200) {
       CacheNetwork.deleteCacheItem(key: cacheTokenKey);

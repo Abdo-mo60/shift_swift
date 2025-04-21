@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shiftswift/profile/Models/user_info_model.dart';
 import 'package:shiftswift/profile/Profile%20All/Settting/Device_managment.dart';
-import 'package:shiftswift/profile/Profile%20All/Settting/chang_Email.dart';
+import 'package:shiftswift/profile/Profile%20All/Settting/change_Email.dart';
 import 'package:shiftswift/profile/Profile%20All/Settting/delet_account.dart';
 import 'package:shiftswift/profile/Profile%20All/Settting/manage_2Fa.dart';
+import 'package:shiftswift/profile/user%20info%20cubit/user_info_cubit.dart';
 
 class SettingsScreen extends StatelessWidget {
   @override
@@ -21,18 +24,29 @@ class SettingsScreen extends StatelessWidget {
         ),
       ),
       body: ListView(
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.all(8),
         children: [
-          _buildSettingItem(
-            title: "Email",
-            subtitle: "Karim.Ali@example.com",
-            buttonText: "Change Email",
-            onPressed: () {
-              Navigator.push(
-  context,
-  MaterialPageRoute(builder: (context) => ChangeEmailScreen()),
-);
-
+          BlocBuilder<UserInfoCubit, UserInfoState>(
+            builder: (context, state) {
+              if (state is UserInfoSuccess) {
+                UserInfoModel usermodel =
+                    BlocProvider.of<UserInfoCubit>(context).userModel!;
+                return _buildSettingItem(
+                  title: "Email",
+                  subtitle: usermodel.email,
+                  buttonText: "Change Email",
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChangeEmailScreen(),
+                      ),
+                    );
+                  },
+                );
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
             },
           ),
           _buildSettingItem(
@@ -41,10 +55,9 @@ class SettingsScreen extends StatelessWidget {
             buttonText: "Manage 2FA",
             onPressed: () {
               Navigator.push(
-  context,
-  MaterialPageRoute(builder: (context) => TwoFactorAuthPage()),
-);
-
+                context,
+                MaterialPageRoute(builder: (context) => TwoFactorAuthPage()),
+              );
             },
           ),
           _buildSettingItem(
@@ -60,9 +73,12 @@ class SettingsScreen extends StatelessWidget {
             subtitle: "",
             buttonText: "View",
             onPressed: () {
-                          Navigator.push(
-  context,
-  MaterialPageRoute(builder: (context) => DeviceManagementPage()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DeviceManagementPage(),
+                ),
+              );
             },
           ),
           _buildSettingItem(
@@ -72,10 +88,9 @@ class SettingsScreen extends StatelessWidget {
             isDestructive: true,
             onPressed: () {
               Navigator.push(
-  context,
-  MaterialPageRoute(builder: (context) => DeleteAccountPage()),
-);
-
+                context,
+                MaterialPageRoute(builder: (context) => DeleteAccountPage()),
+              );
             },
           ),
         ],
@@ -101,19 +116,16 @@ class SettingsScreen extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, ),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               if (subtitle != null && subtitle.isNotEmpty)
-                Text(
-                  subtitle,
-                  style: TextStyle(color: Colors.grey[700]),
-                ),
+                Text(subtitle, style: TextStyle(color: Colors.grey[700])),
             ],
           ),
           OutlinedButton(
             onPressed: onPressed,
             style: OutlinedButton.styleFrom(
-              foregroundColor:   Colors.blue,
+              foregroundColor: Colors.blue,
               side: BorderSide(color: Colors.blue),
             ),
             child: Text(buttonText),

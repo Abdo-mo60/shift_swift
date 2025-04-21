@@ -8,10 +8,17 @@ import 'package:shiftswift/login/helper/local_network.dart';
 import 'package:shiftswift/login/login_home.dart';
 import 'package:shiftswift/profile/user%20info%20cubit/user_info_cubit.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
- await CacheNetwork.cacheIntialization();
- token=CacheNetwork.getCacheData(key: cacheTokenKey);
+  await CacheNetwork.cacheIntialization();
+  token = CacheNetwork.getCacheData(key: cacheTokenKey);
+  accType=CacheNetwork.getCacheData(key: cacheAccountTypeKey);
+  if (accType == 'Member') {
+    memberId = CacheNetwork.getCacheData(key: cacheMemberIdKey);
+  } else if (accType == 'Company') {
+    companyId = CacheNetwork.getCacheData(key: cacheCompanyIdKey);
+  }
+
   runApp(const Shiftswift());
 }
 
@@ -28,7 +35,10 @@ class Shiftswift extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home:(token!= null&& token!='')? CustomBottomNavigationBar():LoginHome(),
+        home:
+            (token != null && token != '')
+                ? CustomBottomNavigationBar()
+                : LoginHome(),
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: AppColors.blue),
         ),
