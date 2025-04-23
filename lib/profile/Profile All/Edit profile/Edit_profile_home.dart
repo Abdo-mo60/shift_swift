@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:shiftswift/profile/Profile%20All/Edit%20profile/Personal.dart';
+import 'package:shiftswift/core/app_colors.dart';
+import 'package:shiftswift/profile/Profile%20All/Edit%20profile/Views/Personal.dart';
+import 'package:shiftswift/profile/Profile%20All/Edit%20profile/Views/add_education_view.dart';
+import 'package:shiftswift/profile/Profile%20All/Edit%20profile/Views/add_experience_view.dart';
+import 'package:shiftswift/profile/Profile%20All/Edit%20profile/Views/add_skills_view.dart';
+import 'package:shiftswift/profile/widgets/profile_section.dart';
 
-class  EditProfileScreen extends StatelessWidget {
+class EditProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
-        backgroundColor: Colors.blue.shade800,
+        backgroundColor: AppColors.blue,
         elevation: 0,
-        title: Text("Edit Profile",style: TextStyle(color: Colors.white),),
+        title: Text("Edit Profile", style: TextStyle(color: Colors.white)),
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pop(context),
@@ -43,26 +48,10 @@ class  EditProfileScreen extends StatelessWidget {
           //     ],
           //   ),
           // ),
-         
-         
-          ListTile(
-            title: Text("Personal Info", style: TextStyle(fontWeight: FontWeight.bold)),
-            subtitle: Text("Karim Ali"),
-            trailing: OutlinedButton(
-              onPressed: () {
-                Navigator.push(
-  context,
-  MaterialPageRoute(builder: (context) => PersonalInfoPage()),
-);
-
-              },
-              style: OutlinedButton.styleFrom(
-                side: BorderSide(color: Colors.blue),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-              ),
-              child: Text("View", style: TextStyle(color: Colors.blue)),
-            ),
-          ),
+          ProfileSection(title: 'Personal Info', page: PersonalInfoPage()),
+          ProfileSection(title: 'Education', page: AddEducationView()),
+          ProfileSection(title: 'Experience', page: AddExperienceView()),
+          ProfileSection(title: 'Skills', page: AddSkillsView()),
         ],
       ),
     );

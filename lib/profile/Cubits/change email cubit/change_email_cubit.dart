@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:shiftswift/profile/Services/change_email_service.dart';
-import 'package:shiftswift/profile/user%20info%20cubit/user_info_cubit.dart';
+import 'package:shiftswift/profile/Cubits/user%20info%20cubit/user_info_cubit.dart';
 
 part 'change_email_state.dart';
 

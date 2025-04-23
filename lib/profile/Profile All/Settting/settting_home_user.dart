@@ -5,7 +5,7 @@ import 'package:shiftswift/profile/Profile%20All/Settting/Device_managment.dart'
 import 'package:shiftswift/profile/Profile%20All/Settting/change_Email.dart';
 import 'package:shiftswift/profile/Profile%20All/Settting/delet_account.dart';
 import 'package:shiftswift/profile/Profile%20All/Settting/manage_2Fa.dart';
-import 'package:shiftswift/profile/user%20info%20cubit/user_info_cubit.dart';
+import 'package:shiftswift/profile/Cubits/user%20info%20cubit/user_info_cubit.dart';
 
 class SettingsScreen extends StatelessWidget {
   @override

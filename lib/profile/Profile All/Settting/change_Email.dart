@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shiftswift/core/app_colors.dart';
-import 'package:shiftswift/profile/change%20email%20cubit/change_email_cubit.dart';
-import 'package:shiftswift/profile/user%20info%20cubit/user_info_cubit.dart';
+import 'package:shiftswift/profile/Cubits/change%20email%20cubit/change_email_cubit.dart';
+import 'package:shiftswift/profile/Cubits/user%20info%20cubit/user_info_cubit.dart';
 
 class ChangeEmailScreen extends StatefulWidget {
   @override

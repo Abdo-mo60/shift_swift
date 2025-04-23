@@ -68,14 +68,14 @@ class _LoginHomeState extends State<LoginHome> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    coustmTextFailed(
+                    customTextField(
                       hinText: 'UserName',
                       controller: userNameController,
                       icon: Icons.person,
                     ),
 
                     SizedBox(height: 20),
-                    coustmTextFailed(
+                    customTextField(
                       isScure: true,
                       hinText: 'Password',
                       controller: passwordController,

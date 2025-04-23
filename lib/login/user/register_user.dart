@@ -66,27 +66,27 @@ class _RegisterUserState extends State<RegisterUser> {
                       style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 35),
-                    coustmTextFailed(
+                    customTextField(
                       icon: Icons.person,
                       hinText: 'User Name',
                       controller: nameController,
                     ),
                     SizedBox(height: 20),
-                    coustmTextFailed(
+                    customTextField(
                       hinText: 'Email',
                       controller: emailController,
                       icon: Icons.email,
                     ),
             
                     SizedBox(height: 20),
-                    coustmTextFailed(
+                    customTextField(
                       isScure: true,
                       hinText: 'Password',
                       controller: passwordController,
                       icon: Icons.lock_outline,
                     ),
                     SizedBox(height: 20),
-                    coustmTextFailed(
+                    customTextField(
                       hinText: 'Phone',
                       controller: phoneController,
                       icon: Icons.phone,

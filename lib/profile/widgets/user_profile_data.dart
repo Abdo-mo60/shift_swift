@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shiftswift/profile/Models/user_info_model.dart';
-import 'package:shiftswift/profile/user%20info%20cubit/user_info_cubit.dart';
+import 'package:shiftswift/profile/Cubits/user%20info%20cubit/user_info_cubit.dart';
 
 class UserProfileData extends StatefulWidget {
   const UserProfileData({super.key});
