@@ -8,10 +8,10 @@ class ChangeEmailService {
     try {
       String url =
           (accType == 'Member')
-              ? '$memberBaseUrl/ChangeMemberEmail/$memberId'
-              : '$companyBaseUrl/ChangeCompanyEmail/$companyId';
+              ? '$memberBaseUrl/ChangeMemberEmail'
+              : '$companyBaseUrl/ChangeCompanyEmail';
       http.Response response = await http.post(
-        Uri.parse('$url?Email=$newEmail'),
+        Uri.parse('$url/$currentId?Email=$newEmail'),
         headers: {'Authorization': 'Bearer $token'},
       );
       if (response.statusCode == 200) {

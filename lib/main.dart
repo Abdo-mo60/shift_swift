@@ -14,9 +14,9 @@ void main() async {
   token = CacheNetwork.getCacheData(key: cacheTokenKey);
   accType=CacheNetwork.getCacheData(key: cacheAccountTypeKey);
   if (accType == 'Member') {
-    memberId = CacheNetwork.getCacheData(key: cacheMemberIdKey);
+    currentId = CacheNetwork.getCacheData(key: cacheMemberIdKey);
   } else if (accType == 'Company') {
-    companyId = CacheNetwork.getCacheData(key: cacheCompanyIdKey);
+    currentId = CacheNetwork.getCacheData(key: cacheCompanyIdKey);
   }
 
   runApp(const Shiftswift());

@@ -47,13 +47,13 @@ class AuthCubit extends Cubit<AuthState> {
           key: cacheMemberIdKey,
           value: responseBody['data']['memberResponse']['memberId'],
         );
-        memberId = responseBody['data']['memberResponse']['memberId'];
+        currentId = responseBody['data']['memberResponse']['memberId'];
       } else {
         await CacheNetwork.insertToCache(
           key: cacheMemberIdKey,
           value: responseBody['data']['companyResponse']['companyId'],
         );
-        companyId = responseBody['data']['companyResponse']['companyId'];
+        currentId = responseBody['data']['companyResponse']['companyId'];
       }
         emit(RegisterSuccessState());
       } else {
@@ -70,7 +70,7 @@ class AuthCubit extends Cubit<AuthState> {
       //  print('Error: $e');
       emit(
         FailedToRegisterState(
-          errorMessage: 'An error occurred while registering.',
+          errorMessage: e.toString(),
         ),
       );
     }
@@ -108,13 +108,13 @@ class AuthCubit extends Cubit<AuthState> {
           key: cacheMemberIdKey,
           value: responseBody['data']['memberResponse']['memberId'],
         );
-        memberId = responseBody['data']['memberResponse']['memberId'];
+        currentId = responseBody['data']['memberResponse']['memberId'];
       } else {
         await CacheNetwork.insertToCache(
           key: cacheCompanyIdKey,
           value: responseBody['data']['companyResponse']['companyId'],
         );
-        companyId = responseBody['data']['companyResponse']['companyId'];
+        currentId = responseBody['data']['companyResponse']['companyId'];
       }
 
       //  print('tokenAfterCacheSet=>$token');
