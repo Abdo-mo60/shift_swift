@@ -40,7 +40,7 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
                       });
                     },
                   ),
-                     RadioListTile(
+                  RadioListTile(
                     title: Text("Found a better alternative"),
                     value: "found a better",
                     groupValue: selectedReason,
@@ -60,7 +60,7 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
                       });
                     },
                   ),
-                      RadioListTile(
+                  RadioListTile(
                     title: Text("Too many emails'/notification"),
                     value: "Too many",
                     groupValue: selectedReason,
@@ -70,7 +70,7 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
                       });
                     },
                   ),
-                     RadioListTile(
+                  RadioListTile(
                     title: Text("Personal reasons"),
                     value: "Personal",
                     groupValue: selectedReason,
@@ -80,7 +80,7 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
                       });
                     },
                   ),
-                     RadioListTile(
+                  RadioListTile(
                     title: Text("Difficulty navigating the platform"),
                     value: "Difficulty",
                     groupValue: selectedReason,
@@ -109,22 +109,27 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
                 ],
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                
-                // حذف الحساب أو تنفيذ العملية المطلوبة
-                                    Navigator.push(
-  context,
-  MaterialPageRoute(builder: (context) => LoginHome()),
-);
+            Padding(
+              padding: const EdgeInsets.only(bottom: 24),
+              child: ElevatedButton(
+                onPressed: () {
+                  // حذف الحساب أو تنفيذ العملية المطلوبة
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginHome()),
+                  );
 
-              },
-
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                minimumSize: Size(double.infinity, 50),
+                },
+              
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  minimumSize: Size(double.infinity, 50),
+                ),
+                child: Text(
+                  "Delete Account",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
-              child: Text("Delete Account", style: TextStyle(color: Colors.white)),
             ),
           ],
         ),
