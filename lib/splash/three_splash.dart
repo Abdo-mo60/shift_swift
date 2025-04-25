@@ -77,9 +77,9 @@ class ThreeSplah extends StatelessWidget {
                 ),
              GestureDetector(
       onTap: () {
-//  Navigator.push(context, MaterialPageRoute(builder: (context) =>
-//               Defult()
-//               ));
+  Navigator.push(context, MaterialPageRoute(builder: (context) =>
+               LoginHome()
+              ));
       },
       child: Container(
         width: 62,
