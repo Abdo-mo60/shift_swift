@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shiftswift/search/presentation/view/widgets/filter_button.dart';
+import 'filter_button.dart';
 
 class JobTypeSection extends StatelessWidget {
   final String jobType;
@@ -19,15 +19,15 @@ class JobTypeSection extends StatelessWidget {
         Row(
           children: [
             FilterButton(
-              text: 'Full Time',
-              value: 'Full Time',
+              text: 'Part Time',
+              value: 'Part Time',
               selectedValue: jobType,
               onPressed: (value) => onJobTypeChanged(value),
             ),
             SizedBox(width: 8),
             FilterButton(
-              text: 'Part Time',
-              value: 'Part Time',
+              text: 'Freelance',
+              value: 'Freelance',
               selectedValue: jobType,
               onPressed: (value) => onJobTypeChanged(value),
             ),

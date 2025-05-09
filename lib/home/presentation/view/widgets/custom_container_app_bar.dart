@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shiftswift/core/app_colors.dart';
-import 'package:shiftswift/core/styles.dart';
+
+import '../../../../core/app_colors.dart';
+import '../../../../core/styles.dart';
 
 
 class CustomContainerAppBar extends StatelessWidget {

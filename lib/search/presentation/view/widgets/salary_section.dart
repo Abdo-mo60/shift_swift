@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shiftswift/search/presentation/view/widgets/custom_text_field.dart';
+
+import 'custom_text_field.dart';
 
 class SalarySection extends StatefulWidget {
   final double minSalary;
@@ -26,7 +27,10 @@ class _SalarySectionState extends State<SalarySection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Salary', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        Text(
+          'Salary',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
         SizedBox(height: 8),
         Row(
           children: [

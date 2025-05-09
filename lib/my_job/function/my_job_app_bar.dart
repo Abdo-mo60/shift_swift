@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shiftswift/bottom_navigation_bar.dart';
 
+import '../../bottom_navigation_bar.dart';
 import '../../core/app_colors.dart';
 import '../../core/styles.dart';
 

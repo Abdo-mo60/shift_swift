@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shiftswift/company/my_jop/widget/my_jop_view_company.dart';
 import 'package:shiftswift/company/my_jop/widget/myjop_company.dart';
 import 'package:shiftswift/core/app_colors.dart';
 import 'package:shiftswift/core/styles.dart';

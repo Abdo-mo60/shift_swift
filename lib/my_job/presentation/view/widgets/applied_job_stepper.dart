@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shiftswift/core/styles.dart';
 import '../../../../core/app_colors.dart';
+import '../../../../core/styles.dart';
 import 'custom_step.dart';
 
 class AppliedJobStepper extends StatefulWidget {
@@ -14,7 +14,7 @@ class AppliedJobStepper extends StatefulWidget {
 int activeStep = 1;
 List<String> titles = [
   'Application Sent',
-  'Application viewed by recruiter',
+  'Application viewed',
   'Application Shortlisted',
 ];
 

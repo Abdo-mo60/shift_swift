@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shiftswift/core/app_colors.dart';
+
+import '../../../../core/app_colors.dart';
 
 class FilterButton extends StatelessWidget {
   final String text;
@@ -21,11 +22,11 @@ class FilterButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () => onPressed(value),
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              return selectedValue == value ? AppColors.blue : AppColors.main;
-            },
-          ),
+          backgroundColor: WidgetStateProperty.resolveWith<Color>((
+            Set<WidgetState> states,
+          ) {
+            return selectedValue == value ? AppColors.blue : AppColors.main;
+          }),
         ),
         child: Text(
           text,

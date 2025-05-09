@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shiftswift/core/app_colors.dart';
 import 'package:shiftswift/home/presentation/view/widgets/search_job_widget.dart';
-
+import '../../../../core/app_colors.dart';
 import '../../../../search/presentation/view/search_view.dart';
 
 class SearchItems extends StatelessWidget {

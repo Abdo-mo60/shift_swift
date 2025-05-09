@@ -3,17 +3,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shiftswift/bottom_navigation_bar.dart';
 import 'package:shiftswift/constant.dart';
 import 'package:shiftswift/core/app_colors.dart';
+import 'package:shiftswift/home/presentation/manager/home_view_cubit.dart';
 import 'package:shiftswift/login/authentication%20cubit/auth_cubit.dart';
 import 'package:shiftswift/login/helper/local_network.dart';
 import 'package:shiftswift/login/login_home.dart';
 import 'package:shiftswift/profile/Cubits/user%20info%20cubit/user_info_cubit.dart';
 
+import 'core/service/service_locator.dart';
+import 'home/data/repos/home_repo_impl.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheNetwork.cacheIntialization();
+  setupServiceLocator();
   token = CacheNetwork.getCacheData(key: cacheTokenKey);
   accType=CacheNetwork.getCacheData(key: cacheAccountTypeKey);
+
   if (accType == 'Member') {
     currentId = CacheNetwork.getCacheData(key: cacheMemberIdKey);
   } else if (accType == 'Company') {
@@ -33,6 +39,7 @@ class Shiftswift extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => AuthCubit()),
         BlocProvider(create: (context) => UserInfoCubit()),
+        BlocProvider(create: (context) => HomeViewCubit(getIt.get<HomeRepoImpl>())..getAllJob()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -44,3 +51,4 @@ class Shiftswift extends StatelessWidget {
     );
   }
 }
+

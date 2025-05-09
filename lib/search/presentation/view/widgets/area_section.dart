@@ -34,19 +34,27 @@ class AreaSection extends StatelessWidget {
                 child: DropdownButton<String>(
                   value: area.isEmpty ? null : area,
                   onChanged: onAreaChanged,
-                  items: <String>['Choose', 'Area 1', 'Area 2', 'Area 3']
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 7),
-                        child: Text(
-                          value,
-                          style: TextStyle(fontSize: 16, color: Colors.black),
-                        ),
-                      ),
-                    );
-                  }).toList(),
+                  items:
+                      <String>[
+                        'Choose',
+                        'Area 1',
+                        'Area 2',
+                        'Area 3',
+                      ].map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 7),
+                            child: Text(
+                              value,
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        );
+                      }).toList(),
                   icon: Padding(
                     padding: const EdgeInsets.only(right: 5),
                     child: Icon(Icons.arrow_drop_down, color: Colors.grey),

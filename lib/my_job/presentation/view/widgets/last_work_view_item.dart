@@ -20,7 +20,7 @@ class LastWorkViewItem extends StatelessWidget {
       ),
       child: Column(
         children: [
-          HomeViewItemTop(),
+          HomeViewItemTop(title: '', companyName: ''),
           Divider(
             color: Color(0xff95948F),
             indent: 10,
@@ -42,7 +42,7 @@ class LastWorkViewItem extends StatelessWidget {
           SizedBox(height: 20),
           CustomTextFieldLastWorkView(),
           SizedBox(height: 20),
-          CustomMyJobButton(text: 'Submit',),
+          CustomMyJobButton(text: 'Submit'),
         ],
       ),
     );

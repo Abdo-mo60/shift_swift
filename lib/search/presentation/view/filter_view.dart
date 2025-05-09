@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:shiftswift/core/app_colors.dart';
-import 'package:shiftswift/search/presentation/view/widgets/sort_by_section.dart';
-import 'package:shiftswift/search/presentation/view/widgets/job_type_section.dart';
-import 'package:shiftswift/search/presentation/view/widgets/salary_section.dart';
-import 'package:shiftswift/search/presentation/view/widgets/area_section.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../core/app_colors.dart';
+import '../../../home/presentation/manager/home_view_cubit.dart';
+import 'widgets/job_type_section.dart';
+import 'widgets/salary_section.dart';
+import 'widgets/sort_by_section.dart';
+
 
 class FilterView extends StatefulWidget {
   const FilterView({super.key});
@@ -15,7 +18,6 @@ class FilterView extends StatefulWidget {
 
 class _FilterPageState extends State<FilterView> {
   String sortBy = 'Latest';
-  String jobType = 'Full Time';
   String area = 'Choose';
   double minSalary = 0;
   double maxSalary = 0;
@@ -26,7 +28,10 @@ class _FilterPageState extends State<FilterView> {
       backgroundColor: AppColors.main,
       appBar: AppBar(
         backgroundColor: AppColors.main,
-        title: Text('Filter', style: TextStyle(color: AppColors.blue, fontSize: 23)),
+        title: Text(
+          'Filter',
+          style: TextStyle(color: AppColors.blue, fontSize: 23),
+        ),
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new, color: AppColors.borderColor),
           onPressed: () {
@@ -58,33 +63,39 @@ class _FilterPageState extends State<FilterView> {
               SalarySection(
                 minSalary: minSalary,
                 maxSalary: maxSalary,
-                onMinSalaryChanged: (value) => setState(() => minSalary = value),
-                onMaxSalaryChanged: (value) => setState(() => maxSalary = value),
+                onMinSalaryChanged:
+                    (value) => setState(() => minSalary = value),
+                onMaxSalaryChanged:
+                    (value) => setState(() => maxSalary = value),
               ),
 
               // Section: Area
               SizedBox(height: 16),
-              AreaSection(
-                area: area,
-                onAreaChanged: (value) => setState(() => area = value ?? 'Choose'),
-              ),
 
-              // Button: Show Results
-              SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  // Show results logic here
+                  context.read<HomeViewCubit>().filtter(
+                    sortBy: sortBy,
+                    min: minSalary,
+                    max: maxSalary,
+                  );
+                  Navigator.of(context).popUntil((route) => route.isFirst);
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(AppColors.blue),
-                  minimumSize: MaterialStateProperty.all(Size(double.infinity, 50)),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  backgroundColor: WidgetStateProperty.all(AppColors.blue),
+                  minimumSize: WidgetStateProperty.all(
+                    Size(double.infinity, 50),
+                  ),
+                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
                 ),
-                child: Text('Show Results', style: TextStyle(color: Colors.white, fontSize: 20)),
+                child: Text(
+                  'Show Results',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
               ),
             ],
           ),
