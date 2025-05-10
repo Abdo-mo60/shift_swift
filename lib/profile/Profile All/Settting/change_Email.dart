@@ -83,7 +83,7 @@ class _ChangeEmailScreenState extends State<ChangeEmailScreen> {
                       foregroundColor: Colors.white,
                       minimumSize: Size(double.infinity, 50),
                     ),
-                    child: Text("Save Changes"),
+                    child:(state is ChangeEmailLoading)?Text("Loading..."): Text("Save Changes"),
                   ),
                 ],
               ),

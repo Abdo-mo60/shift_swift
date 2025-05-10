@@ -10,6 +10,7 @@ final UserInfoCubit userInfoCubit;
   ChangeEmailCubit({required this.userInfoCubit}) : super(ChangeEmailInitial());
  Future<void> changeEmail({required String newEmail})async{
 try {
+  emit(ChangeEmailLoading());
  await ChangeEmailService().changeEmail(newEmail: newEmail );
 
   emit(ChangeEmailSuccess());
