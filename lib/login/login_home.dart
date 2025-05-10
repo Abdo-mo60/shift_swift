@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shiftswift/bottom_navigation_bar.dart';
+import 'package:shiftswift/company/bottom_bar_company.dart';
+import 'package:shiftswift/constant.dart';
 import 'package:shiftswift/core/app_colors.dart';
 import 'package:shiftswift/login/authentication%20cubit/auth_cubit.dart';
 import 'package:shiftswift/login/helper/TextFiled.dart';
@@ -32,7 +34,13 @@ class _LoginHomeState extends State<LoginHome> {
         if (state is LoginSuccessState) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => CustomBottomNavigationBar()),
+            MaterialPageRoute(
+              builder:
+                  (context) =>
+                      (accType == 'Member')
+                          ? CustomBottomNavigationBar()
+                          : CustomBottomCompanyBar(),
+            ),
           );
         } else if (state is FailedTOLoginState) {
           showDialog(

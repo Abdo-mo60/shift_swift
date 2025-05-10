@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shiftswift/bottom_navigation_bar.dart';
 import 'package:shiftswift/core/app_colors.dart';
 import 'package:shiftswift/login/authentication%20cubit/auth_cubit.dart';
 import 'package:shiftswift/login/helper/TextFiled.dart';
@@ -34,7 +33,7 @@ class _RegisterUserState extends State<RegisterUser> {
         if (state is RegisterSuccessState) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => CustomBottomNavigationBar()),
+            MaterialPageRoute(builder: (context) => LoginHome()),
           );
         } else if (state is FailedToRegisterState) {
           showDialog(

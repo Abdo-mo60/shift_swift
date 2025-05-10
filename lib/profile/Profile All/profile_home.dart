@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shiftswift/constant.dart';
 import 'package:shiftswift/core/app_colors.dart';
 import 'package:shiftswift/login/authentication%20cubit/auth_cubit.dart';
 import 'package:shiftswift/login/login_home.dart';
@@ -72,27 +73,30 @@ class ProfileScreen extends StatelessWidget {
             Expanded(
               child: ListView(
                 children: [
-                  _buildProfileOption(
-                    Icons.person,
-                    "View Profile",
-                    context,
-                    ProfilePerson(),
-                  ),
-                  SizedBox(height: 15),
+                  if (accType == 'Member') ...[
+                    _buildProfileOption(
+                      Icons.person,
+                      "View Profile",
+                      context,
+                      ProfilePerson(),
+                    ),
 
-                  _buildProfileOption(
-                    Icons.edit,
-                    "Edit Profile",
-                    context,
-                    EditProfileScreen(),
-                  ),
-                  SizedBox(height: 15),
-                  _buildProfileOption(
-                    Icons.star,
-                    "My Review",
-                    context,
-                    MyReviewsPage(),
-                  ),
+                    SizedBox(height: 15),
+
+                    _buildProfileOption(
+                      Icons.edit,
+                      "Edit Profile",
+                      context,
+                      EditProfileScreen(),
+                    ),
+                  ] else ...[
+                    _buildProfileOption(
+                      Icons.star,
+                      "My Review",
+                      context,
+                      MyReviewsPage(),
+                    ),
+                  ],
                   SizedBox(height: 15),
                   _buildProfileOption(
                     Icons.settings,
@@ -143,7 +147,7 @@ Widget _buildProfileOption(
 }) {
   return ListTile(
     leading: Icon(icon, color: Color.fromRGBO(43, 91, 141, 1), size: 30),
-    title: Text(title, style: TextStyle(color: Colors.black)),
+    title: Text(title, style: TextStyle(color: Colors.black,fontSize: 18)),
     trailing: Icon(Icons.arrow_forward_ios, size: 20, color: Colors.grey),
     onTap: () {
       if (isLogout == true) {

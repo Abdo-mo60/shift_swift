@@ -45,8 +45,12 @@ class Shiftswift extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home :CustomBottomCompanyBar(),
-       // home:(token!= null&& token!='')? CustomBottomNavigationBar():LoginHome(),
+        // home :CustomBottomCompanyBar(),
+     home: (token != null && token != '')
+    ? (accType == 'Company'
+        ? const CustomBottomCompanyBar()
+        : const CustomBottomNavigationBar())
+    :  LoginHome(),
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: AppColors.blue),
         ),
