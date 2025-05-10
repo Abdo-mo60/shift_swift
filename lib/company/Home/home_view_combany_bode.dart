@@ -16,13 +16,10 @@ class HomeViewCompanyBody extends StatelessWidget {
         children: [
           Column(
             children: [
-              CustomContainerAppBar(),
+            CustomContainerAppBar(),
               SizedBox(height: 60),
               SizedBox(height: 20),
-              CompanyReviewTitle(),
-              SizedBox(height: 20),
-              CompanyReviewItemListView(),
-              SizedBox(height: 20),
+          
             ],
           ),
           Positioned(top: 100, left: 20, right: 20, child: SearchItems()),
