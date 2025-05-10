@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shiftswift/company/my_jop/widget/my_gop_received.dart';
 import 'package:shiftswift/company/my_jop/widget/my_jop_shortlist.dart';
-import 'package:shiftswift/company/my_jop/widget/saved_view_company.dart';
+
 import 'package:shiftswift/my_job/model/tap_bar_model.dart';
 import 'package:shiftswift/my_job/presentation/view/applied_view.dart';
 import 'package:shiftswift/my_job/presentation/view/last_work_view.dart';
@@ -24,9 +24,9 @@ class _MyJobViewBodyState extends State<MyJobViewCompanyBody> {
   Widget build(BuildContext context) {
     List<TapBarModel> tapBar = [
       TapBarModel(text: 'Received', widget:  RecevidViewCompany()),
-      TapBarModel(text: 'Saved', widget: SavedViewCompany()),
       
-      TapBarModel(text: 'Short List', widget: ShortlistViewCompany()),
+      
+      TapBarModel(text: 'Short List', widget: ShortListPage()),
     ];
     return Column(
       children: [

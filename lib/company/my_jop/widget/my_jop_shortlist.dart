@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
-class ShortlistViewCompany extends StatelessWidget {
-  const ShortlistViewCompany({super.key});
+class ShortListPage extends StatelessWidget {
+  const ShortListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      
+    );
   }
 }
