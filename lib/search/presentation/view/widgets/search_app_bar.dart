@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shiftswift/core/app_colors.dart';
+import '../../../../core/app_colors.dart';
 
 class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback onBackButtonPressed;

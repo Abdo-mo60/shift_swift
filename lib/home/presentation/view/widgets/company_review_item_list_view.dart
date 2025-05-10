@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shiftswift/home/presentation/view/widgets/company_review_item.dart';
-
+import 'company_review_item.dart';
 
 class CompanyReviewItemListView extends StatelessWidget {
   const CompanyReviewItemListView({super.key});

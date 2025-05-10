@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shiftswift/core/styles.dart';
 
 import '../../../../core/app_colors.dart';
+import '../../../../core/styles.dart';
 import 'title_widget.dart';
 import 'trending_now_item.dart';
 
 class HomeViewItemTop extends StatelessWidget {
-  const HomeViewItemTop({super.key});
-
+  const HomeViewItemTop({
+    super.key,
+    required this.title,
+    required this.companyName,
+  });
+  final String title;
+  final String companyName;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -18,9 +23,9 @@ class HomeViewItemTop extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TrendingNowItem(),
-            TitleWidget(text: 'Arabic call center'),
+            TitleWidget(text: title),
             Text(
-              'Rog Web',
+              companyName,
               style: GoogleFonts.lato(textStyle: AppStyles.regular14),
             ),
           ],

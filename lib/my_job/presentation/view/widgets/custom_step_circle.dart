@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:shiftswift/core/app_colors.dart';
+
+import '../../../../core/app_colors.dart';
 
 class CustomStepCircle extends StatelessWidget {
-  const CustomStepCircle({super.key, required this.index, required this.activeStep,});
+  const CustomStepCircle({
+    super.key,
+    required this.index,
+    required this.activeStep,
+  });
   final int index;
   final int activeStep;
   @override
@@ -26,7 +31,10 @@ class CustomStepCircle extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           color: Color(0xff0D9300),
         ),
-        child: activeStep > index ? Icon(Icons.check,color: AppColors.white,size: 15,):null,
+        child:
+            activeStep > index
+                ? Icon(Icons.check, color: AppColors.white, size: 15)
+                : null,
       ),
     );
   }

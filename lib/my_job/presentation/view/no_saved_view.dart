@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shiftswift/core/styles.dart';
-import 'package:shiftswift/my_job/presentation/view/widgets/custom_my_job_button.dart';
-
 import '../../../bottom_navigation_bar.dart';
+import '../../../core/styles.dart';
+import 'widgets/custom_my_job_button.dart';
 
 class NoSavedView extends StatelessWidget {
   const NoSavedView({super.key});
@@ -15,7 +14,7 @@ class NoSavedView extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset('assets/images/saved.png'),
+          Image.asset('asstes/saved.png'),
           Text(
             'No Saved Jobs Yet...! ',
             style: GoogleFonts.lato(textStyle: AppStyles.bold24),

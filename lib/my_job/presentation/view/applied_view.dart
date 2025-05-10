@@ -9,4 +9,3 @@ class AppliedView extends StatelessWidget {
     return AppliedViewBody();
   }
 }
-

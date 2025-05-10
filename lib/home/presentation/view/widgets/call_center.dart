@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CallCenterWidget extends StatelessWidget {
-  const CallCenterWidget({super.key});
-
+  const CallCenterWidget({
+    super.key,
+    required this.title,
+    required this.companyName,
+  });
+  final String title;
+  final String companyName;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,7 +20,7 @@ class CallCenterWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Arabic Call Center',
+                title,
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
@@ -25,7 +30,7 @@ class CallCenterWidget extends StatelessWidget {
           ),
           SizedBox(height: 8),
           Text(
-            'Rog Web',
+            companyName,
             style: TextStyle(fontSize: 16, color: Colors.grey),
             textAlign: TextAlign.center,
           ),

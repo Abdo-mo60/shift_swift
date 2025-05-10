@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class StatusRowWidget extends StatelessWidget {
-  const StatusRowWidget({super.key});
-
+  const StatusRowWidget({super.key, required this.postedOn});
+  final DateTime postedOn;
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         _buildStatusContainer(
-          text: "3 Hours Ago",
+          text: timeago.format(postedOn),
           textColor: Colors.black54,
           borderColor: Colors.grey.shade400,
         ),

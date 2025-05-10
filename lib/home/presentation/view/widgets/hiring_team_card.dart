@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shiftswift/core/app_colors.dart';
-
+import '../../../../core/app_colors.dart';
 
 class HiringTeamCard extends StatelessWidget {
   const HiringTeamCard({super.key});
@@ -17,6 +16,7 @@ class HiringTeamCard extends StatelessWidget {
         border: Border.all(color: Colors.grey[300]!),
         boxShadow: [
           BoxShadow(
+            // ignore: deprecated_member_use
             color: Colors.grey.withOpacity(0.2),
             spreadRadius: 2,
             blurRadius: 4,
@@ -33,9 +33,7 @@ class HiringTeamCard extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 20,
-                backgroundImage: AssetImage(
-                  "asstes/Frame 953.png",
-                ), 
+                backgroundImage: AssetImage("asstes/Frame 953.png"),
               ),
               SizedBox(width: 10),
               Column(
@@ -49,7 +47,7 @@ class HiringTeamCard extends StatelessWidget {
                   ConstrainedBox(
                     constraints: BoxConstraints(maxWidth: 250),
                     child: Text(
-                      "Responding to customer questions and providing the required information Responding to customer",
+                      "Responding to customer questions and providing the required information\nResponding to customer",
                       style: TextStyle(color: Colors.grey[700], fontSize: 13),
                       maxLines: 4,
                       overflow: TextOverflow.ellipsis,

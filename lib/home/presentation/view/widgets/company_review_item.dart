@@ -31,14 +31,14 @@ class CompanyReviewItem extends StatelessWidget {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: Image.asset('asstes/im.png'),
+                  child: Image.asset('assets/images/im.png'),
                 ),
               ),
               SizedBox(width: 8),
               TitleWidget(text: 'Abstergo Ltd', size: 14),
             ],
           ),
-          CustomRating(),
+          CustomRating(rating: '', review: 0),
         ],
       ),
     );

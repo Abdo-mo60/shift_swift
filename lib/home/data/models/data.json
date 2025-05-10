@@ -1,0 +1,11 @@
+{
+    "isSuccess": true,
+    "statusCode": 201,
+    "message": "JobApplication added successfully.",
+    "data": {
+        "id": "d1a7caaa-a99d-4398-ae07-f0aa8e1d1e1f",
+        "jobId": "abb65ae5-25df-4f57-a7e4-373ade3d6722",
+        "memberId": "51b86e53-40ea-4408-857d-96111a52488e",
+        "appliedOn": "2025-05-07T21:47:02.794302Z"
+    }
+}

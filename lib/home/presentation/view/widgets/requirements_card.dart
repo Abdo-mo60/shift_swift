@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:shiftswift/core/app_colors.dart';
-
-
+import '../../../../core/app_colors.dart';
 class RequirementsCard extends StatelessWidget {
-  const RequirementsCard({super.key});
-
+  const RequirementsCard({super.key, required this.requirement});
+  final String requirement;
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Card(
         color: AppColors.grey200,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         elevation: 0.5,
         margin: EdgeInsets.all(5),
         child: Padding(
@@ -22,10 +18,7 @@ class RequirementsCard extends StatelessWidget {
             children: [
               Text(
                 "Requirements",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 8),
               ..._buildRequirementsList(),
@@ -37,37 +30,27 @@ class RequirementsCard extends StatelessWidget {
   }
 
   List<Widget> _buildRequirementsList() {
-    List<String> requirements = [
-      "Responding to customer questions and providing the required information",
-      "Assisting customers in solving any problems they encounter with products or services",
-      "Logging customer complaints and working to find solutions",
-      "Informing customers about offers",
-    ];
+    List<String> requirements = [requirement];
 
-    return requirements.map(
-      (text) => Padding(
-        padding: EdgeInsets.only(bottom: 4),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.circle,
-              size: 8,
-              color: AppColors.grey400,
-            ),
-            SizedBox(width: 8),
-            Expanded(
-              child: Text(
-                text,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey[700],
+    return requirements
+        .map(
+          (text) => Padding(
+            padding: EdgeInsets.only(bottom: 4),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(Icons.circle, size: 8, color: AppColors.grey400),
+                SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    text,
+                    style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
-      ),
-    ).toList();
+          ),
+        )
+        .toList();
   }
 }
