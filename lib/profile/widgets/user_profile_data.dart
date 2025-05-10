@@ -43,23 +43,24 @@ class _UserProfileDataState extends State<UserProfileData> {
             ],
           );
         } else if (state is UserInfoFailure) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "No user name",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                "No Email",
-                style: TextStyle(color: Colors.white70, fontSize: 14),
-              ),
-            ],
-          );
+          return CircularProgressIndicator(color: Colors.white,);
+          // Column(
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: [
+          //     Text(
+          //       "No user name",
+          //       style: TextStyle(
+          //         color: Colors.white,
+          //         fontSize: 20,
+          //         fontWeight: FontWeight.bold,
+          //       ),
+          //     ),
+          //     Text(
+          //       "No Email",
+          //       style: TextStyle(color: Colors.white70, fontSize: 14),
+          //     ),
+          //   ],
+          // );
         } else {
           return CircularProgressIndicator();
         }

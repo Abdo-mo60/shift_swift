@@ -18,11 +18,12 @@ class ChangeEmailService {
         print('responebody=>${response.body}');
       } else {
         Map<String, dynamic> responseBody = jsonDecode(response.body);
-        final String? specificMessage = responseBody['data']?['Email']?[0];
-        final String errorMessage =
-            specificMessage ?? 'Email Field Is Required!';
+        final String specificMessage = responseBody['data']['Email'][0];
+        // final String? specificMessage = responseBody['data']?['Email']?[0];
+        // final String errorMessage =
+        //     specificMessage ?? 'Email Field Is Required!';
 
-        throw (errorMessage);
+        throw (specificMessage);
       }
     } catch (e) {
       throw Exception(e.toString());

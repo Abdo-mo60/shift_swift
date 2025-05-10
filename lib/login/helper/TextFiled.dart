@@ -17,7 +17,7 @@ Widget customTextField({
         {
           if (controller.text.isEmpty)
            {
-            return '$hinText  must not be empty';
+            return '$hinText must not be empty';
           }
           else{
             return null;
@@ -40,7 +40,7 @@ Widget customTextField({
             ),
           ),
         //  suffixIcon: Icon(icon,
-          //color: Colors.black,),
+          //color: Colors.blac
           hintText: hinText,
            
          

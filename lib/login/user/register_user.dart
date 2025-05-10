@@ -126,7 +126,7 @@ class _RegisterUserState extends State<RegisterUser> {
                             userName: nameController.text,
                             email: emailController.text,
                             password: passwordController.text,
-                            phone: phoneController.text,
+                            phone: '+2${phoneController.text}',
                             accountType: accountType,
                           );
                         }
