@@ -13,8 +13,8 @@ class RatingCards extends StatelessWidget {
     final List<Map<String, dynamic>> ratings = List.generate(
       rating.ratings!.length,
       (index) => {
-        "rating": rating.averageScore.toString(),
-        "reviews": rating.ratings![index],
+        "rating": rating.ratings![index].score,
+        "reviews": rating.ratings![index].comment,
       },
     );
 
