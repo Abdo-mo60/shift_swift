@@ -19,18 +19,36 @@ class CustomBottomNavigationBar extends StatefulWidget {
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   int _selectedIndex = 0;
 
-  static final List<Widget> _pages = [
+//  late List<Widget> _pages;
+
+ static final List<Widget> _pages = [
     const HomeView(),
     const ProfileHome(),
    const MyJobView(),
   ];
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
-
+// @override
+//   void initState() {
+//     // TODO: implement initState
+//     super.initState();
+//      if (accType == 'Member') {
+//     _pages = [
+//       const HomeView(),
+//       const ProfileHome(),
+//       const MyJobView(),
+//     ];
+//   } else {
+//     _pages = [
+//       const HomeView(),
+//       const ProfileHome(),
+//       const MyJobView(),
+//     ];
+//   }
+//   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

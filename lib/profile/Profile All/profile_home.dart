@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shiftswift/constant.dart';
 import 'package:shiftswift/core/app_colors.dart';
 import 'package:shiftswift/login/authentication%20cubit/auth_cubit.dart';
 import 'package:shiftswift/login/login_home.dart';
@@ -8,7 +9,8 @@ import 'package:shiftswift/profile/Profile%20All/Edit%20profile/Edit_profile_hom
 import 'package:shiftswift/profile/Profile%20All/HelpCenter/help_center.dart';
 import 'package:shiftswift/profile/Profile%20All/MyReview/my_review.dart';
 import 'package:shiftswift/profile/Profile%20All/Settting/settting_home_user.dart';
-
+import 'package:shiftswift/profile/Profile%20All/profile_person.dart';
+import 'package:shiftswift/profile/widgets/user_profile_data.dart';
 
 class ProfileHome extends StatelessWidget {
   const ProfileHome({super.key});
@@ -35,7 +37,7 @@ class ProfileScreen extends StatelessWidget {
             builder:
                 (context) => AlertDialog(
                   content: Text(
-                    'Try Again',
+                    'Failed to sign out...Try Again',
                     style: const TextStyle(color: Colors.white),
                   ),
                   backgroundColor: AppColors.blue,
@@ -54,34 +56,47 @@ class ProfileScreen extends StatelessWidget {
             // القسم العلوي (صورة المستخدم والاسم والبريد)
             Container(
               color: Color.fromRGBO(43, 91, 141, 1),
-              padding: const EdgeInsets.symmetric(
-                vertical: 20,
-                horizontal: 16,
-              ),
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
               child: Row(
                 children: [
                   CircleAvatar(
                     radius: 35,
-                    backgroundImage: AssetImage(
-                      'asstes/three.png',
-                    ), 
+                    backgroundImage: AssetImage('asstes/three.png'),
                   ),
                   const SizedBox(width: 15),
-                  
+                  UserProfileData(),
                 ],
               ),
             ),
-    
+
             // القائمة الرئيسية
             Expanded(
               child: ListView(
                 children: [
-                  _buildProfileOption(
-                    Icons.edit,
-                    "Edit Profile",
-                    context,
-                    EditProfileScreen(),
-                  ),
+                  if (accType == 'Member') ...[
+                    _buildProfileOption(
+                      Icons.person,
+                      "View Profile",
+                      context,
+                      ProfilePerson(),
+                    ),
+
+                    SizedBox(height: 15),
+
+                    _buildProfileOption(
+                      Icons.edit,
+                      "Edit Profile",
+                      context,
+                      EditProfileScreen(),
+                    ),
+                  ] else ...[
+                    _buildProfileOption(
+                      Icons.star,
+                      "My Review",
+                      context,
+                      MyReviewsPage(),
+                    ),
+                  ],
                   SizedBox(height: 15),
                   _buildProfileOption(
                     Icons.settings,
@@ -89,15 +104,7 @@ class ProfileScreen extends StatelessWidget {
                     context,
                     SettingsScreen(),
                   ),
-                   SizedBox(height: 15),
-                  _buildProfileOption(
-                    Icons.star,
-                    "My Review",
-                    context,
-                  MyReviewsPage(),
-                  ),
                   SizedBox(height: 15),
-    
                   _buildProfileOption(
                     Icons.help,
                     "Help Center",
@@ -140,7 +147,7 @@ Widget _buildProfileOption(
 }) {
   return ListTile(
     leading: Icon(icon, color: Color.fromRGBO(43, 91, 141, 1), size: 30),
-    title: Text(title, style: TextStyle(color: Colors.black)),
+    title: Text(title, style: TextStyle(color: Colors.black,fontSize: 18)),
     trailing: Icon(Icons.arrow_forward_ios, size: 20, color: Colors.grey),
     onTap: () {
       if (isLogout == true) {
