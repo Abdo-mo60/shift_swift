@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shiftswift/home/presentation/view/widgets/company_review_item_list_view.dart';
-import 'package:shiftswift/home/presentation/view/widgets/company_review_title.dart';
 import 'package:shiftswift/home/presentation/view/widgets/custom_container_app_bar.dart';
 import 'package:shiftswift/home/presentation/view/widgets/search_items.dart';
 

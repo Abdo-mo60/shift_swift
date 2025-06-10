@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shiftswift/bottom_navigation_bar.dart';
-import 'package:shiftswift/company/Home/postNewJop.dart';
 import 'package:shiftswift/company/bottom_bar_company.dart';
 import 'package:shiftswift/constant.dart';
 import 'package:shiftswift/core/app_colors.dart';
@@ -46,7 +45,7 @@ class Shiftswift extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         // home :CustomBottomCompanyBar(),
-     home: (token != null && token != '')
+    home: (token != null && token != '')
     ? (accType == 'Company'
         ? const CustomBottomCompanyBar()
         : const CustomBottomNavigationBar())

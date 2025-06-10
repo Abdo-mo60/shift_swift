@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shiftswift/company/my_jop/widget/my_gop_received.dart';
 import 'package:shiftswift/company/my_jop/widget/my_jop_shortlist.dart';
-
 import 'package:shiftswift/my_job/model/tap_bar_model.dart';
-import 'package:shiftswift/my_job/presentation/view/applied_view.dart';
-import 'package:shiftswift/my_job/presentation/view/last_work_view.dart';
-
 import 'package:shiftswift/my_job/presentation/view/widgets/custom_tap_bar_button.dart';
 import '../../../../core/app_colors.dart';
 

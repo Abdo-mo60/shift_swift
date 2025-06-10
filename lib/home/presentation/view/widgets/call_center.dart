@@ -21,8 +21,9 @@ class CallCenterWidget extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
               ),
               SizedBox(width: 5),
               Icon(Icons.verified, color: Colors.blue, size: 20),

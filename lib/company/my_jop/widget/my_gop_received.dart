@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shiftswift/company/my_jop/widget/details.dart';
-import 'package:shiftswift/company/my_jop/widget/my_jop_shortlist.dart';
 
 
 
@@ -36,7 +35,7 @@ class RecevidViewCompany extends StatelessWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: Image.asset(
-                       'asstes/d1.png' ,
+                      'asstes/d1.png' ,
                         width: 60,
                         height: 60,
                         fit: BoxFit.cover,

@@ -4,7 +4,6 @@ import 'package:shiftswift/company/Home/home_view_combany_bode.dart';
 import 'package:shiftswift/company/my_jop/widget/myjop_company.dart';
 import 'package:shiftswift/core/app_colors.dart';
 import 'package:shiftswift/core/styles.dart';
-import 'package:shiftswift/home/presentation/view/home_view.dart';
 import 'package:shiftswift/home/presentation/view/widgets/custom_floating_action_button.dart';
 
 import 'package:shiftswift/profile/Profile%20All/profile_home.dart';
@@ -23,9 +22,9 @@ class _CustomBottomNavigationBarState extends State<CustomBottomCompanyBar> {
   int _selectedIndex = 0;
 
   static final List<Widget> _pages = [
-   const HomeViewCompanyBody() ,
+  const HomeViewCompanyBody() ,
     const ProfileHome(),
-   const MyJobViewCompany(),
+  const MyJobViewCompany(),
   ];
 
   void _onItemTapped(int index) {
