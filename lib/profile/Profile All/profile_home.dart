@@ -172,7 +172,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               backgroundImage:
                                   (url != '')
                                       ? NetworkImage(url)
-                                      : AssetImage('asstes/Frame 953.png'),
+                                      : AssetImage('asstes/profile.png'),
                             ),
                           );
                         } else if (state is GetPictureFailure) {
