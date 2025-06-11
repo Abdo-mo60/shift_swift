@@ -91,6 +91,7 @@ class _RegisterUserState extends State<RegisterUser> {
                       hinText: 'Phone',
                       controller: phoneController,
                       icon: Icons.phone,
+                      inputType: TextInputType.phone
                     ),
                     SizedBox(height: 20),
                     FormField<String>(
@@ -118,34 +119,38 @@ class _RegisterUserState extends State<RegisterUser> {
                       },
                     ),
 
-                    MaterialButton(
-                      onPressed: () {
-                        if (fromKey.currentState!.validate()) {
-                          // Register
-                          // blocprovider
-                          BlocProvider.of<AuthCubit>(context).register(
-                            userName: nameController.text,
-                            email: emailController.text,
-                            password: passwordController.text,
-                            phone: '+2${phoneController.text}',
-                            accountType: accountType,
-                          );
-                        }
+                    BlocBuilder<AuthCubit, AuthState>(
+                      builder: (context, state) {
+                        return MaterialButton(
+                          onPressed: () {
+                            if (fromKey.currentState!.validate()) {
+                              // Register
+                              // blocprovider
+                              BlocProvider.of<AuthCubit>(context).register(
+                                userName: nameController.text,
+                                email: emailController.text,
+                                password: passwordController.text,
+                                phone: '+2${phoneController.text}',
+                                accountType: accountType,
+                              );
+                            }
+                          },
+                          padding: EdgeInsets.symmetric(vertical: 15),
+                          color: AppColors.blue,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          textColor: Colors.white,
+                          minWidth: double.infinity,
+                          child: Text((state is RegisterLoadingState)?'Loading...':
+                            "Register",
+                            style: TextStyle(
+                              fontSize: 16.5,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        );
                       },
-                      child: Text(
-                        "Register",
-                        style: TextStyle(
-                          fontSize: 16.5,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      padding: EdgeInsets.symmetric(vertical: 15),
-                      color: AppColors.blue,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      textColor: Colors.white,
-                      minWidth: double.infinity,
                     ),
                     SizedBox(height: 8),
                     Row(

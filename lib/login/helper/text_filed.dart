@@ -5,10 +5,12 @@ Widget customTextField({
   required String hinText,
   bool isScure = false,
    IconData? icon,
+   TextInputType ?inputType,
 }) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: TextFormField(
+      keyboardType: inputType??TextInputType.text,
       controller: controller,
       validator: (input) {
         if (controller.text.isEmpty) {

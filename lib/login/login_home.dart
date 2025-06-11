@@ -83,7 +83,7 @@ class _LoginHomeState extends State<LoginHome> {
                     //   controller: passwordController,
                     //   icon: Icons.lock_outline,
                     // ),
-                    PasswordField(controller: passwordController,),
+                    PasswordField(controller: passwordController),
                     SizedBox(height: 20),
                     FormField<String>(
                       validator: _validateAccountType,
@@ -110,32 +110,36 @@ class _LoginHomeState extends State<LoginHome> {
                       },
                     ),
 
-                    MaterialButton(
-                      onPressed: () {
-                        if (fromKey.currentState!.validate()) {
-                          // Register
-                          // blocprovider
-                          BlocProvider.of<AuthCubit>(context).login(
-                            userName: userNameController.text,
-                            password: passwordController.text,
-                            accountType: accountType,
-                          );
-                        }
+                    BlocBuilder<AuthCubit, AuthState>(
+                      builder: (context, state) {
+                        return MaterialButton(
+                          onPressed: () {
+                            if (fromKey.currentState!.validate()) {
+                              // Register
+                              // blocprovider
+                              BlocProvider.of<AuthCubit>(context).login(
+                                userName: userNameController.text,
+                                password: passwordController.text,
+                                accountType: accountType,
+                              );
+                            }
+                          },
+                          padding: EdgeInsets.symmetric(vertical: 15),
+                          color: AppColors.blue,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          textColor: Colors.white,
+                          minWidth: double.infinity,
+                          child: Text((state is LoginLoadingState)?'Loading...':
+                            "Login",
+                            style: TextStyle(
+                              fontSize: 16.5,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        );
                       },
-                      padding: EdgeInsets.symmetric(vertical: 15),
-                      color: AppColors.blue,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      textColor: Colors.white,
-                      minWidth: double.infinity,
-                      child: Text(
-                        "Login",
-                        style: TextStyle(
-                          fontSize: 16.5,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
                     ),
                     SizedBox(height: 16),
                     Row(
