@@ -8,8 +8,8 @@ import 'package:shiftswift/splash/two_splash.dart';
 
 
 
-class OneSolash extends StatelessWidget {
-  const OneSolash({super.key});
+class OneSplash extends StatelessWidget {
+  const OneSplash({super.key});
 
   @override
   Widget build(BuildContext context) {

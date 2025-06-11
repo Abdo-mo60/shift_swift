@@ -11,6 +11,7 @@ import 'package:shiftswift/login/authentication%20cubit/auth_cubit.dart';
 import 'package:shiftswift/login/helper/local_network.dart';
 import 'package:shiftswift/login/login_home.dart';
 import 'package:shiftswift/profile/Cubits/user%20info%20cubit/user_info_cubit.dart';
+import 'package:shiftswift/splash/one_splash.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,7 +51,7 @@ class Shiftswift extends StatelessWidget {
         home:
             (token != null && token != '')
                 ? const CustomBottomNavigationBar()
-                : LoginHome(),
+                : OneSplash(),
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: AppColors.blue),
         ),
