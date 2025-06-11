@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shiftswift/login/login_home.dart';
 
 class DeviceManagementPage extends StatelessWidget {
+  const DeviceManagementPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +49,7 @@ class DeviceCard extends StatelessWidget {
   final String date;
   final bool isCurrentDevice;
 
-  DeviceCard({
+  const DeviceCard({super.key, 
     required this.deviceType,
     required this.ip,
     required this.date,

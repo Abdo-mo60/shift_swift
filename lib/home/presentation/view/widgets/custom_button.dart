@@ -30,7 +30,7 @@ class CustomButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            isIcon ? Icon(Icons.pages, color: AppColors.blue) : SizedBox(),
+            isIcon ? Icon(Icons.bookmark_border, color: AppColors.blue) : SizedBox(),
             SizedBox(width: 8),
             Text(
               text,

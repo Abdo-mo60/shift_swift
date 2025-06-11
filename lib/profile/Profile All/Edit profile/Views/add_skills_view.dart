@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shiftswift/core/app_colors.dart';
-import 'package:shiftswift/login/helper/TextFiled.dart';
+import 'package:shiftswift/login/helper/text_filed.dart';
 import 'package:shiftswift/profile/Cubits/skills%20cubit/skills_cubit.dart';
 import 'package:shiftswift/profile/widgets/custom_button_profile.dart';
 

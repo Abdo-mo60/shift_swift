@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shiftswift/bottom_navigation_bar.dart';
 import 'package:shiftswift/core/app_colors.dart';
 import 'package:shiftswift/login/authentication%20cubit/auth_cubit.dart';
-import 'package:shiftswift/login/helper/TextFiled.dart';
+import 'package:shiftswift/login/helper/password_field.dart';
+import 'package:shiftswift/login/helper/text_filed.dart';
 import 'package:shiftswift/login/login_home.dart';
 
 class RegisterUser extends StatefulWidget {
@@ -33,7 +35,9 @@ class _RegisterUserState extends State<RegisterUser> {
         if (state is RegisterSuccessState) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => LoginHome()),
+            MaterialPageRoute(
+              builder: (context) => CustomBottomNavigationBar(),
+            ),
           );
         } else if (state is FailedToRegisterState) {
           showDialog(
@@ -62,7 +66,10 @@ class _RegisterUserState extends State<RegisterUser> {
                   children: [
                     Text(
                       "Sing Up",
-                      style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     SizedBox(height: 35),
                     customTextField(
@@ -76,14 +83,9 @@ class _RegisterUserState extends State<RegisterUser> {
                       controller: emailController,
                       icon: Icons.email,
                     ),
-            
+
                     SizedBox(height: 20),
-                    customTextField(
-                      isScure: true,
-                      hinText: 'Password',
-                      controller: passwordController,
-                      icon: Icons.lock_outline,
-                    ),
+                    PasswordField(controller: passwordController),
                     SizedBox(height: 20),
                     customTextField(
                       hinText: 'Phone',
@@ -115,7 +117,7 @@ class _RegisterUserState extends State<RegisterUser> {
                         );
                       },
                     ),
-            
+
                     MaterialButton(
                       onPressed: () {
                         if (fromKey.currentState!.validate()) {
@@ -157,12 +159,17 @@ class _RegisterUserState extends State<RegisterUser> {
                           onTap: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => LoginHome()),
+                              MaterialPageRoute(
+                                builder: (context) => LoginHome(),
+                              ),
                             );
                           },
                           child: Text(
                             'Logn in',
-                            style: TextStyle(fontSize: 16, color: AppColors.blue),
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: AppColors.blue,
+                            ),
                           ),
                         ),
                       ],

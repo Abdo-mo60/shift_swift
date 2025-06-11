@@ -4,6 +4,8 @@ import 'package:shiftswift/profile/Profile All/Settting/manage2.dart' ;
 
 
 class TwoFactorAuthPage extends StatelessWidget {
+  const TwoFactorAuthPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

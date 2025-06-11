@@ -1,77 +1,86 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shiftswift/core/app_colors.dart';
+import 'package:shiftswift/profile/Cubits/reviews%20cubit/reviews_cubit.dart';
+import 'package:shiftswift/profile/Models/reviews_model.dart';
 
 class MyReviewsPage extends StatefulWidget {
-  const MyReviewsPage({super.key});
-
+  const MyReviewsPage({super.key, required this.companyId});
+  final String companyId;
   @override
   State<MyReviewsPage> createState() => _MyReviewsPageState();
 }
 
 class _MyReviewsPageState extends State<MyReviewsPage> {
   String selectedFilter = 'All';
-
-  final List<Map<String, dynamic>> reviews = [
-    {
-      'name': 'Mahmoud Eidhan',
-      'date': '10:00 AM, 20 Oct 2021',
-      'review':
-          'Hade pisan mang urang meuli jacket asalna nu orange ktu hade warna na mengkilap like very good beautifully process',
-      'rating': 5,
-      'image': 'asstes/d1.png',
-    },
-    {
-      'name': 'Robert Fox',
-      'date': '10:00 AM, 20 Oct 2021',
-      'review':
-          'Hade pisan mang urang meuli jacket asalna nu orange ktu hade warna na mengkilap like very good beautifully process',
-      'rating': 3,
-      'image': 'asstes/d2.png',
-    },
-    {
-      'name': 'Esther Howard',
-      'date': '10:00 AM, 20 Oct 2021',
-      'review':
-          'Hade pisan mang urang meuli jacket asalna nu orange ktu hade warna na mengkilap like very good beautifully process',
-      'rating': 4,
-      'image': 'asstes/d3.png',
-    },
-    {
-      'name': 'Ali Ahmed',
-      'date': '11:00 AM, 21 Oct 2021',
-      'review':
-          'Jacket ktu hade warna na mengkilap like very good beautifully process',
-      'rating': 2,
-      'image': 'asstes/three.png',
-    },
-    {
-      'name': 'Sara Ali',
-      'date': '9:00 AM, 22 Oct 2021',
-      'review':
-          'Beautifully process very good!',
-      'rating': 1,
-      'image': 'asstes/d1.png',
-    },
-  ];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    BlocProvider.of<ReviewsCubit>(
+      context,
+    ).getReviews(companyId: widget.companyId);
+  }
+  // final List<Map<String, dynamic>> reviews = [
+  //   {
+  //     'name': 'Mahmoud Eidhan',
+  //     'date': '10:00 AM, 20 Oct 2021',
+  //     'review':
+  //         'Hade pisan mang urang meuli jacket asalna nu orange ktu hade warna na mengkilap like very good beautifully process',
+  //     'rating': 5,
+  //     'image': 'asstes/d1.png',
+  //   },
+  //   {
+  //     'name': 'Robert Fox',
+  //     'date': '10:00 AM, 20 Oct 2021',
+  //     'review':
+  //         'Hade pisan mang urang meuli jacket asalna nu orange ktu hade warna na mengkilap like very good beautifully process',
+  //     'rating': 3,
+  //     'image': 'asstes/d2.png',
+  //   },
+  //   {
+  //     'name': 'Esther Howard',
+  //     'date': '10:00 AM, 20 Oct 2021',
+  //     'review':
+  //         'Hade pisan mang urang meuli jacket asalna nu orange ktu hade warna na mengkilap like very good beautifully process',
+  //     'rating': 4,
+  //     'image': 'asstes/d3.png',
+  //   },
+  //   {
+  //     'name': 'Ali Ahmed',
+  //     'date': '11:00 AM, 21 Oct 2021',
+  //     'review':
+  //         'Jacket ktu hade warna na mengkilap like very good beautifully process',
+  //     'rating': 2,
+  //     'image': 'asstes/three.png',
+  //   },
+  //   {
+  //     'name': 'Sara Ali',
+  //     'date': '9:00 AM, 22 Oct 2021',
+  //     'review':
+  //         'Beautifully process very good!',
+  //     'rating': 1,
+  //     'image': 'asstes/d1.png',
+  //   },
+  // ];
 
   @override
   Widget build(BuildContext context) {
-    // فلترة الريفيوز بناءً على الزر المختار
-    List<Map<String, dynamic>> filteredReviews = selectedFilter == 'All'
-        ? reviews
-        : reviews.where((review) => review['rating'].toString() == selectedFilter).toList();
-
     return Scaffold(
       backgroundColor: const Color(0xFFFAFAFA),
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: Icon(Icons.chevron_left_outlined),
+          color: Colors.grey,
+          iconSize: 40,
+        ),
         backgroundColor: Colors.white,
         elevation: 0,
-      
         title: const Text(
           "My Reviews",
-          style: TextStyle(
-            color: Colors.blue,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(color: AppColors.blue, fontWeight: FontWeight.bold),
         ),
         centerTitle: false,
       ),
@@ -81,25 +90,66 @@ class _MyReviewsPageState extends State<MyReviewsPage> {
           children: [
             _buildFilterRows(),
             const SizedBox(height: 20),
-            Expanded(
-              child: filteredReviews.isNotEmpty
-                  ? ListView(
-                      children: filteredReviews
-                          .map((review) => _buildReviewItem(
-                                name: review['name'],
-                                date: review['date'],
-                                review: review['review'],
-                                rating: review['rating'],
-                                imageUrl: review['image'],
-                              ))
-                          .toList(),
-                    )
-                  : const Center(
+            BlocBuilder<ReviewsCubit, ReviewsState>(
+              builder: (context, state) {
+                if (state is ReviewsSuccess) {
+                  List<ReviewsModel> reviewsList = state.reviewsList;
+                  List<ReviewsModel> filteredReviews =
+                      selectedFilter == 'All'
+                          ? reviewsList
+                          : reviewsList
+                              .where(
+                                (review) =>
+                                    review.score.toInt().toString() ==
+                                    selectedFilter,
+                              )
+                              .toList();
+                  return Expanded(
+                    child:
+                        filteredReviews.isNotEmpty
+                            ? ListView(
+                              children:
+                                  filteredReviews
+                                      .map(
+                                        (review) => _buildReviewItem(
+                                          name: review.ratedByUserNAme,
+                                          date: review.createdAt,
+                                          review: review.comment,
+                                          rating: review.score,
+                                          imageUrl: review.ratedByImageUrl,
+                                        ),
+                                      )
+                                      .toList(),
+                            )
+                            : const Center(
+                              child: Text(
+                                'No reviwes found⭐',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            ),
+                  );
+                } else if (state is ReviewsFailure) {
+                  return Text(state.message);
+                } else if (state is NoReviews) {
+                  return Expanded(
+                    child: const Center(
                       child: Text(
-                        'لا توجد مراجعات لهذا التقييم ⭐',
-                        style: TextStyle(fontSize: 16, color: Colors.black54),
+                        'No reviwes found⭐',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.black54,
+                        ),
                       ),
                     ),
+                  );
+                } else {
+                  return CircularProgressIndicator();
+                }
+              },
             ),
           ],
         ),
@@ -112,16 +162,18 @@ class _MyReviewsPageState extends State<MyReviewsPage> {
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: ['All', '1', '2'].map((filter) {
-            return _buildFilterButton(filter);
-          }).toList(),
+          children:
+              ['All', '1', '2'].map((filter) {
+                return _buildFilterButton(filter);
+              }).toList(),
         ),
         const SizedBox(height: 8),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: ['3', '4', '5'].map((filter) {
-            return _buildFilterButton(filter);
-          }).toList(),
+          children:
+              ['3', '4', '5'].map((filter) {
+                return _buildFilterButton(filter);
+              }).toList(),
         ),
       ],
     );
@@ -139,10 +191,8 @@ class _MyReviewsPageState extends State<MyReviewsPage> {
           });
         },
         style: OutlinedButton.styleFrom(
-          backgroundColor: isSelected ? const Color(0xFF567DF4) : Colors.white,
-          side: BorderSide(
-            color: isSelected ? const Color(0xFF567DF4) : Colors.grey.shade300,
-          ),
+          backgroundColor: isSelected ? AppColors.blue : Colors.white,
+          side: BorderSide(color: AppColors.blue),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
@@ -150,9 +200,7 @@ class _MyReviewsPageState extends State<MyReviewsPage> {
         icon: const Icon(Icons.star, size: 16, color: Colors.amber),
         label: Text(
           filter,
-          style: TextStyle(
-            color: isSelected ? Colors.white : Colors.black,
-          ),
+          style: TextStyle(color: isSelected ? Colors.white : Colors.black),
         ),
       ),
     );
@@ -162,16 +210,14 @@ class _MyReviewsPageState extends State<MyReviewsPage> {
     required String name,
     required String date,
     required String review,
-    required int rating,
+    required double rating,
     required String imageUrl,
   }) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 12),
       padding: const EdgeInsets.only(bottom: 12),
       decoration: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(color: Color(0xFFE0E0E0)),
-        ),
+        border: Border(bottom: BorderSide(color: Color(0xFFE0E0E0))),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -179,8 +225,10 @@ class _MyReviewsPageState extends State<MyReviewsPage> {
           Row(
             children: [
               CircleAvatar(
-                radius: 24,
-                backgroundImage: AssetImage(imageUrl),
+                radius: 32,
+                backgroundImage: NetworkImage(
+                  imageUrl,
+                ),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -189,33 +237,41 @@ class _MyReviewsPageState extends State<MyReviewsPage> {
                   children: [
                     Text(
                       name,
-                      style:
-                          const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       date,
-                      style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
+                      style: TextStyle(
+                        color: Colors.grey.shade600,
+                        fontSize: 18,
+                      ),
                     ),
                   ],
                 ),
               ),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFFCE8B2),
-                  borderRadius: BorderRadius.circular(12),
+                  color: AppColors.lightyellow,
+                  borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      rating.toString(),
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.black),
+                      rating.toInt().toString(),
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
-                    const SizedBox(width: 2),
-                    const Icon(Icons.star, size: 16, color: Colors.amber),
+                    SizedBox(width: 4),
+                    Icon(Icons.star, color: Colors.amber, size: 22),
                   ],
                 ),
               ),
@@ -224,7 +280,7 @@ class _MyReviewsPageState extends State<MyReviewsPage> {
           const SizedBox(height: 12),
           Text(
             review,
-            style: const TextStyle(fontSize: 14, color: Colors.black87),
+            style: const TextStyle(fontSize: 16, color: Colors.black),
           ),
         ],
       ),

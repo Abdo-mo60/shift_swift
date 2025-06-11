@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shiftswift/core/app_colors.dart';
+import 'package:shiftswift/my_job/presentation/view/widgets/custom_my_job_button.dart';
 import 'package:shiftswift/profile/Cubits/change%20email%20cubit/change_email_cubit.dart';
 import 'package:shiftswift/profile/Cubits/user%20info%20cubit/user_info_cubit.dart';
 
@@ -58,32 +59,33 @@ class _ChangeEmailScreenState extends State<ChangeEmailScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Center(child: Text('Change Email Address',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),)),
+                  SizedBox(height: 12,),
                   Text(
-                    "Change Email Address",
+                    "New Email Address",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 10),
+
                   TextField(
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
-                      hintText: "New Email Address",
-                      border: OutlineInputBorder(),
+                      // label: Text('New Email Address'),
+                      // hintText: "New Email Address",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
                     ),
                   ),
                   SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
+                  CustomMyJobButton(
+                    text: (state is ChangeEmailLoading)?"Loading...": "Save Changes",
+                    onTap: () {
                       BlocProvider.of<ChangeEmailCubit>(
                         context,
                       ).changeEmail(newEmail: _emailController.text);
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      foregroundColor: Colors.white,
-                      minimumSize: Size(double.infinity, 50),
-                    ),
-                    child:(state is ChangeEmailLoading)?Text("Loading..."): Text("Save Changes"),
                   ),
                 ],
               ),

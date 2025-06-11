@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:shiftswift/company/my_jop/widget/my_gop_received.dart';
-import 'package:shiftswift/company/my_jop/widget/my_jop_shortlist.dart';
+import 'package:shiftswift/company/models/company_job_post_model.dart';
+import 'package:shiftswift/company/my_jop/widget/my_job_received.dart';
+import 'package:shiftswift/company/my_jop/widget/my_job_shortlist.dart';
 
 import 'package:shiftswift/my_job/model/tap_bar_model.dart';
-import 'package:shiftswift/my_job/presentation/view/applied_view.dart';
-import 'package:shiftswift/my_job/presentation/view/last_work_view.dart';
 
 import 'package:shiftswift/my_job/presentation/view/widgets/custom_tap_bar_button.dart';
 import '../../../../core/app_colors.dart';
 
-
 class MyJobViewCompanyBody extends StatefulWidget {
-  const MyJobViewCompanyBody({super.key});
+  const MyJobViewCompanyBody({super.key, this.jobId, this.jobModel});
+  final String? jobId;
+  final CompanyJobPostModel? jobModel;
 
   @override
   State<MyJobViewCompanyBody> createState() => _MyJobViewBodyState();
@@ -23,10 +23,20 @@ class _MyJobViewBodyState extends State<MyJobViewCompanyBody> {
   @override
   Widget build(BuildContext context) {
     List<TapBarModel> tapBar = [
-      TapBarModel(text: 'Received', widget:  RecevidViewCompany()),
-      
-      
-      TapBarModel(text: 'Short List', widget: ShortListPage()),
+      TapBarModel(
+        text: 'Received',
+        widget: ReceivedViewCompany(
+          jobId: widget.jobId,
+          jobModel: widget.jobModel,
+        ),
+      ),
+      TapBarModel(
+        text: 'Short List',
+        widget: ShortListPage(
+          jobId: widget.jobId,
+          jobPostModel: widget.jobModel,
+        ),
+      ),
     ];
     return Column(
       children: [

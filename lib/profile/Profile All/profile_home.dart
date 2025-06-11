@@ -1,15 +1,20 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shiftswift/constant.dart';
 import 'package:shiftswift/core/app_colors.dart';
 import 'package:shiftswift/login/authentication%20cubit/auth_cubit.dart';
 import 'package:shiftswift/login/login_home.dart';
+import 'package:shiftswift/profile/Cubits/picture%20cubit/picture_cubit.dart';
+import 'package:shiftswift/profile/Cubits/reviews%20cubit/reviews_cubit.dart';
 import 'package:shiftswift/profile/Profile%20All/AboutUS/about_us.dart';
 import 'package:shiftswift/profile/Profile%20All/Edit%20profile/Edit_profile_home.dart';
 import 'package:shiftswift/profile/Profile%20All/HelpCenter/help_center.dart';
 import 'package:shiftswift/profile/Profile%20All/MyReview/my_review.dart';
 import 'package:shiftswift/profile/Profile%20All/Settting/settting_home_user.dart';
-import 'package:shiftswift/profile/Profile%20All/profile_person.dart';
+import 'package:shiftswift/profile/Services/get_profile_pic_service.dart';
 import 'package:shiftswift/profile/widgets/user_profile_data.dart';
 
 class ProfileHome extends StatelessWidget {
@@ -21,13 +26,78 @@ class ProfileHome extends StatelessWidget {
   }
 }
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  File? imageFile;
+  final ImagePicker picker = ImagePicker();
+
+  Future<void> pickerCamera(ImageSource source) async {
+    final pickedFile = await picker.pickImage(source: source);
+    if (pickedFile != null) {
+      setState(() {
+        imageFile = File(pickedFile.path);
+      });
+      await ProfilePicService().uploadProfilePicture(imageFile: imageFile!);
+      // await ProfilePicService().getProfilePic();
+
+      BlocProvider.of<PictureCubit>(context).getPicUrl();
+    }
+  }
+
+  Widget bottomSheet(BuildContext context) {
+    return Container(
+      height: 150,
+      width: double.infinity,
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      child: Column(
+        children: [
+          Text('Choose profile Photo', style: TextStyle(fontSize: 20)),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton.icon(
+                icon: const Icon(Icons.camera_alt),
+                label: const Text('Camera'),
+                onPressed: () {
+                  Navigator.pop(context);
+                  pickerCamera(ImageSource.camera);
+                },
+              ),
+              SizedBox(width: 20),
+              ElevatedButton.icon(
+                icon: const Icon(Icons.photo),
+                label: const Text('Gallery'),
+                onPressed: () {
+                  Navigator.pop(context);
+                  pickerCamera(ImageSource.gallery);
+                },
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    BlocProvider.of<PictureCubit>(context).getPicUrl();
+ 
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is LogOutStateSuccessfully) {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => LoginHome()),
           );
@@ -46,57 +116,109 @@ class ProfileScreen extends StatelessWidget {
         }
       },
       child: Scaffold(
-        backgroundColor: Colors.grey[200],
-        appBar: AppBar(
-          backgroundColor: Color.fromRGBO(43, 91, 141, 1),
-          elevation: 0,
-        ),
+        backgroundColor: Colors.white,
+
         body: Column(
           children: [
-            // القسم العلوي (صورة المستخدم والاسم والبريد)
             Container(
-              color: Color.fromRGBO(43, 91, 141, 1),
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    radius: 35,
-                    backgroundImage: AssetImage('asstes/three.png'),
-                  ),
-                  const SizedBox(width: 15),
-                  UserProfileData(),
-                ],
+              color: AppColors.blue,
+              padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 18),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 35),
+                child: Row(
+                  children: [
+                    BlocConsumer<PictureCubit, PictureState>(
+                      listener: (context, state) {
+                        if (state is GetPictureFailure) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              behavior: SnackBarBehavior.floating,
+                              backgroundColor: AppColors.blue,
+                              content: Text(state.errorMessage),
+                            ),
+                          );
+                        } else if (state is AddPictureSuccess) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              behavior: SnackBarBehavior.floating,
+                              backgroundColor: AppColors.blue,
+                              content: Text('Success picture!'),
+                            ),
+                          );
+                        } else if(state is AddPictureLoading){
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              behavior: SnackBarBehavior.floating,
+                              backgroundColor: AppColors.blue,
+                              content: Text('Loading...!'),
+                            ),
+                          );
+                        }
+                      },
+                      builder: (context, state) {
+                        if (state is GetPictureSuccess) {
+                          String url = state.picUrl.picUrl;
+                          return GestureDetector(
+                            onTap: () {
+                              showModalBottomSheet(
+                                context: context,
+                                builder: (context) {
+                                  return bottomSheet(context);
+                                },
+                              );
+                            },
+                            child: CircleAvatar(
+                              radius: 35,
+                              backgroundImage:
+                                  (url != '')
+                                      ? NetworkImage(url)
+                                      : AssetImage('asstes/Frame 953.png'),
+                            ),
+                          );
+                        } else if (state is GetPictureFailure) {
+                          return Text(state.errorMessage);
+                        } else {
+                          return CircularProgressIndicator();
+                        }
+                      },
+                    ),
+                    const SizedBox(width: 15),
+                    UserProfileData(),
+                  ],
+                ),
               ),
             ),
 
-            // القائمة الرئيسية
             Expanded(
               child: ListView(
                 children: [
-                  if (accType == 'Member') ...[
-                    _buildProfileOption(
-                      Icons.person,
-                      "View Profile",
-                      context,
-                      ProfilePerson(),
-                    ),
-
-                    SizedBox(height: 15),
-
-                    _buildProfileOption(
-                      Icons.edit,
-                      "Edit Profile",
-                      context,
-                      EditProfileScreen(),
-                    ),
-                  ] else ...[
+                  // if (accType == 'Member') ...[
+                  //   _buildProfileOption(
+                  //     Icons.person,
+                  //     "View Profile",
+                  //     context,
+                  //     ProfilePerson(),
+                  //   ),
+                  // ] 
+                  if(accType=='Company') ...[
                     _buildProfileOption(
                       Icons.star,
                       "My Review",
                       context,
-                      MyReviewsPage(),
+                      BlocProvider(
+                        create: (context) => ReviewsCubit(),
+                        child: MyReviewsPage(companyId: currentId!),
+                      ),
                     ),
+                  SizedBox(height: 15),
                   ],
+
+                  _buildProfileOption(
+                    Icons.edit,
+                    "Edit Profile",
+                    context,
+                    EditProfileScreen(),
+                  ),
                   SizedBox(height: 15),
                   _buildProfileOption(
                     Icons.settings,
@@ -137,7 +259,6 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
-// دالة لإنشاء عناصر القائمة مع التنقل
 Widget _buildProfileOption(
   IconData icon,
   String title,
@@ -146,9 +267,9 @@ Widget _buildProfileOption(
   bool isLogout = false,
 }) {
   return ListTile(
-    leading: Icon(icon, color: Color.fromRGBO(43, 91, 141, 1), size: 30),
-    title: Text(title, style: TextStyle(color: Colors.black,fontSize: 18)),
-    trailing: Icon(Icons.arrow_forward_ios, size: 20, color: Colors.grey),
+    leading: Icon(icon, color: AppColors.blue, size: 30),
+    title: Text(title, style: TextStyle(color: AppColors.black, fontSize: 18)),
+    trailing: Icon(Icons.arrow_forward_ios, size: 20, color: AppColors.grey400),
     onTap: () {
       if (isLogout == true) {
         BlocProvider.of<AuthCubit>(context).logOut();

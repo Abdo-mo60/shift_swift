@@ -9,16 +9,16 @@ class EducationCubit extends Cubit<EducationState> {
   EducationCubit() : super(AddEducationInitial());
   EducationModel? educationModel;
   Future<void> addEducation({
-    required String schoolName,
-    required String levelOfEducation,
-    required String fieldOfStudy,
+    required String universityName,
+    required String level,
+    required String faculty,
   }) async {
     try {
       emit(AddEducationLoading());
       await EducationService().addEducation(
-        schoolName: schoolName,
-        levelOfEducation: levelOfEducation,
-        fieldOfStudy: fieldOfStudy,
+        universityName: universityName,
+        level: level,
+        faculty: faculty,
       );
       emit(AddEducationSuccess());
     } catch (e) {

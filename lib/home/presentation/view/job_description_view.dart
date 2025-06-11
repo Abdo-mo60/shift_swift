@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shiftswift/home/presentation/view/widgets/apply_now_botton.dart';
 import 'package:shiftswift/home/presentation/view/widgets/custom_app_bar.dart';
 import 'package:shiftswift/home/presentation/view/widgets/job_description_card.dart';
@@ -6,6 +7,8 @@ import 'package:shiftswift/home/presentation/view/widgets/job_infosection.dart';
 import 'package:shiftswift/home/presentation/view/widgets/rating_cards.dart';
 import 'package:shiftswift/home/presentation/view/widgets/review_header.dart';
 import 'package:shiftswift/home/presentation/view/widgets/status_row.dart';
+import 'package:shiftswift/profile/Cubits/reviews%20cubit/reviews_cubit.dart';
+import 'package:shiftswift/profile/Profile%20All/MyReview/my_review.dart';
 import '../../../core/app_colors.dart';
 import '../../../core/model/job_data_model.dart';
 import '../../../core/model/rating_model.dart';
@@ -46,7 +49,20 @@ class JobDescriptionView extends StatelessWidget {
               jobType: job.jobTypeTd,
             ),
             SizedBox(height: 8),
-            ReviewsHeader(onViewAllPressed: () {}),
+            ReviewsHeader(
+              onViewAllPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder:
+                        (context) => BlocProvider(
+                          create: (context) => ReviewsCubit(),
+                          child: MyReviewsPage(companyId: job.companyId,),
+                        ),
+                  ),
+                );
+              },
+            ),
             RatingCards(rating: rating),
             SizedBox(height: 24),
             HiringTeamCard(),

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shiftswift/bottom_navigation_bar.dart';
-import 'package:shiftswift/company/bottom_bar_company.dart';
-import 'package:shiftswift/constant.dart';
 import 'package:shiftswift/core/app_colors.dart';
 import 'package:shiftswift/login/authentication%20cubit/auth_cubit.dart';
-import 'package:shiftswift/login/helper/TextFiled.dart';
+import 'package:shiftswift/login/helper/text_filed.dart';
+import 'package:shiftswift/login/helper/password_field.dart';
 import 'package:shiftswift/login/user/register_user.dart';
 
 class LoginHome extends StatefulWidget {
@@ -22,7 +21,7 @@ class _LoginHomeState extends State<LoginHome> {
   final fromKey = GlobalKey<FormState>();
   String? _validateAccountType(String? value) {
     if (accountType.isEmpty) {
-      return 'Please select an account type'; 
+      return 'Please select an account type';
     }
     return null;
   }
@@ -35,11 +34,7 @@ class _LoginHomeState extends State<LoginHome> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder:
-                  (context) =>
-                      (accType == 'Member')
-                          ? CustomBottomNavigationBar()
-                          : CustomBottomCompanyBar(),
+              builder: (context) => CustomBottomNavigationBar(),
             ),
           );
         } else if (state is FailedTOLoginState) {
@@ -48,14 +43,13 @@ class _LoginHomeState extends State<LoginHome> {
             builder:
                 (context) => AlertDialog(
                   content: Text(
-                   ' ${state.errorMessage}or Account type',
+                    ' ${state.errorMessage}',
                     style: const TextStyle(color: Colors.white),
                   ),
                   backgroundColor: AppColors.blue,
                 ),
           );
         }
-        
       },
       child: Scaffold(
         body: Center(
@@ -83,13 +77,13 @@ class _LoginHomeState extends State<LoginHome> {
                     ),
 
                     SizedBox(height: 20),
-                    customTextField(
-                      isScure: true,
-                      hinText: 'Password',
-                      controller: passwordController,
-                      icon: Icons.lock_outline,
-                    ),
-
+                    // customTextField(
+                    //   isScure: true,
+                    //   hinText: 'Password',
+                    //   controller: passwordController,
+                    //   icon: Icons.lock_outline,
+                    // ),
+                    PasswordField(controller: passwordController,),
                     SizedBox(height: 20),
                     FormField<String>(
                       validator: _validateAccountType,
@@ -128,13 +122,6 @@ class _LoginHomeState extends State<LoginHome> {
                           );
                         }
                       },
-                      child: Text(
-                        "Login",
-                        style: TextStyle(
-                          fontSize: 16.5,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
                       padding: EdgeInsets.symmetric(vertical: 15),
                       color: AppColors.blue,
                       shape: RoundedRectangleBorder(
@@ -142,15 +129,15 @@ class _LoginHomeState extends State<LoginHome> {
                       ),
                       textColor: Colors.white,
                       minWidth: double.infinity,
+                      child: Text(
+                        "Login",
+                        style: TextStyle(
+                          fontSize: 16.5,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
-                    SizedBox(height: 8),
-                    // Center(
-                    //   child: Text(
-                    //     ' Don\'t have an account?  ',
-                    //     style: TextStyle(fontSize: 14),
-                    //   ),
-                    // ),
-                    SizedBox(height: 8),
+                    SizedBox(height: 16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -178,26 +165,6 @@ class _LoginHomeState extends State<LoginHome> {
                       ],
                     ),
                     SizedBox(height: 8),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: [
-                    //     Text('Are you? Company ', style: TextStyle(fontSize: 14)),
-                    //     GestureDetector(
-                    //       onTap: () {
-                    //         Navigator.push(
-                    //           context,
-                    //           MaterialPageRoute(
-                    //             builder: (context) => RegisterCompany(),
-                    //           ),
-                    //         );
-                    //       },
-                    //       child: Text(
-                    //         'click here',
-                    //         style: TextStyle(fontSize: 16, color: Colors.blue),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
                   ],
                 ),
               ),

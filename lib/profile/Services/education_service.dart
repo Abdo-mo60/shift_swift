@@ -6,9 +6,9 @@ import 'package:shiftswift/profile/Models/education_model.dart';
 
 class EducationService {
   Future<void> addEducation({
-    required String schoolName,
-    required String levelOfEducation,
-    required String fieldOfStudy,
+    required String universityName,
+    required String level,
+    required String faculty,
   }) async {
     Map <String,String> headers={
           'Authorization': 'Bearer $token',
@@ -18,9 +18,9 @@ class EducationService {
       http.Response response = await http.post(
         Uri.parse('$memberBaseUrl/AddEducation/$currentId'),
         body: jsonEncode({
-          "schoolName": schoolName,
-          "levelOfEducation": levelOfEducation,
-          "fieldOfStudy": fieldOfStudy,
+          "level": level,
+          "faculty": faculty,
+          "universityName": universityName,
         }),
         headers:headers ,
       );

@@ -33,28 +33,28 @@ class AuthCubit extends Cubit<AuthState> {
       Map<String, dynamic> responseBody = jsonDecode(response.body);
       if (response.statusCode == 200) {
         await CacheNetwork.insertToCache(
-        key: cacheTokenKey,
-        value: responseBody['data']['token'],
-      );
-      token = responseBody['data']['token'];
-      await CacheNetwork.insertToCache(
-        key: cacheAccountTypeKey,
-        value: accountType,
-      );
-      accType = accountType;
-      if (accountType == 'Member') {
-        await CacheNetwork.insertToCache(
-          key: cacheMemberIdKey,
-          value: responseBody['data']['memberResponse']['memberId'],
+          key: cacheTokenKey,
+          value: responseBody['data']['token'],
         );
-        currentId = responseBody['data']['memberResponse']['memberId'];
-      } else {
+        token = responseBody['data']['token'];
         await CacheNetwork.insertToCache(
-          key: cacheMemberIdKey,
-          value: responseBody['data']['companyResponse']['companyId'],
+          key: cacheAccountTypeKey,
+          value: accountType,
         );
-        currentId = responseBody['data']['companyResponse']['companyId'];
-      }
+        accType = accountType;
+        if (accountType == 'Member') {
+          await CacheNetwork.insertToCache(
+            key: cacheMemberIdKey,
+            value: responseBody['data']['memberResponse']['memberId'],
+          );
+          currentId = responseBody['data']['memberResponse']['memberId'];
+        } else {
+          await CacheNetwork.insertToCache(
+            key: cacheMemberIdKey,
+            value: responseBody['data']['companyResponse']['companyId'],
+          );
+          currentId = responseBody['data']['companyResponse']['companyId'];
+        }
         emit(RegisterSuccessState());
       } else {
         dynamic errorData = responseBody['data'];
@@ -68,11 +68,7 @@ class AuthCubit extends Cubit<AuthState> {
       }
     } on Exception catch (e) {
       //  print('Error: $e');
-      emit(
-        FailedToRegisterState(
-          errorMessage: e.toString(),
-        ),
-      );
+      emit(FailedToRegisterState(errorMessage: e.toString()));
     }
   }
 
@@ -81,62 +77,72 @@ class AuthCubit extends Cubit<AuthState> {
     required String password,
     required String accountType,
   }) async {
-    emit(LoginLoadingState());
-    String loginAccountType =
-        (accountType == 'Member') ? 'LoginMember' : 'LoginCompany';
-    http.Response response = await http.post(
-      Uri.parse('$accountBaseUrl/$loginAccountType'),
-      body: jsonEncode({"userName": userName, "password": password}),
-      headers: {'content-type': 'application/json'},
-    );
+    try {
+      emit(LoginLoadingState());
+      String loginAccountType =
+          (accountType == 'Member') ? 'LoginMember' : 'LoginCompany';
+      http.Response response = await http.post(
+        Uri.parse('$accountBaseUrl/$loginAccountType'),
+        body: jsonEncode({"userName": userName, "password": password}),
+        headers: {'content-type': 'application/json'},
+      );
 
-    Map<String, dynamic> responseBody = jsonDecode(response.body);
-    if (response.statusCode == 200) {
-      //  print('tokenAfterLogin=>${responseBody['data']['token']}');
-      await CacheNetwork.insertToCache(
-        key: cacheTokenKey,
-        value: responseBody['data']['token'],
-      );
-      token = responseBody['data']['token'];
-      await CacheNetwork.insertToCache(
-        key: cacheAccountTypeKey,
-        value: accountType,
-      );
-      accType = accountType;
-      if (accountType == 'Member') {
+      Map<String, dynamic> responseBody = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        //  print('tokenAfterLogin=>${responseBody['data']['token']}');
         await CacheNetwork.insertToCache(
-          key: cacheMemberIdKey,
-          value: responseBody['data']['memberResponse']['memberId'],
+          key: cacheTokenKey,
+          value: responseBody['data']['token'],
         );
-        currentId = responseBody['data']['memberResponse']['memberId'];
+        token = responseBody['data']['token'];
+        await CacheNetwork.insertToCache(
+          key: cacheAccountTypeKey,
+          value: accountType,
+        );
+        accType = accountType;
+        if (accountType == 'Member') {
+          await CacheNetwork.insertToCache(
+            key: cacheMemberIdKey,
+            value: responseBody['data']['memberResponse']['memberId'],
+          );
+          currentId = responseBody['data']['memberResponse']['memberId'];
+        } else {
+          await CacheNetwork.insertToCache(
+            key: cacheCompanyIdKey,
+            value: responseBody['data']['companyResponse']['companyId'],
+          );
+          currentId = responseBody['data']['companyResponse']['companyId'];
+        }
+
+        //  print('tokenAfterCacheSet=>$token');
+        emit(LoginSuccessState());
       } else {
-        await CacheNetwork.insertToCache(
-          key: cacheCompanyIdKey,
-          value: responseBody['data']['companyResponse']['companyId'],
+        List<dynamic> erorrData = responseBody['data'];
+        emit(
+          FailedTOLoginState(errorMessage: '${erorrData[0]} or Account Type'),
         );
-        currentId = responseBody['data']['companyResponse']['companyId'];
       }
-
-      //  print('tokenAfterCacheSet=>$token');
-      emit(LoginSuccessState());
-    } else {
-      List<dynamic> erorrData = responseBody['data'];
-      emit(FailedTOLoginState(errorMessage: erorrData[0]));
+    } catch (e) {
+      emit(FailedTOLoginState(errorMessage: 'Server Error...Try Later'));
     }
   }
 
   Future<void> logOut() async {
-    http.Response response = await http.post(
-      Uri.parse('$accountBaseUrl/LogOutAccoount'),
-      headers: {'Authorization': 'Bearer $token'},
-    );
-    //  print('Log Out Response => ${response.statusCode}');
+    try {
+      http.Response response = await http.post(
+        Uri.parse('$accountBaseUrl/LogOutAccoount'),
+        headers: {'Authorization': 'Bearer $token'},
+      );
+      //  print('Log Out Response => ${response.statusCode}');
 
-    if (response.statusCode == 200) {
-      CacheNetwork.deleteCacheItem(key: cacheTokenKey);
+      if (response.statusCode == 200) {
+        CacheNetwork.deleteCacheItem(key: cacheTokenKey);
 
-      emit(LogOutStateSuccessfully());
-    } else {
+        emit(LogOutStateSuccessfully());
+      } else {
+        emit(FailedToLogOutState());
+      }
+    } catch (e) {
       emit(FailedToLogOutState());
     }
   }

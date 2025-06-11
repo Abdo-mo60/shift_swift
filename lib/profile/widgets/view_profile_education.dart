@@ -19,7 +19,9 @@ class _ViewProfileEducationState extends State<ViewProfileEducation> {
   void initState() {
     super.initState();
     // TODO: implement initState
+    if (accType=='Member') {
     BlocProvider.of<EducationCubit>(context).getEducation();
+    }
   }
 
   @override

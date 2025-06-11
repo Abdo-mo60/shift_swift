@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shiftswift/core/app_colors.dart';
 import 'package:shiftswift/profile/Models/user_info_model.dart';
-import 'package:shiftswift/profile/Profile%20All/Settting/Device_managment.dart';
+import 'package:shiftswift/profile/Profile%20All/Settting/device_managment.dart';
 import 'package:shiftswift/profile/Profile%20All/Settting/change_Email.dart';
 import 'package:shiftswift/profile/Profile%20All/Settting/delet_account.dart';
-import 'package:shiftswift/profile/Profile%20All/Settting/manage_2Fa.dart';
+import 'package:shiftswift/profile/Profile%20All/Settting/manage_2fa.dart';
 import 'package:shiftswift/profile/Cubits/user%20info%20cubit/user_info_cubit.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -49,25 +50,25 @@ class SettingsScreen extends StatelessWidget {
               }
             },
           ),
-          _buildSettingItem(
-            title: "Two-Factor Authentication (2FA)",
-            subtitle: "Disable",
-            buttonText: "Manage 2FA",
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => TwoFactorAuthPage()),
-              );
-            },
-          ),
-          _buildSettingItem(
-            title: "Block List",
-            subtitle: "4 users",
-            buttonText: "View",
-            onPressed: () {
-              print("View Block List Clicked");
-            },
-          ),
+          // _buildSettingItem(
+          //   title: "Two-Factor Authentication (2FA)",
+          //   subtitle: "Disable",
+          //   buttonText: "Manage 2FA",
+          //   onPressed: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(builder: (context) => TwoFactorAuthPage()),
+          //     );
+          //   },
+          // ),
+          // _buildSettingItem(
+          //   title: "Block List",
+          //   subtitle: "4 users",
+          //   buttonText: "View",
+          //   onPressed: () {
+          //     print("View Block List Clicked");
+          //   },
+          // ),
           _buildSettingItem(
             title: "Device Management",
             subtitle: "",
@@ -81,30 +82,29 @@ class SettingsScreen extends StatelessWidget {
               );
             },
           ),
-          _buildSettingItem(
-            title: "Delete Account",
-            subtitle: "",
-            buttonText: "Delete My Account",
-            isDestructive: true,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => DeleteAccountPage()),
-              );
-            },
-          ),
+          // _buildSettingItem(
+          //   title: "Delete Account",
+          //   subtitle: "",
+          //   buttonText: "Delete My Account",
+          //   isDestructive: true,
+          //   onPressed: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(builder: (context) => DeleteAccountPage()),
+          //     );
+          //   },
+          // ),
         ],
       ),
     );
   }
 
-  // دالة لإنشاء عنصر في قائمة الإعدادات
   Widget _buildSettingItem({
     required String title,
     String? subtitle,
     required String buttonText,
     required VoidCallback onPressed,
-    bool isDestructive = false,
+    // bool isDestructive = false,
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
@@ -125,8 +125,9 @@ class SettingsScreen extends StatelessWidget {
           OutlinedButton(
             onPressed: onPressed,
             style: OutlinedButton.styleFrom(
-              foregroundColor: Colors.blue,
-              side: BorderSide(color: Colors.blue),
+              foregroundColor: AppColors.blue,
+              side: BorderSide(color: AppColors.blue),
+            
             ),
             child: Text(buttonText),
           ),

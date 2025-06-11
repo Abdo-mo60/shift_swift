@@ -13,9 +13,9 @@ class EducationModel {
   factory EducationModel.fromJson(json) {
     if (json['data'] is Map<String, dynamic>) {
       return EducationModel(
-        schoolName: json['data']['schoolName'],
-        levelOfEducation: json['data']['levelOfEducation'],
-        fieldOfStudy: json['data']['fieldOfStudy'],
+        schoolName: json['data']['universityName'],
+        levelOfEducation: json['data']['level'],
+        fieldOfStudy: json['data']['faculty'],
       );
     } else if (json['data'] is String) {
       return EducationModel(message: json['data']);
