@@ -136,12 +136,14 @@ class ShortListViewCompanyBody extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       /// Name & Job Title
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          TitleWidget(text: name),
-                          Text(jobModel.title ?? ''),
-                        ],
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TitleWidget(text: name),
+                            Text(jobModel.title ?? ''),
+                          ],
+                        ),
                       ),
 
                       /// Applicant Image

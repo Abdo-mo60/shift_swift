@@ -14,4 +14,8 @@ final class UserInfoSuccess extends UserInfoState {
 
 }
 
-final class UserInfoFailure extends UserInfoState {}
+final class UserInfoFailure extends UserInfoState {
+  final String errorMessage;
+
+  UserInfoFailure({required this.errorMessage});
+}

@@ -5,23 +5,16 @@ class CallCenterWidget extends StatelessWidget {
     super.key,
     required this.title,
     required this.companyName,
-    this.imageUrl,
   });
   final String title;
   final String companyName;
-  final String? imageUrl;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(16.0),
       child: Column(
         children: [
-          Center(
-            child:
-                imageUrl == null
-                    ? Image.asset('asstes/image 4.png')
-                    : Image.network(imageUrl!,width:80,),
-          ),
+          Center(child: Image.asset('asstes/image 4.png')),
           SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

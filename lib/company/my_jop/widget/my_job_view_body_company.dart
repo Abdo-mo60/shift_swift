@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD:lib/company/my_jop/widget/my_job_view_body_company.dart
 import 'package:shiftswift/company/models/company_job_post_model.dart';
 import 'package:shiftswift/company/my_jop/widget/my_job_received.dart';
 import 'package:shiftswift/company/my_jop/widget/my_job_shortlist.dart';
-
+import 'package:shiftswift/core/app_colors.dart';
 import 'package:shiftswift/my_job/model/tap_bar_model.dart';
-
-=======
-import 'package:shiftswift/company/my_jop/widget/my_gop_received.dart';
-import 'package:shiftswift/company/my_jop/widget/my_jop_shortlist.dart';
-import 'package:shiftswift/my_job/model/tap_bar_model.dart';
->>>>>>> 35d8a23c5ddd75a89d57683a7e773e08d915a6f3:lib/company/my_jop/widget/my_jop_view_company.dart
 import 'package:shiftswift/my_job/presentation/view/widgets/custom_tap_bar_button.dart';
-import '../../../../core/app_colors.dart';
 
 class MyJobViewCompanyBody extends StatefulWidget {
   const MyJobViewCompanyBody({super.key, this.jobId, this.jobModel});

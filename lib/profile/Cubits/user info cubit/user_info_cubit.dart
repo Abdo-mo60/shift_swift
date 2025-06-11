@@ -16,7 +16,7 @@ class UserInfoCubit extends Cubit<UserInfoState> {
         emit(UserInfoSuccess(usermodel: userModel!));
       } catch (e) {
          
-        emit(UserInfoFailure());
+        emit(UserInfoFailure(errorMessage: e.toString()));
       }
   }
  

@@ -59,16 +59,18 @@ class ReceivedViewCompanyBody extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TitleWidget(
-                        text: (details.fullName == null || details.fullName!.trim().isEmpty)
-                            ? details.userName
-                            : details.fullName!,
-                      ),
-                      Text('${jobModel!.title}'),
-                    ],
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TitleWidget(
+                          text: (details.fullName == null || details.fullName!.trim().isEmpty)
+                              ? details.userName
+                              : details.fullName!,
+                        ),
+                        Text('${jobModel!.title}'),
+                      ],
+                    ),
                   ),
                   Container(
                     width: 74,

@@ -1,29 +1,22 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shiftswift/bottom_navigation_bar.dart';
-import 'package:shiftswift/company/Cubits/all%20applicants%20for%20specific%20job%20cubit/all_applicants_for_job_cubit.dart';
 import 'package:shiftswift/company/Cubits/applicant%20details/applicant_details_cubit.dart';
 import 'package:shiftswift/company/Cubits/company%20job%20posts%20cubit/company_job_posts_cubit.dart';
 import 'package:shiftswift/company/models/company_job_post_model.dart';
-import 'package:shiftswift/company/my_jop/widget/my_job_view_body_company.dart';
 import 'package:shiftswift/company/my_jop/widget/myjob_company.dart';
 import 'package:shiftswift/company/widgets/home_view_item_top_company.dart';
 import 'package:shiftswift/company/widgets/no_jobs_view.dart';
-import 'package:shiftswift/company/widgets/post_job_bar.dart';
+import 'package:shiftswift/constant.dart';
 import 'package:shiftswift/core/app_colors.dart';
 import 'package:shiftswift/core/styles.dart';
 import 'package:shiftswift/home/presentation/view/widgets/call_center.dart';
 import 'package:shiftswift/home/presentation/view/widgets/custom_app_bar.dart';
 import 'package:shiftswift/home/presentation/view/widgets/custom_button.dart';
-=======
->>>>>>> 35d8a23c5ddd75a89d57683a7e773e08d915a6f3
 import 'package:shiftswift/home/presentation/view/widgets/custom_container_app_bar.dart';
 import 'package:shiftswift/home/presentation/view/widgets/custom_rating.dart';
 import 'package:shiftswift/home/presentation/view/widgets/hiring_team_card.dart';
-import 'package:shiftswift/home/presentation/view/widgets/home_view_item_top.dart';
 import 'package:shiftswift/home/presentation/view/widgets/information_item.dart';
 import 'package:shiftswift/home/presentation/view/widgets/job_description_card.dart';
 import 'package:shiftswift/home/presentation/view/widgets/job_infosection.dart';
@@ -35,7 +28,6 @@ import 'package:shiftswift/profile/Cubits/user%20info%20cubit/user_info_cubit.da
 import 'package:shiftswift/profile/Models/reviews_model.dart';
 import 'package:shiftswift/profile/Models/user_info_model.dart';
 import 'package:shiftswift/profile/Profile%20All/MyReview/my_review.dart';
-import 'package:shiftswift/constant.dart';
 
 class HomeViewCompanyBody extends StatelessWidget {
   const HomeViewCompanyBody({super.key});
@@ -202,11 +194,10 @@ class HomeViewItem extends StatefulWidget {
 class _HomeViewItemState extends State<HomeViewItem> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     BlocProvider.of<PictureCubit>(context).getPicUrl();
   }
- String ?picUrl;
+ late String picUrl;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -229,9 +220,8 @@ class _HomeViewItemState extends State<HomeViewItem> {
                         BlocProvider.of<UserInfoCubit>(context).userModel!;
                     return HomeViewItemTopCompany(
                       imageUrl:
-                          state.picUrl.picUrl == ''
-                              ? null
-                              : state.picUrl.picUrl,
+                          state.picUrl.picUrl 
+                             ,
                       title: '${widget.jobPostModel.title}',
                       companyName:
                           '${userInfoModel.firstName} ${userInfoModel.lastName}',
@@ -341,9 +331,9 @@ class _HomeViewItemState extends State<HomeViewItem> {
 }
 
 class JobDescriptionViewCompany extends StatefulWidget {
-  const JobDescriptionViewCompany({super.key, required this.jobPostModel, this.imageUrl});
+  const JobDescriptionViewCompany({super.key, required this.jobPostModel,required this.imageUrl});
   final CompanyJobPostModel jobPostModel;
-  final String?imageUrl;
+  final String imageUrl;
 
   @override
   State<JobDescriptionViewCompany> createState() =>
@@ -373,7 +363,7 @@ class _JobDescriptionViewCompanyState extends State<JobDescriptionViewCompany> {
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: [
-            CallCenterWidget(
+            CallCenterWidgetCompany(
               imageUrl:widget.imageUrl ,
               title: '${widget.jobPostModel.title}',
               companyName:
@@ -605,6 +595,54 @@ class ReviewCards extends StatelessWidget {
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class CallCenterWidgetCompany extends StatelessWidget {
+  const CallCenterWidgetCompany({
+    super.key,
+    required this.title,
+    required this.companyName,
+    this.imageUrl,
+  });
+  final String title;
+  final String companyName;
+  final String? imageUrl;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(16.0),
+      child: Column(
+        children: [
+          Center(
+            child:
+                imageUrl == ''
+                    ? Image.asset('asstes/profile.png')
+                    : Image.network(imageUrl!,width:80,),
+          ),
+          SizedBox(height: 16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                title,
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+              ),
+              SizedBox(width: 5),
+              Icon(Icons.verified, color: Colors.blue, size: 20),
+            ],
+          ),
+          SizedBox(height: 8),
+          Text(
+            companyName,
+            style: TextStyle(fontSize: 16, color: Colors.grey),
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
     );
   }

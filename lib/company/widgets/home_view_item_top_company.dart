@@ -22,16 +22,18 @@ class HomeViewItemTopCompany extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TrendingNowItem(),
-            TitleWidget(text: title),
-            Text(
-              companyName,
-              style: GoogleFonts.lato(textStyle: AppStyles.regular14),
-            ),
-          ],
+          Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(width: 100, child: TrendingNowItem()),
+              TitleWidget(text: title),
+              Text(
+                companyName,
+                style: GoogleFonts.lato(textStyle: AppStyles.regular14),
+              ),
+            ],
+          ),
         ),
         Container(
           width: 74,
@@ -44,7 +46,7 @@ class HomeViewItemTopCompany extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child:
-                (imageUrl == null)
+                (imageUrl == '')
                     ? Image.asset('asstes/profile.png',fit: BoxFit.cover,)
                     : Image.network(imageUrl!, fit: BoxFit.cover),
           ),

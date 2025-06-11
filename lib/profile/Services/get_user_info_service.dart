@@ -19,7 +19,7 @@ class GetUserInfoService {
       return UserInfoModel.fromJson(jsonDecode(response.body));
     } catch (e) {
     //  print('oops there wan an error try later');
-      throw Exception('oops there wan an error try later');
+      throw Exception(e.toString());
     }
   }
 }

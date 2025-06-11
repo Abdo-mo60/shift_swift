@@ -43,7 +43,7 @@ class _UserProfileDataState extends State<UserProfileData> {
             ],
           );
         } else if (state is UserInfoFailure) {
-          return CircularProgressIndicator(color: Colors.white,);
+          return Text(state.errorMessage);
           // Column(
           //   crossAxisAlignment: CrossAxisAlignment.start,
           //   children: [

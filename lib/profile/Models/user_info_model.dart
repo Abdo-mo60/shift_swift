@@ -20,8 +20,8 @@ class UserInfoModel {
     return UserInfoModel(
       email: jsonData['data']['email'],
       userName: jsonData['data']['userName'],
-     firstName: jsonData['data']['firstName'],
-     lastName:jsonData['data']['lastName'],
+     firstName: (jsonData['data']['firstName']==null)?' ':jsonData['data']['firstName'],
+     lastName:(jsonData['data']['lastName']==null)?' ':jsonData['data']['lastName'],
       phone: jsonData['data']['phoneNumber'],
     );
   }
