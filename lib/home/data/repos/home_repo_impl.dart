@@ -59,7 +59,7 @@ class HomeRepoImpl implements HomeRepo {
     try {
       var response = await apiService.post(
         endPoint: 'Member/SaveJob?JobId=$jobId&MemberId=$memberId',
-        token: Ids.token,
+        token: Ids.tokenFromIds,
       );
 
       JobAddedModel saveJob = JobAddedModel.fromJson(response);
@@ -76,7 +76,7 @@ class HomeRepoImpl implements HomeRepo {
     try {
       var response = await apiService.post(
         endPoint: 'Member/AddJobApplication',
-        token: Ids.token,
+        token: Ids.tokenFromIds,
         body: body,
       );
       JobAddedModel applyJob = JobAddedModel.fromJson(response);

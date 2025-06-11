@@ -24,7 +24,7 @@ class MyJobRepoImpl implements MyJobRepo {
   Future<List<JobDataModel>> getAllJobs({required String memberId}) async {
     var response = await apiService.get(
       endPoint: 'Member/GetAllSavedJobs/$memberId',
-      token: Ids.token,
+      token: Ids.tokenFromIds,
     ); // Corrected the variable name
     List<dynamic> dataList = response['data'];
     List<JobDataModel> jobs =
@@ -57,7 +57,7 @@ class MyJobRepoImpl implements MyJobRepo {
     try {
       var response = await apiService.get(
         endPoint: 'Member/GetAllMyJobApplications/$memberId',
-        token: Ids.token,
+        token: Ids.tokenFromIds,
       ); // Corrected the variable name
       List<dynamic> dataList = response['data'];
       List<AppliedJobModel> jobs =
@@ -74,7 +74,7 @@ class MyJobRepoImpl implements MyJobRepo {
     try {
       var response = await apiService.get(
         endPoint: 'Member/GetLastWork',
-        token: Ids.token,
+        token: Ids.tokenFromIds,
       );
 
       List<dynamic> dataList = response['data'];
@@ -95,7 +95,7 @@ class MyJobRepoImpl implements MyJobRepo {
     try {
       var response = await apiService.post(
         endPoint: 'Member/AddRating/$companyId?RatedById=$memberId',
-        token: Ids.token,
+        token: Ids.tokenFromIds,
         body: body,
       );
       dynamic message = response['message'];
