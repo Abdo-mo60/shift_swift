@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shiftswift/bottom_navigation_bar.dart';
+<<<<<<< HEAD
 import 'package:shiftswift/company/Cubits/company%20job%20posts%20cubit/company_job_posts_cubit.dart';
+=======
+import 'package:shiftswift/company/bottom_bar_company.dart';
+>>>>>>> 35d8a23c5ddd75a89d57683a7e773e08d915a6f3
 import 'package:shiftswift/constant.dart';
 import 'package:shiftswift/core/app_colors.dart';
 import 'package:shiftswift/home/presentation/manager/home_view_cubit.dart';
@@ -48,10 +52,19 @@ class Shiftswift extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+<<<<<<< HEAD
         home:
             (token != null && token != '')
                 ? const CustomBottomNavigationBar()
                 : LoginHome(),
+=======
+        // home :CustomBottomCompanyBar(),
+    home: (token != null && token != '')
+    ? (accType == 'Company'
+        ? const CustomBottomCompanyBar()
+        : const CustomBottomNavigationBar())
+    :  LoginHome(),
+>>>>>>> 35d8a23c5ddd75a89d57683a7e773e08d915a6f3
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: AppColors.blue),
         ),

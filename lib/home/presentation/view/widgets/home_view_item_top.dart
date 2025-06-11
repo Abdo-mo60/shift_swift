@@ -19,17 +19,20 @@ class HomeViewItemTop extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TrendingNowItem(),
-            TitleWidget(text: title),
-            Text(
-              companyName,
-              style: GoogleFonts.lato(textStyle: AppStyles.regular14),
-            ),
-          ],
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(width: 100, child: TrendingNowItem()),
+              TitleWidget(text: title),
+              Text(
+                companyName,
+                style: GoogleFonts.lato(textStyle: AppStyles.regular14),
+              ),
+            ],
+          ),
         ),
+        SizedBox(width: 30),
         Container(
           width: 74,
           height: 64,

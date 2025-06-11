@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
-import 'package:shiftswift/home/data/repos/home_repo.dart';
-
 import '../../../core/error/failure.dart';
 import '../../../core/model/job_data_model.dart';
 import '../../../core/model/rating_model.dart';
 import '../../../core/service/api_service.dart';
+import '../../presentation/view/widgets/ids.dart';
 import '../models/home_model/job_added_model.dart';
 import '../models/home_model/job_model.dart';
+import 'home_repo.dart';
 
 class HomeRepoImpl implements HomeRepo {
   final ApiService apiService;
@@ -16,8 +16,9 @@ class HomeRepoImpl implements HomeRepo {
   @override
   Future<List<JobDataModel>> getAllJopPosts() async {
     var response = await apiService.get(
-      endPoint: 'Home/GetRandomJobs',
-    ); 
+      endPoint:
+          'Home/GetRandomJobs?PageNumber=1&PageSize=10&SortBy=JobType&SortOrder=asc&JobTypeIdFilterValue=0&SalaryTypeIdFilterValue=0',
+    ); // Corrected the variable name
 
     List<dynamic> dataList = response['data']['data'];
     List<JobDataModel> jobs =
@@ -28,7 +29,9 @@ class HomeRepoImpl implements HomeRepo {
 
   @override
   Future<RatingModel> getAllCompanyRating({required String companyId}) async {
-    var data = await apiService.get(endPoint: 'Company/GetRating/$companyId');
+    var data = await apiService.get(
+      endPoint: 'Company/GetRating?companyId=$companyId',
+    );
     RatingModel rating = RatingModel.fromJson(data['data']);
     return rating;
   }
@@ -56,7 +59,7 @@ class HomeRepoImpl implements HomeRepo {
     try {
       var response = await apiService.post(
         endPoint: 'Member/SaveJob?JobId=$jobId&MemberId=$memberId',
-
+        token: Ids.token,
       );
 
       JobAddedModel saveJob = JobAddedModel.fromJson(response);
@@ -67,10 +70,13 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<Either<Failure, JobAddedModel>> addAppliedJob({required Map<String, dynamic> body}) async {
+  Future<Either<Failure, JobAddedModel>> addAppliedJob({
+    required Map<String, dynamic> body,
+  }) async {
     try {
       var response = await apiService.post(
         endPoint: 'Member/AddJobApplication',
+        token: Ids.token,
         body: body,
       );
       JobAddedModel applyJob = JobAddedModel.fromJson(response);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,6 +18,8 @@ import 'package:shiftswift/core/styles.dart';
 import 'package:shiftswift/home/presentation/view/widgets/call_center.dart';
 import 'package:shiftswift/home/presentation/view/widgets/custom_app_bar.dart';
 import 'package:shiftswift/home/presentation/view/widgets/custom_button.dart';
+=======
+>>>>>>> 35d8a23c5ddd75a89d57683a7e773e08d915a6f3
 import 'package:shiftswift/home/presentation/view/widgets/custom_container_app_bar.dart';
 import 'package:shiftswift/home/presentation/view/widgets/custom_rating.dart';
 import 'package:shiftswift/home/presentation/view/widgets/hiring_team_card.dart';

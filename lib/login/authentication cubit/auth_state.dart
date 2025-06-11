@@ -8,6 +8,7 @@ final class RegisterLoadingState extends AuthState {}
 
 final class RegisterSuccessState extends AuthState {}
 
+// ignore: must_be_immutable
 final class FailedToRegisterState extends AuthState {
   String errorMessage;
   FailedToRegisterState({required this.errorMessage});
@@ -17,6 +18,7 @@ class LoginLoadingState extends AuthState {}
 
 class LoginSuccessState extends AuthState {}
 
+// ignore: must_be_immutable
 class FailedTOLoginState extends AuthState {
   String errorMessage;
   FailedTOLoginState({required this.errorMessage});

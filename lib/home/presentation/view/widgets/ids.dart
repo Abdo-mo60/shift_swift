@@ -1,6 +1,5 @@
-import 'package:shiftswift/constant.dart';
-
 abstract class Ids {
-  static  String memberId = currentId!;
-  static  String token = token;
+  static const String memberId = '5646d9d9-11ac-4b9f-9da4-76270e52307e';
+  static const String token =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjU2NDZkOWQ5LTExYWMtNGI5Zi05ZGE0LTc2MjcwZTUyMzA3ZSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJ1c2VmIiwiZW1haWwiOiJ1c2VmMDNAZ21haWwuY29tIiwianRpIjoiNzIzMjdjZjAtMGIyYy00MDc0LTlkYmItZDM4ZWEyYzhjNmI2IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiTWVtYmVyIiwiZXhwIjoxNzUwMzUxNTc4LCJpc3MiOiJTaGlmdFN3aWZ0LkNvbSIsImF1ZCI6IlNoaWZ0U3dpZnQifQ.6vHtiIN3-G7T86TgScTrC_VbKAJbOhvoQJ8oM0hIVKo';
 }

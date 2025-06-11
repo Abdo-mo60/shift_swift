@@ -1,11 +1,12 @@
 import 'package:dartz/dartz.dart';
-import '../../constant.dart' as Ids;
 import '../../core/error/failure.dart';
 import '../../core/model/job_data_model.dart';
 import '../../core/model/rating_model.dart';
 import '../../core/service/api_service.dart';
 import '../../home/data/models/home_model/job_model.dart';
+import '../../home/presentation/view/widgets/ids.dart';
 import '../model/applied_job_model.dart';
+import '../model/last_work_model.dart';
 import 'my_job_repo.dart';
 
 class MyJobRepoImpl implements MyJobRepo {
@@ -14,7 +15,7 @@ class MyJobRepoImpl implements MyJobRepo {
   MyJobRepoImpl({required this.apiService});
   @override
   Future<RatingModel> getAllCompanyRating({required String companyId}) async {
-    var data = await apiService.get(endPoint: 'Company/GetRating/$companyId');
+    var data = await apiService.get(endPoint: 'Company/GetRating?companyId=$companyId');
     RatingModel rating = RatingModel.fromJson(data['data']);
     return rating;
   }
@@ -23,9 +24,8 @@ class MyJobRepoImpl implements MyJobRepo {
   Future<List<JobDataModel>> getAllJobs({required String memberId}) async {
     var response = await apiService.get(
       endPoint: 'Member/GetAllSavedJobs/$memberId',
-      token:
-          Ids.token,
-    ); 
+      token: Ids.token,
+    ); // Corrected the variable name
     List<dynamic> dataList = response['data'];
     List<JobDataModel> jobs =
         dataList.map((job) => JobDataModel.fromJson(job)).toList();
@@ -51,20 +51,57 @@ class MyJobRepoImpl implements MyJobRepo {
   }
 
   @override
-  Future<Either<Failure,List<AppliedJobModel>>> getAllAppliedJob({required String memberId}) async {
+  Future<Either<Failure, List<AppliedJobModel>>> getAllAppliedJob({
+    required String memberId,
+  }) async {
     try {
-  var response = await apiService.get(
-    endPoint: 'Member/GetAllMyJobApplications/$memberId',
-    token:
-        Ids.token,
-  ); // Corrected the variable name
-  List<dynamic> dataList = response['data'];
-  List<AppliedJobModel> jobs =
-      dataList.map((job) => AppliedJobModel.fromJson(job)).toList();
-  
-  return right(jobs);
-} on Exception catch (e) {
-  return left(ServerFailure(errorMessage: e.toString()));
-}
+      var response = await apiService.get(
+        endPoint: 'Member/GetAllMyJobApplications/$memberId',
+        token: Ids.token,
+      ); // Corrected the variable name
+      List<dynamic> dataList = response['data'];
+      List<AppliedJobModel> jobs =
+          dataList.map((job) => AppliedJobModel.fromJson(job)).toList();
+
+      return right(jobs);
+    } on Exception catch (e) {
+      return left(ServerFailure(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<LastWorkModel>>> getLastWork() async {
+    try {
+      var response = await apiService.get(
+        endPoint: 'Member/GetLastWork',
+        token: Ids.token,
+      );
+
+      List<dynamic> dataList = response['data'];
+      List<LastWorkModel> jobs =
+          dataList.map((job) => LastWorkModel.fromJson(job)).toList();
+      return right(jobs);
+    } on Exception catch (e) {
+      return left(ServerFailure(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> addRate({
+    required String companyId,
+    required String memberId,
+    required Map<String, dynamic> body,
+  }) async {
+    try {
+      var response = await apiService.post(
+        endPoint: 'Member/AddRating/$companyId?RatedById=$memberId',
+        token: Ids.token,
+        body: body,
+      );
+      dynamic message = response['message'];
+      return right(message);
+    } on Exception catch (e) {
+      return left(ServerFailure(errorMessage: e.toString()));
+    }
   }
 }

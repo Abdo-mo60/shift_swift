@@ -12,12 +12,15 @@ class TitleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(
-          text,
-          style: GoogleFonts.lato(
-            textStyle: AppStyles.medium20.copyWith(
-              color: AppColors.black,
-              fontSize: size,
+        Flexible(
+          child: Text(
+            text,
+            overflow: TextOverflow.ellipsis,
+            style: GoogleFonts.lato(
+              textStyle: AppStyles.medium20.copyWith(
+                color: AppColors.black,
+                fontSize: size,
+              ),
             ),
           ),
         ),
