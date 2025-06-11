@@ -189,7 +189,9 @@ class _ApplicantProfileState extends State<ApplicantProfile> {
                             }
                             ,
                           ),
+
                           if (state.applicantDetailsModel.title != '') ...[
+                            SizedBox(height: 16,),
                             ApplicantLastWork(
                               sectionTitle: 'Last Work',
                               icon: Icon(Icons.reply),
@@ -197,6 +199,7 @@ class _ApplicantProfileState extends State<ApplicantProfile> {
                               description:
                                   state.applicantDetailsModel.description!,
                               postedOn: state.applicantDetailsModel.postedOn!,
+                              imageUrl: state.applicantDetailsModel.imageUrl,
                             ),
                           ],
                           const Divider(height: 20),

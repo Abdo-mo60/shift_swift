@@ -21,7 +21,7 @@ class ApplicantLastWork extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(children: [icon, Text(sectionTitle)]),
+        Row(children: [icon, Text(sectionTitle,style: TextStyle(fontSize: 17),)]),
         Row(
           children: [
             (imageUrl == '')

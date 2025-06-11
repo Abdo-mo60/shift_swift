@@ -24,15 +24,15 @@ class AddUpdatePersonalDataService {
       'content-type': 'application/json',
     };
     try {
-      // http.Response responseEducationData = await http.post(
-      //   Uri.parse('$memberBaseUrl/AddEducation/$currentId'),
-      //   body: jsonEncode({
-      //     "level": level,
-      //     "faculty": faculty,
-      //     "universityName": universityName,
-      //   }),
-      //   headers: headers,
-      // ); 
+      http.Response responseEducationData = await http.post(
+        Uri.parse('$memberBaseUrl/AddEducation/$currentId'),
+        body: jsonEncode({
+          "level": level,
+          "faculty": faculty,
+          "universityName": universityName,
+        }),
+        headers: headers,
+      ); 
       http.Response responsePersonalData = await http.post(
         Uri.parse('$memberBaseUrl/AddOrUpdateMamberProfileData'),
         headers: headers,
@@ -54,11 +54,11 @@ class AddUpdatePersonalDataService {
           'Add Member data Respone=> $jsonDecode(${responsePersonalData.body})',
         );
       }
-      // if (responseEducationData.statusCode == 200) {
-      //   print(
-      //     'Add Member data Respone=> $jsonDecode(${responseEducationData.body})',
-      //   );
-      // }
+      if (responseEducationData.statusCode == 200) {
+        print(
+          'Add Member data Respone=> $jsonDecode(${responseEducationData.body})',
+        );
+      }
     } catch (e) {
       print('failed to send data from service');
       throw (e.toString());

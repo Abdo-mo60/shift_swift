@@ -344,87 +344,90 @@ class _PostNewJobPageState extends State<PostNewJob> {
                     ),
 
                     const SizedBox(height: 24),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.blue,
-                        foregroundColor: Colors.white,
-                        minimumSize: const Size.fromHeight(50),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 25),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.blue,
+                          foregroundColor: Colors.white,
+                          minimumSize: const Size.fromHeight(50),
+                        ),
+                        onPressed:
+                            (state is GetCompanyDataSuccess &&
+                                    state.companyInfoModel.firstName.isEmpty)
+                                ? null
+                                : () async {
+                                  // Focus on the title field to ensure it's validated properly
+                                  FocusScope.of(
+                                    context,
+                                  ).requestFocus(titleFocusNode);
+                                  // FocusScope.of(context).requestFocus(keyWordsFocusNode);
+                      
+                                  final isValid =
+                                      formKey.currentState!.validate();
+                                  final isJobTypeSelected =
+                                      selectedJobType.isNotEmpty;
+                                  final isLocationSelected =
+                                      selectedLocation.isNotEmpty;
+                                  final isCitySelected = selectedCity != null;
+                                  final isSalaryTypeSelected =
+                                      selectedSalaryType != null;
+                      
+                                  setState(() {
+                                    isJobTypeValid = selectedJobType.isNotEmpty;
+                                    isLocationValid = selectedLocation.isNotEmpty;
+                                  });
+                      
+                                  if (isValid &&
+                                      isJobTypeSelected &&
+                                      isLocationSelected &&
+                                      isCitySelected &&
+                                      isSalaryTypeSelected) {
+                                    final int jobTypeValue = getJobTypeValue(
+                                      selectedJobType,
+                                    );
+                                    final int workModeValue = getWorkModeValue(
+                                      selectedLocation,
+                                    );
+                                    final int salaryTypeValue =
+                                        getSalaryTypeValue(selectedSalaryType!);
+                                    // Bloc Logic
+                                    BlocProvider.of<CompanyJobPostsCubit>(
+                                      context,
+                                    ).createJobPostForCompany(
+                                      title: jobTitleController.text,
+                                      description: jobDescriptionController.text,
+                                      location: selectedCity!,
+                                      requirements:
+                                          jobRequirementsController.text,
+                                      keywords: keywordsController.text,
+                                      salary:
+                                          int.tryParse(jobSalaryController.text)!,
+                                      salaryType: salaryTypeValue,
+                                      workMode: workModeValue,
+                                      jobType: jobTypeValue,
+                                    );
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder:
+                                            (context) =>
+                                                CustomBottomNavigationBar(),
+                                      ),
+                                    );
+                                  }
+                                  // else {
+                                  //   // Optionally, show a message indicating missing fields
+                                  //   ScaffoldMessenger.of(context).showSnackBar(
+                                  //     SnackBar(
+                                  //       behavior: SnackBarBehavior.floating,
+                                  //       content: Text('Please fill out all required fields.'),
+                                  //     ),
+                                  //   );
+                                  // }
+                                },
+                        child: const Text('Post'),
                       ),
-                      onPressed:
-                          (state is GetCompanyDataSuccess &&
-                                  state.companyInfoModel.firstName.isEmpty)
-                              ? null
-                              : () async {
-                                // Focus on the title field to ensure it's validated properly
-                                FocusScope.of(
-                                  context,
-                                ).requestFocus(titleFocusNode);
-                                // FocusScope.of(context).requestFocus(keyWordsFocusNode);
-
-                                final isValid =
-                                    formKey.currentState!.validate();
-                                final isJobTypeSelected =
-                                    selectedJobType.isNotEmpty;
-                                final isLocationSelected =
-                                    selectedLocation.isNotEmpty;
-                                final isCitySelected = selectedCity != null;
-                                final isSalaryTypeSelected =
-                                    selectedSalaryType != null;
-
-                                setState(() {
-                                  isJobTypeValid = selectedJobType.isNotEmpty;
-                                  isLocationValid = selectedLocation.isNotEmpty;
-                                });
-
-                                if (isValid &&
-                                    isJobTypeSelected &&
-                                    isLocationSelected &&
-                                    isCitySelected &&
-                                    isSalaryTypeSelected) {
-                                  final int jobTypeValue = getJobTypeValue(
-                                    selectedJobType,
-                                  );
-                                  final int workModeValue = getWorkModeValue(
-                                    selectedLocation,
-                                  );
-                                  final int salaryTypeValue =
-                                      getSalaryTypeValue(selectedSalaryType!);
-                                  // Bloc Logic
-                                  BlocProvider.of<CompanyJobPostsCubit>(
-                                    context,
-                                  ).createJobPostForCompany(
-                                    title: jobTitleController.text,
-                                    description: jobDescriptionController.text,
-                                    location: selectedCity!,
-                                    requirements:
-                                        jobRequirementsController.text,
-                                    keywords: keywordsController.text,
-                                    salary:
-                                        int.tryParse(jobSalaryController.text)!,
-                                    salaryType: salaryTypeValue,
-                                    workMode: workModeValue,
-                                    jobType: jobTypeValue,
-                                  );
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder:
-                                          (context) =>
-                                              CustomBottomNavigationBar(),
-                                    ),
-                                  );
-                                }
-                                // else {
-                                //   // Optionally, show a message indicating missing fields
-                                //   ScaffoldMessenger.of(context).showSnackBar(
-                                //     SnackBar(
-                                //       behavior: SnackBarBehavior.floating,
-                                //       content: Text('Please fill out all required fields.'),
-                                //     ),
-                                //   );
-                                // }
-                              },
-                      child: const Text('Post'),
                     ),
 
                     // TextButton(
