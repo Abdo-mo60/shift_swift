@@ -35,7 +35,7 @@ class _PostNewJobPageState extends State<PostNewJob> {
       TextEditingController();
   final TextEditingController jobRequirementsController =
       TextEditingController();
-  final TextEditingController keywordsController = TextEditingController();
+  // final TextEditingController keywordsController = TextEditingController();
   final TextEditingController jobSalaryController = TextEditingController();
   @override
   void dispose() {
@@ -336,12 +336,12 @@ class _PostNewJobPageState extends State<PostNewJob> {
                       maxLines: 3,
                     ),
 
-                    const SizedBox(height: 16),
-                    CustomPostJobFields(
-                      label: 'Key Words',
-                      //   focusNode: keyWordsFocusNode,
-                      controller: keywordsController,
-                    ),
+                    // const SizedBox(height: 16),
+                    // CustomPostJobFields(
+                    //   label: 'Key Words',
+                    //   //   focusNode: keyWordsFocusNode,
+                    //   controller: keywordsController,
+                    // ),
 
                     const SizedBox(height: 24),
                     Padding(
@@ -400,7 +400,7 @@ class _PostNewJobPageState extends State<PostNewJob> {
                                       location: selectedCity!,
                                       requirements:
                                           jobRequirementsController.text,
-                                      keywords: keywordsController.text,
+                                      // keywords: keywordsController.text,
                                       salary:
                                           int.tryParse(jobSalaryController.text)!,
                                       salaryType: salaryTypeValue,

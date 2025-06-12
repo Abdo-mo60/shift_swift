@@ -34,7 +34,7 @@ class CompanyPostsService {
           CompanyJobPostModel jobModel = CompanyJobPostModel.fromJson(
             job: job,
             avgRating: reviewsmodel[0].avgScore,
-            numOfreviews:reviewsmodel[0].numberOfReviews ,
+            numOfreviews: reviewsmodel[0].numberOfReviews,
           );
           allJobPostsList.add(jobModel);
         }
@@ -62,7 +62,7 @@ class CompanyPostsService {
     required String description,
     required String location,
     required String requirements,
-    required String keywords,
+    // required String keywords,
     required int salary,
     required int salaryType,
     required int workMode,
@@ -80,14 +80,7 @@ class CompanyPostsService {
           "salary": salary,
           "salaryType": salaryType,
           "requirements": requirements,
-          "keywords": keywords,
-          "questions": [
-            {
-              "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-              "questionText": 'question',
-              "questionType": 2,
-            },
-          ],
+          "keywords": 'keywords',
         }),
         headers: {
           'Authorization': ' Bearer $token',

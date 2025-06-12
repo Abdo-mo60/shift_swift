@@ -56,7 +56,7 @@ class AddUpdatePersonalDataService {
       }
       if (responseEducationData.statusCode == 200) {
         print(
-          'Add Member data Respone=> $jsonDecode(${responseEducationData.body})',
+          'Add Member Education data Respone=> $jsonDecode(${responseEducationData.body})',
         );
       }
     } catch (e) {
@@ -73,9 +73,8 @@ class AddUpdatePersonalDataService {
       );
       print('Response status: ${response.statusCode}');
 
-      print('get company response${response.body}');
+      print('get Member response${response.body}');
       var jsonData = jsonDecode(response.body);
-      print('Parsed JSON data: $jsonData');
       return PersonalInfoModel.fromJson(jsonData);
     } catch (e) {
       throw (e.toString());

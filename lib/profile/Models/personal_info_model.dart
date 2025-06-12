@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class PersonalInfoModel {
   final String memberId;
   final String firstName;
@@ -5,7 +7,6 @@ class PersonalInfoModel {
   final String userName;
   final String phoneNumber;
   final String alternativeNumber;
-
   final String email;
   final String gender;
   final String country;
@@ -14,6 +15,7 @@ class PersonalInfoModel {
   final String universityName;
   final String city;
   final String area;
+  final String birthDate;
 
   PersonalInfoModel({
     required this.memberId,
@@ -30,8 +32,17 @@ class PersonalInfoModel {
     required this.faculty,
     required this.universityName,
     required this.gender,
+    required this.birthDate,
   });
   factory PersonalInfoModel.fromJson(json) {
+    String formattedDate;
+    if (json['data']['birthDate'] != null) {
+      String dateString = json['data']['birthDate'];
+      DateTime date = DateTime.parse(dateString);
+      formattedDate = DateFormat('yyyy-MM-dd').format(date);
+    } else {
+      formattedDate = '';
+    }
     final List educationList = json['data']['educations'];
     int genderValue = json['data']['genderId'];
     return PersonalInfoModel(
@@ -51,6 +62,7 @@ class PersonalInfoModel {
           (json['data']['location'] == null) ? '' : json['data']['location'],
       city: (json['data']['city'] == null) ? '' : json['data']['city'],
       area: (json['data']['area'] == null) ? '' : json['data']['area'],
+      birthDate: formattedDate,
       gender: GenderExtension.fromId(genderValue).name,
       level: (educationList.isEmpty) ? '' : educationList[0]['level'],
       faculty: (educationList.isEmpty) ? '' : educationList[0]['faculty'],

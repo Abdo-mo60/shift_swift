@@ -26,7 +26,7 @@ class PersonalInfoPagestate extends State<PersonalInfoPage> {
   final mobileNumberController = TextEditingController();
   final universityNameController = TextEditingController();
   final facultyController = TextEditingController();
-    final birthDateController = TextEditingController();
+  final birthDateController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
   
@@ -39,7 +39,7 @@ class PersonalInfoPagestate extends State<PersonalInfoPage> {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
+      firstDate: DateTime(1970),
       lastDate: DateTime.now(),
     );
     if (picked != null) {
@@ -163,7 +163,6 @@ class PersonalInfoPagestate extends State<PersonalInfoPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     BlocProvider.of<AddUpdatePersonInfoCubit>(context).getPersonalInfo();
   }
@@ -246,6 +245,7 @@ class PersonalInfoPagestate extends State<PersonalInfoPage> {
               firstNameController.text = state.personalInfoModel.firstName;
               lastNameControlloer.text = state.personalInfoModel.lastName;
               mobileNumberController.text = state.personalInfoModel.phoneNumber;
+              birthDateController.text = state.personalInfoModel.birthDate;
               alternativemobileNumberController.text =
                   state.personalInfoModel.alternativeNumber;
               facultyController.text = state.personalInfoModel.faculty;
@@ -315,7 +315,7 @@ class PersonalInfoPagestate extends State<PersonalInfoPage> {
                             },
                           ),
                         ),
-                        SizedBox(width: 16,),
+                        SizedBox(width: 16),
                         Expanded(
                           child: TextFormField(
                             controller: lastNameControlloer,
@@ -502,7 +502,7 @@ class PersonalInfoPagestate extends State<PersonalInfoPage> {
                       // initialValue: companyNameController.text,
                     ),
                     SizedBox(height: 12),
-                   
+
                     // Row(
                     //   children: [
                     //     Checkbox(
@@ -523,21 +523,21 @@ class PersonalInfoPagestate extends State<PersonalInfoPage> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 6),
-                  
+
                     GestureDetector(
                       onTap: () => _selectDate(context, birthDateController),
                       child: AbsorbPointer(
                         child: TextFormField(
-                      controller: birthDateController,
-                      decoration: getOutlinedDecoration('Birth Date'),
-                      validator: (input) {
-                        if (birthDateController.text.isEmpty) {
-                          return 'Birth Date must not be empty';
-                        } else {
-                          return null;
-                        }
-                      },
-                    ),
+                          controller: birthDateController,
+                          decoration: getOutlinedDecoration('Birth Date'),
+                          validator: (input) {
+                            if (birthDateController.text.isEmpty) {
+                              return 'Birth Date must not be empty';
+                            } else {
+                              return null;
+                            }
+                          },
+                        ),
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -565,7 +565,7 @@ class PersonalInfoPagestate extends State<PersonalInfoPage> {
                                     alternativemobileNumberController.text,
                                 city: city!,
                                 area: area!,
-                                dateOfBirth: birthDateController.text
+                                dateOfBirth: birthDateController.text,
                               );
                             }
                           },

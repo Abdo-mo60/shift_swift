@@ -66,7 +66,7 @@ class AuthCubit extends Cubit<AuthState> {
           emit(FailedToRegisterState(errorMessage: 'Unknown error'));
         }
       }
-    } on Exception catch (e) {
+    }  catch (e) {
       //  print('Error: $e');
       emit(FailedToRegisterState(errorMessage: e.toString()));
     }
@@ -123,7 +123,7 @@ class AuthCubit extends Cubit<AuthState> {
         );
       }
     } catch (e) {
-      emit(FailedTOLoginState(errorMessage: 'Server Error...Try Later'));
+      emit(FailedTOLoginState(errorMessage: e.toString()));
     }
   }
 
