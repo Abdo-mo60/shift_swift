@@ -199,7 +199,7 @@ class _ApplicantProfileState extends State<ApplicantProfile> {
                               description:
                                   state.applicantDetailsModel.description!,
                               postedOn: state.applicantDetailsModel.postedOn!,
-                              imageUrl: state.applicantDetailsModel.imageUrl,
+                              imageUrl: state.applicantDetailsModel.lastWorkCompanyPic,
                             ),
                           ],
                           const Divider(height: 20),

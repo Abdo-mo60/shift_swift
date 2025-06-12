@@ -186,20 +186,21 @@ class ShortListViewCompanyBody extends StatelessWidget {
                   ),
 
                   /// Info Items
-                  InformationItem(
-                    text: jobModel.location ?? '',
-                    icon: Icons.location_on_outlined,
-                  ),
+                  if (details.location != '') ...[
+                    InformationItem(
+                      text: details.location ?? '',
+                      icon: Icons.location_on_outlined,
+                    ),
+                  ],
                   const SizedBox(height: 10),
-                  InformationItem(
-                    text: '${jobModel.jobType}/${jobModel.salaryType}',
-                    icon: Icons.watch_later_outlined,
-                  ),
+                  InformationItem(text: details.phoneNumber, icon: Icons.phone),
                   const SizedBox(height: 10),
-                  InformationItem(
-                    text: '${jobModel.salary} EGP/${jobModel.salaryType}',
-                    icon: Icons.money_sharp,
-                  ),
+                  if (details.schoolName != '') ...[
+                    InformationItem(
+                      text: '${details.schoolName}/${details.fieldOfStudy}',
+                      icon: Icons.school,
+                    ),
+                  ],
                   const SizedBox(height: 10),
 
                   /// Buttons
@@ -208,7 +209,7 @@ class ShortListViewCompanyBody extends StatelessWidget {
                     children: [
                       SizedBox(
                         height: 40,
-                        width: 145,
+                        width: 160,
                         child: OutlinedButton(
                           onPressed: () {
                             BlocProvider.of<AllSpecificApplicantsCubit>(
@@ -229,8 +230,8 @@ class ShortListViewCompanyBody extends StatelessWidget {
                           child: const Text(
                             "Remove From Short List",
                             style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                              // fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
@@ -252,10 +253,7 @@ class ShortListViewCompanyBody extends StatelessWidget {
                                       create:
                                           (_) => AllSpecificApplicantsCubit(),
                                     ),
-                                    BlocProvider(
-                                      create:
-                                          (_) => PictureCubit(),
-                                    ),
+                                    BlocProvider(create: (_) => PictureCubit()),
                                   ],
                                   child: ApplicantProfile(
                                     jobModel: jobModel,

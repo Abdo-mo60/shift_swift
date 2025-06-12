@@ -36,7 +36,7 @@ class ShortListBlocConsumerButton extends StatelessWidget {
       builder: (context, state) {
         return SizedBox(
           height: 40,
-          width: 145,
+          width: 160,
           child: OutlinedButton(
             onPressed: () {
               BlocProvider.of<AllSpecificApplicantsCubit>(
@@ -52,7 +52,9 @@ class ShortListBlocConsumerButton extends StatelessWidget {
             ),
             child: const Text(
               "Move To Short List",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 15,
+              //  fontWeight: FontWeight.bold,
+               ),
             ),
           ),
         );

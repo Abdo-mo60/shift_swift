@@ -17,6 +17,7 @@ class ApplicantDetailsModel {
   // dynamic experienceEndDate;
   // dynamic experienceDescription;
   // dynamic skills;
+  String? lastWorkCompanyPic;
   String? imageUrl;
   String? fullName;
   String? location;
@@ -40,6 +41,7 @@ class ApplicantDetailsModel {
     // required this.experienceEndDate,
     // required this.experienceDescription,
     // this.skills,
+    this.lastWorkCompanyPic,
     this.fullName,
     this.location,
     this.imageUrl,
@@ -81,7 +83,8 @@ class ApplicantDetailsModel {
       email: data['email'],
       fullName: (data['fullName'] == ' ') ? data['userName'] : data['fullName'],
       location: (data['location'] == null) ? '' : data['location'],
-      imageUrl: (data['imageUrl'] == null) ? '' : data['imageUrl'],
+      lastWorkCompanyPic: (data['companyImageUrl'] == null) ? '' : data['companyImageUrl'],
+      imageUrl: (data['memberImageUrl'] == null) ? '' : data['memberImageUrl'],
       schoolName: (educations.isEmpty) ? '' : educations[0]['universityName'],
       levelOfEducation: (educations.isEmpty) ? '' : educations[0]['level'],
       fieldOfStudy: (educations.isEmpty) ? '' : educations[0]['faculty'],

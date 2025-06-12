@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shiftswift/core/app_colors.dart';
 
 import '../../../../core/service/service_locator.dart';
 import '../../../../core/styles.dart';
@@ -51,9 +52,13 @@ class ApplyNowButton extends StatelessWidget {
             );
           }
           if (state is AddedjobcubitFailure) {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text('Job is already added')));
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Job is already added'),
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: AppColors.blue,
+              ),
+            );
           }
         },
         builder: (context, state) {
@@ -65,11 +70,7 @@ class ApplyNowButton extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   context.read<Addedjobcubit>().appliedJob(
-                    body: {
-                      "jobId": jobId,
-                      "memberId": Ids.memberId,
-                    //  "status": 1,
-                    },
+                    body: {"jobId": jobId, "memberId": Ids.memberId},
                   );
                 },
                 style: ElevatedButton.styleFrom(

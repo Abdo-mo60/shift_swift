@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shiftswift/company/Cubits/applicant%20details/applicant_details_cubit.dart';
 import 'package:shiftswift/company/models/applicant_details_model.dart';
 import 'package:shiftswift/company/models/applicant_model.dart';
 import 'package:shiftswift/company/models/company_job_post_model.dart';
@@ -9,6 +7,7 @@ import 'package:shiftswift/company/services/applicants_details_service.dart';
 import 'package:shiftswift/core/app_colors.dart';
 import 'package:shiftswift/home/presentation/view/widgets/information_item.dart';
 import 'package:shiftswift/home/presentation/view/widgets/title_widget.dart';
+
 class ReceivedViewCompanyBody extends StatelessWidget {
   const ReceivedViewCompanyBody({
     super.key,
@@ -64,9 +63,11 @@ class ReceivedViewCompanyBody extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TitleWidget(
-                          text: (details.fullName == null || details.fullName!.trim().isEmpty)
-                              ? details.userName
-                              : details.fullName!,
+                          text:
+                              (details.fullName == null ||
+                                      details.fullName!.trim().isEmpty)
+                                  ? details.userName
+                                  : details.fullName!,
                         ),
                         Text('${jobModel!.title}'),
                       ],
@@ -85,9 +86,16 @@ class ReceivedViewCompanyBody extends StatelessWidget {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: details.imageUrl == ''
-                          ? Image.asset('asstes/profile.png', fit: BoxFit.cover)
-                          : Image.network(details.imageUrl!, fit: BoxFit.cover),
+                      child:
+                          details.imageUrl == ''
+                              ? Image.asset(
+                                'asstes/profile.png',
+                                fit: BoxFit.cover,
+                              )
+                              : Image.network(
+                                details.imageUrl!,
+                                fit: BoxFit.cover,
+                              ),
                     ),
                   ),
                 ],
@@ -98,20 +106,21 @@ class ReceivedViewCompanyBody extends StatelessWidget {
                 endIndent: 10,
                 height: 20,
               ),
-              InformationItem(
-                text: '${jobModel!.location}',
-                icon: Icons.location_on_outlined,
-              ),
+              if (details.location != '') ...[
+                InformationItem(
+                  text: '${details.location}',
+                  icon: Icons.location_on_outlined,
+                ),
+              ],
               const SizedBox(height: 10),
-              InformationItem(
-                text: '${jobModel!.jobType}/${jobModel!.salaryType}',
-                icon: Icons.watch_later_outlined,
-              ),
+              InformationItem(text: details.phoneNumber, icon: Icons.phone),
               const SizedBox(height: 10),
-              InformationItem(
-                text: '${jobModel!.salary} EGP/${jobModel!.salaryType}',
-                icon: Icons.money_sharp,
-              ),
+              if (details.schoolName != '') ...[
+                InformationItem(
+                  text: '${details.schoolName} /${details.fieldOfStudy}',
+                  icon: Icons.school,
+                ),
+              ],
               const SizedBox(height: 10),
               ReceivedViewButtons(
                 jobModel: jobModel,
