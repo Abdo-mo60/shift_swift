@@ -34,7 +34,7 @@ class _LastWorkViewItemState extends State<LastWorkViewItem> {
       child: Column(
         children: [
           HomeViewItemTop(
-            imageUrl: widget.lastWorkModel.companyPictureUrl!,
+            imageUrl: widget.lastWorkModel.companyPictureUrl??'',
             title: widget.lastWorkModel.title!,
             companyName:
                 '${widget.lastWorkModel.firstName} ${widget.lastWorkModel.firstName}',

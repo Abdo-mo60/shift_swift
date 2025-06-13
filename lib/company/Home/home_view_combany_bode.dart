@@ -619,7 +619,7 @@ class CallCenterWidgetCompany extends StatelessWidget {
           Center(
             child:
                 imageUrl == ''
-                    ? Image.asset('asstes/profile.png')
+                    ? Image.asset('asstes/images.jpg')
                     : Image.network(imageUrl!,width:80,),
           ),
           SizedBox(height: 16),

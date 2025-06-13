@@ -11,12 +11,12 @@ class HomeViewItemTop extends StatelessWidget {
   const HomeViewItemTop({
     super.key,
     required this.title,
-    required this.companyName, 
+    required this.companyName,
     required this.imageUrl,
   });
   final String title;
   final String companyName;
-  final String  imageUrl;
+  final String imageUrl;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -28,13 +28,14 @@ class HomeViewItemTop extends StatelessWidget {
             children: [
               SizedBox(width: 100, child: TrendingNowItem()),
               TitleWidget(text: title),
-              if(companyName!='null null')...[
-              Text(
-                companyName,
-                style: GoogleFonts.lato(textStyle: AppStyles.regular14),
-              ),
+              if (companyName != 'null null') ...[
+                Text(
+                  companyName,
+                  style: GoogleFonts.lato(textStyle: AppStyles.regular14),
+                ),
+              ],
             ],
-      ]),
+          ),
         ),
         SizedBox(width: 30),
 
@@ -48,14 +49,18 @@ class HomeViewItemTop extends StatelessWidget {
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: CachedNetworkImage(
-              imageUrl: imageUrl, 
-              fit: BoxFit.cover,
-              errorWidget: (context, url, error) => Image.asset('asstes/images.jpg'), 
-            ),
+            child:
+                imageUrl == ''
+                    ? Image.asset('asstes/images.jpg')
+                    : CachedNetworkImage(
+                      imageUrl: imageUrl,
+                      fit: BoxFit.cover,
+                      errorWidget:
+                          (context, url, error) =>
+                              Image.asset('asstes/images.jpg'),
+                    ),
           ),
         ),
-
       ],
     );
   }

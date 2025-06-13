@@ -31,7 +31,7 @@ class ViewApplicantUserNameImage extends StatelessWidget {
                 child: CircleAvatar(
                   radius: 35,
                   
-                  backgroundImage:(imageUrl=='')? AssetImage('asstes/profile.png'): NetworkImage(imageUrl),
+                  backgroundImage:(imageUrl=='')? AssetImage('asstes/images.jpg'): NetworkImage(imageUrl),
                 ),
               ),
               Text(

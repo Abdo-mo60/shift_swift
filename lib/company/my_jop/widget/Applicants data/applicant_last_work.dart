@@ -25,7 +25,7 @@ class ApplicantLastWork extends StatelessWidget {
         Row(
           children: [
             (imageUrl == '')
-                ? Image.asset('asstes/profile.png', width: 40, height: 40)
+                ? Image.asset('asstes/images.jpg', width: 40, height: 40)
                 : Image.network(imageUrl!,width: 40,height: 40,),
             SizedBox(width: 8),
 

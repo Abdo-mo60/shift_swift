@@ -89,7 +89,7 @@ class ReceivedViewCompanyBody extends StatelessWidget {
                       child:
                           details.imageUrl == ''
                               ? Image.asset(
-                                'asstes/profile.png',
+                                'asstes/images.jpg',
                                 fit: BoxFit.cover,
                               )
                               : Image.network(

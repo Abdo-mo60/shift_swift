@@ -163,16 +163,10 @@ class ShortListViewCompanyBody extends StatelessWidget {
                           child:
                               imageUrl == ''
                                   ? Image.asset(
-                                    'asstes/profile.png',
+                                    'asstes/images.jpg',
                                     fit: BoxFit.cover,
                                   )
-                                  : Image.network(
-                                    imageUrl!,
-                                    fit: BoxFit.cover,
-                                    errorBuilder:
-                                        (context, error, stackTrace) =>
-                                            Image.asset('asstes/profile.png'),
-                                  ),
+                                  : Image.network(imageUrl!, fit: BoxFit.cover),
                         ),
                       ),
                     ],
