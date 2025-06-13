@@ -28,12 +28,13 @@ class HomeViewItemTop extends StatelessWidget {
             children: [
               SizedBox(width: 100, child: TrendingNowItem()),
               TitleWidget(text: title),
+              if(companyName!='null null')...[
               Text(
                 companyName,
                 style: GoogleFonts.lato(textStyle: AppStyles.regular14),
               ),
             ],
-          ),
+      ]),
         ),
         SizedBox(width: 30),
 
