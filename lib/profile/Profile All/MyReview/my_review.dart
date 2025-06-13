@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shiftswift/core/app_colors.dart';
 import 'package:shiftswift/profile/Cubits/reviews%20cubit/reviews_cubit.dart';
 import 'package:shiftswift/profile/Models/reviews_model.dart';
@@ -226,7 +225,7 @@ class _MyReviewsPageState extends State<MyReviewsPage> {
             children: [
               CircleAvatar(
                 radius: 32,
-                backgroundImage: NetworkImage(
+                backgroundImage:(imageUrl=='')?AssetImage('asstes/profile.png'): NetworkImage(
                   imageUrl,
                 ),
               ),

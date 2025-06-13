@@ -37,7 +37,7 @@ class _LastWorkViewItemState extends State<LastWorkViewItem> {
             imageUrl: widget.lastWorkModel.companyPictureUrl??'',
             title: widget.lastWorkModel.title!,
             companyName:
-                '${widget.lastWorkModel.firstName} ${widget.lastWorkModel.firstName}',
+                '${widget.lastWorkModel.firstName} ${widget.lastWorkModel.lastName}',
           ),
           const Divider(
             color: Color(0xff95948F),

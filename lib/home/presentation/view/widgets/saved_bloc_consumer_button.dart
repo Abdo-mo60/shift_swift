@@ -18,9 +18,13 @@ class SavedBlocConsumerButton extends StatelessWidget {
       listener: (context, state) {
         if (state is AddedjobcubitSuccess) {
           log(state.jobAddedModel.message!);
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(state.jobAddedModel.message!)));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.jobAddedModel.message!),
+              backgroundColor: AppColors.blue,
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
         }
         if (state is AddedjobcubitFailure) {
           ScaffoldMessenger.of(context).showSnackBar(

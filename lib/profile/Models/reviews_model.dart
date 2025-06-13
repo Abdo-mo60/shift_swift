@@ -15,20 +15,24 @@ class ReviewsModel {
     required this.ratedByImageUrl,
     required this.score,
     required this.avgScore,
-    required this.numberOfReviews
+    required this.numberOfReviews,
   });
 
-  factory ReviewsModel.fromJson({reviewItem,double? avgScore,required int numberOfReviews}) {
+  factory ReviewsModel.fromJson({
+    reviewItem,
+    double? avgScore,
+    required int numberOfReviews,
+  }) {
     if (reviewItem == null) {
       return ReviewsModel(
-      comment: '',
-      createdAt: '',
-      ratedByImageUrl: '',
-      ratedByUserNAme: '',
-      score: 0,
-      avgScore: avgScore ?? 0,
-      numberOfReviews: numberOfReviews
-    );
+        comment: '',
+        createdAt: '',
+        ratedByImageUrl: '',
+        ratedByUserNAme: '',
+        score: 0,
+        avgScore: avgScore ?? 0,
+        numberOfReviews: numberOfReviews,
+      );
     } else {
       String date = reviewItem['createdAt'];
 
@@ -42,13 +46,13 @@ class ReviewsModel {
         comment: reviewItem['comment'],
         createdAt: formattedDate,
         ratedByImageUrl:
-            reviewItem['ratedByImageUrl'].toString().isEmpty
-                ? 'asstes/two.png'
+            (reviewItem['ratedByImageUrl'] == null)
+                ? ''
                 : reviewItem['ratedByImageUrl'],
         ratedByUserNAme: reviewItem['ratedByUserName'],
         score: reviewItem['score'],
         avgScore: avgScore!,
-        numberOfReviews: numberOfReviews
+        numberOfReviews: numberOfReviews,
       );
     }
   }
