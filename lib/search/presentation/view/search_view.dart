@@ -67,7 +67,7 @@ class _SearchPageState extends State<SearchView> {
                                 child: ListTile(
                                   title: Text(jobs[index].jobDataModel.title),
                                   subtitle: Text(
-                                    jobs[index].jobDataModel.companyName!,
+                                    jobs[index].jobDataModel.companyFirstName!,
                                   ),
                                   onTap: () {
                                     searchHistory.add(jobs[index]);

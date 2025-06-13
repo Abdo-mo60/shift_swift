@@ -4,8 +4,10 @@ class AppliedJobModel {
   final String description;
   final String location;
   final DateTime postedOn;
-  AppliedJobModel({
+  final String? companyPictureUrl;
+  AppliedJobModel( {
     required this.jobId,
+    required this.companyPictureUrl,
     required this.title,
     required this.description,
     required this.location,
@@ -18,6 +20,7 @@ class AppliedJobModel {
       description: json['description'],
       location: json['location'],
       postedOn: DateTime.parse(json['postedOn'] as String),
+      companyPictureUrl: json['companyPictureUrl'],
     );
   }
 }

@@ -37,7 +37,11 @@ class JobDescriptionView extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: [
-            CallCenterWidget(title: job.title, companyName: job.companyName!),
+            CallCenterWidget(
+              companyName: '${job.companyFirstName} ${job.companyLastName}',
+              imageUrl: job.imageUrl!,
+              title: job.title,
+              ),
             SizedBox(height: 8),
             StatusRowWidget(postedOn: job.postedOn!),
             SizedBox(height: 8),

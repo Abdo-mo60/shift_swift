@@ -32,8 +32,9 @@ class HomeViewItem extends StatelessWidget {
             child: Column(
               children: [
                 HomeViewItemTop(
+                  imageUrl: job.jobDataModel.imageUrl!,
                   title: job.jobDataModel.title,
-                  companyName: job.jobDataModel.companyName!,
+                  companyName: '${job.jobDataModel.companyFirstName} ${job.jobDataModel.companyLastName}',
                 ),
                 Divider(
                   color: Color(0xff95948F),

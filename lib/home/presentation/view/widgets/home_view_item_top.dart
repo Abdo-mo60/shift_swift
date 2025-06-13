@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -10,10 +11,12 @@ class HomeViewItemTop extends StatelessWidget {
   const HomeViewItemTop({
     super.key,
     required this.title,
-    required this.companyName,
+    required this.companyName, 
+    required this.imageUrl,
   });
   final String title;
   final String companyName;
+  final String  imageUrl;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -33,6 +36,7 @@ class HomeViewItemTop extends StatelessWidget {
           ),
         ),
         SizedBox(width: 30),
+
         Container(
           width: 74,
           height: 64,
@@ -43,9 +47,14 @@ class HomeViewItemTop extends StatelessWidget {
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: Image.asset('asstes/im.png'),
+            child: CachedNetworkImage(
+              imageUrl: imageUrl, 
+              fit: BoxFit.cover,
+              errorWidget: (context, url, error) => Image.asset('asstes/images.png'), 
+            ),
           ),
         ),
+
       ],
     );
   }
