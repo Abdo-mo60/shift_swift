@@ -2,10 +2,10 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shiftswift/constant.dart';
 import 'package:shiftswift/core/app_colors.dart';
 import '../../manager/added_job_cubit.dart';
 import 'custom_button.dart';
-import 'ids.dart';
 
 class SavedBlocConsumerButton extends StatelessWidget {
   const SavedBlocConsumerButton({super.key, required this.jobId});
@@ -39,7 +39,7 @@ class SavedBlocConsumerButton extends StatelessWidget {
           onTap: () {
             BlocProvider.of<Addedjobcubit>(
               context,
-            ).savedJob(jobId: jobId, memberId: Ids.memberId);
+            ).savedJob(jobId: jobId, memberId: currentId!);
           },
         );
       },

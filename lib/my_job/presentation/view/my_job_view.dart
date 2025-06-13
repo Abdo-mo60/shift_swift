@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shiftswift/constant.dart';
 import '../../../core/service/service_locator.dart';
-import '../../../home/presentation/view/widgets/ids.dart';
 import '../../function/my_job_app_bar.dart';
 import '../../repos/my_job_repo_impl.dart';
 import '../manager/aplied_job_cubit.dart';
@@ -19,13 +19,13 @@ class MyJobView extends StatelessWidget {
           create:
               (context) =>
                   MyJobCubit(getIt.get<MyJobRepoImpl>())
-                    ..getAllJob(memberId: Ids.memberId),
+                    ..getAllJob(memberId: currentId!),
         ),
         BlocProvider(
           create:
               (context) =>
                   ApliedJobCubit(getIt.get<MyJobRepoImpl>())
-                    ..getAllAppliedJob(memberId: Ids.memberId),
+                    ..getAllAppliedJob(memberId: currentId!),
         ),
       ],
       child: Scaffold(appBar: buildMyJobAppBar(context), body: MyJobViewBody()),

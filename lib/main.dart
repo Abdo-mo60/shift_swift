@@ -9,7 +9,6 @@ import 'package:shiftswift/home/data/repos/home_repo_impl.dart';
 import 'package:shiftswift/home/presentation/manager/home_view_cubit.dart';
 import 'package:shiftswift/login/authentication%20cubit/auth_cubit.dart';
 import 'package:shiftswift/login/helper/local_network.dart';
-import 'package:shiftswift/login/login_home.dart';
 import 'package:shiftswift/profile/Cubits/user%20info%20cubit/user_info_cubit.dart';
 import 'package:shiftswift/splash/one_splash.dart';
 
