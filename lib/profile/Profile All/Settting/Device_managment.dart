@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shiftswift/core/app_colors.dart';
 import 'package:shiftswift/login/login_home.dart';
 
 class DeviceManagementPage extends StatelessWidget {
@@ -11,7 +12,7 @@ class DeviceManagementPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Device Management',
-          style: TextStyle(color: Colors.blue, fontSize: 18),
+          style: TextStyle(color: AppColors.blue, fontSize: 20),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -38,15 +39,16 @@ class HomePage extends StatelessWidget {
     return TableRow(
       children: [
         Container(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(18),
+          
           color: const Color(0xFFEDEEF1),
-          // alignment: Alignment.center,
-          child: Text(title, style: titleStyle, textAlign: TextAlign.center),
+       //    alignment: Alignment.center,
+          child: Text(title, style: titleStyle, ),
         ),
         Container(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(14),
           color: Colors.white,
-          // alignment: Alignment.center,
+         //  alignment: Alignment.center,
           child: content,
         ),
       ],
@@ -56,7 +58,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const contentTextStyle = TextStyle(
-      fontSize: 18,
+      fontSize: 16,
       fontWeight: FontWeight.w400,
       color: Colors.black,
     );
@@ -71,7 +73,7 @@ class HomePage extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Table(
-              border: TableBorder.all(color: Colors.grey.shade400, width: 1),
+              border: TableBorder.all(color: Colors.grey.shade400, width: 2),
               columnWidths: const {
                 0: IntrinsicColumnWidth(),
                 1: FlexColumnWidth(),
@@ -106,14 +108,14 @@ class HomePage extends StatelessWidget {
                       ),
                       padding: const EdgeInsets.symmetric(
                         horizontal: 32,
-                        vertical: 12,
+                       vertical: 6,
                       ),
                     ),
                     child: const Text(
                       "Sign Out",
                       style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                        fontSize: 14,
+                       // fontWeight: FontWeight.w500,
                         color: Colors.white,
                       ),
                     ),

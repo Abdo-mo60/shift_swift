@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shiftswift/core/app_colors.dart';
 
 class HelpCenterScreen extends StatelessWidget {
   @override
@@ -6,7 +7,7 @@ class HelpCenterScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Help Center"),
+        title: Text("Help Center" , style: TextStyle(color: AppColors.blue),),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,

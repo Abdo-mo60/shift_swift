@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shiftswift/core/app_colors.dart';
 
 class AboutUsScreen extends StatelessWidget {
   @override
@@ -6,7 +7,7 @@ class AboutUsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("About Us"),
+        title: Text("About Us", style: TextStyle(color: AppColors.blue),),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
@@ -44,6 +45,7 @@ class AboutUsScreen extends StatelessWidget {
   // دالة لإنشاء عنصر قائمة منسدلة
   Widget _buildExpansionTile(String title, String content) {
     return Card(
+      color: Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       elevation: 1,
       child: ExpansionTile(

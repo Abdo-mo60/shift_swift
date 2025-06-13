@@ -22,7 +22,7 @@ class _ChangeEmailScreenState extends State<ChangeEmailScreen> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text("Change Email"),
+          title: Text("Change Email" ,  style: TextStyle(color: AppColors.blue),),
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
           elevation: 0,
