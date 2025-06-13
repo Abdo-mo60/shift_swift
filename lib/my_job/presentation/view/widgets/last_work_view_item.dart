@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shiftswift/constant.dart';
 import '../../../../core/app_colors.dart';
 import '../../../../core/styles.dart';
 import '../../../../home/presentation/view/widgets/home_view_item_top.dart';
-import '../../../../home/presentation/view/widgets/ids.dart';
 import '../../../model/last_work_model.dart';
 import '../../manager/lastwork_cubit.dart';
 import 'custom_my_job_button.dart';
@@ -131,7 +131,7 @@ class _LastWorkViewItemState extends State<LastWorkViewItem> {
 
                           context.read<LastworkCubit>().addRating(
                             body: {'score': _rating, 'comment': comment},
-                            memberId: Ids.memberId,
+                            memberId: currentId!,
                             companyId: widget.lastWorkModel.companyId!,
                           );
                         },

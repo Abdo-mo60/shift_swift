@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shiftswift/constant.dart';
 import 'package:shiftswift/core/app_colors.dart';
 
 import '../../../../core/service/service_locator.dart';
 import '../../../../core/styles.dart';
 import '../../../data/repos/home_repo_impl.dart';
 import '../../manager/added_job_cubit.dart';
-import 'ids.dart';
 
 class ApplyNowButton extends StatelessWidget {
   const ApplyNowButton({super.key, required this.jobId});
@@ -70,7 +70,7 @@ class ApplyNowButton extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   context.read<Addedjobcubit>().appliedJob(
-                    body: {"jobId": jobId, "memberId": Ids.memberId},
+                    body: {"jobId": jobId, "memberId": currentId},
                   );
                 },
                 style: ElevatedButton.styleFrom(

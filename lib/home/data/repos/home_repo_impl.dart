@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
+import 'package:shiftswift/constant.dart';
 import '../../../core/error/failure.dart';
 import '../../../core/model/job_data_model.dart';
 import '../../../core/model/rating_model.dart';
 import '../../../core/service/api_service.dart';
-import '../../presentation/view/widgets/ids.dart';
 import '../models/home_model/job_added_model.dart';
 import '../models/home_model/job_model.dart';
 import 'home_repo.dart';
@@ -59,7 +59,7 @@ class HomeRepoImpl implements HomeRepo {
     try {
       var response = await apiService.post(
         endPoint: 'Member/SaveJob?JobId=$jobId&MemberId=$memberId',
-        token: Ids.tokenFromIds,
+        token: token,
       );
 
       JobAddedModel saveJob = JobAddedModel.fromJson(response);
@@ -76,7 +76,7 @@ class HomeRepoImpl implements HomeRepo {
     try {
       var response = await apiService.post(
         endPoint: 'Member/AddJobApplication',
-        token: Ids.tokenFromIds,
+        token: token,
         body: body,
       );
       JobAddedModel applyJob = JobAddedModel.fromJson(response);
