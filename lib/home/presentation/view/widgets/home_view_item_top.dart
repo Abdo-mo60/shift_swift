@@ -50,7 +50,7 @@ class HomeViewItemTop extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl: imageUrl, 
               fit: BoxFit.cover,
-              errorWidget: (context, url, error) => Image.asset('asstes/images.png'), 
+              errorWidget: (context, url, error) => Image.asset('asstes/images.jpg'), 
             ),
           ),
         ),
