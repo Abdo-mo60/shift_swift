@@ -9,6 +9,7 @@ class TwoFactorAuthPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text("Two-Factor Authentication (2FA)"),
         backgroundColor: Colors.white,

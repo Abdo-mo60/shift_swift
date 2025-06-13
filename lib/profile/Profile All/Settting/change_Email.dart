@@ -20,6 +20,7 @@ class _ChangeEmailScreenState extends State<ChangeEmailScreen> {
           (context) =>
               ChangeEmailCubit(userInfoCubit: context.read<UserInfoCubit>()),
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text("Change Email"),
           backgroundColor: Colors.white,

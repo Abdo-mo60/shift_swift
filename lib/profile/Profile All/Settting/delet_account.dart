@@ -13,6 +13,7 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('Delete Account', style: TextStyle(color: Colors.blue)),
         backgroundColor: Colors.transparent,

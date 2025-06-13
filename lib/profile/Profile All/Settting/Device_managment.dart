@@ -7,6 +7,7 @@ class DeviceManagementPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
           'Device Management',
@@ -15,95 +16,112 @@ class DeviceManagementPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.blue),
+          icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            DeviceCard(
-              deviceType: "Mobile",
-              ip: "324.978.243.456 Cairo",
-              date: "April 13, 2023",
-              isCurrentDevice: true,
-            ),
-            SizedBox(height: 10),
-            DeviceCard(
-              deviceType: "Mobile",
-              ip: "324.978.243.456 Cairo",
-              date: "April 13, 2023",
-              isCurrentDevice: false,
-            ),
-          ],
-        ),
-      ),
+      body: const HomePage(),
     );
   }
 }
 
-class DeviceCard extends StatelessWidget {
-  final String deviceType;
-  final String ip;
-  final String date;
-  final bool isCurrentDevice;
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
-  const DeviceCard({super.key, 
-    required this.deviceType,
-    required this.ip,
-    required this.date,
-    required this.isCurrentDevice,
-  });
+  TableRow buildRow(String title, Widget content) {
+    const titleStyle = TextStyle(
+      fontSize: 20,
+      fontWeight: FontWeight.w600,
+      color: Colors.black,
+    );
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey.shade300),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Column(
-        children: [
-          buildRow("Device", deviceType),
-          buildRow("Date Logged In", date),
-          buildRow("IP Address", ip),
-          buildRow(
-            "Actions",
-            isCurrentDevice
-                ? "This Device"
-                : ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-  context,
-  MaterialPageRoute(builder: (context) => LoginHome()),
-);
-
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    ),
-                    child: Text("Sign Out", style: TextStyle(color: Colors.white)),
-                  ),
-          ),
-        ],
-      ),
+    return TableRow(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(16),
+          color: const Color(0xFFEDEEF1),
+          // alignment: Alignment.center,
+          child: Text(title, style: titleStyle, textAlign: TextAlign.center),
+        ),
+        Container(
+          padding: const EdgeInsets.all(16),
+          color: Colors.white,
+          // alignment: Alignment.center,
+          child: content,
+        ),
+      ],
     );
   }
 
-  Widget buildRow(String title, dynamic value) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 6),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  @override
+  Widget build(BuildContext context) {
+    const contentTextStyle = TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w400,
+      color: Colors.black,
+    );
+
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+
         children: [
-          Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
-          if (value is String)
-            Text(value, style: TextStyle(color: Colors.black54))
-          else
-            value,
+          SizedBox(height: 16),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Table(
+              border: TableBorder.all(color: Colors.grey.shade400, width: 1),
+              columnWidths: const {
+                0: IntrinsicColumnWidth(),
+                1: FlexColumnWidth(),
+              },
+              children: [
+                buildRow(
+                  "Device",
+                  const Text("Mobile", style: contentTextStyle),
+                ),
+                buildRow(
+                  "Date Logged In",
+                  const Text("April 13, 2023", style: contentTextStyle),
+                ),
+                buildRow(
+                  "IP Address",
+                  const Text("324.978.243.456 Cairo", style: contentTextStyle),
+                ),
+                buildRow(
+                  "Actions",
+                  ElevatedButton(
+                    onPressed: () {
+                      // هنا بيروح لصفحتك الخاصة
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginHome()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF255B93),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 32,
+                        vertical: 12,
+                      ),
+                    ),
+                    child: const Text(
+                      "Sign Out",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

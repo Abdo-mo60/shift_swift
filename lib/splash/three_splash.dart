@@ -1,10 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:shiftswift/login/login_home.dart';
-
+import 'package:shiftswift/splash/animation_logo.dart';
 
 class ThreeSplah extends StatelessWidget {
-  const ThreeSplah ({super.key});
+  const ThreeSplah({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +15,20 @@ class ThreeSplah extends StatelessWidget {
         backgroundColor: Color.fromARGB(255, 15, 104, 177),
         automaticallyImplyLeading: false,
         title: GestureDetector(
-            onTap: () {
-               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => LoginHome()));
-            },
-            child: Text(
-              "Skip",
-              style: TextStyle(
-                  fontSize: 20, color: Color.fromARGB(255, 184, 181, 181)),
-            )),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LoginHome()),
+            );
+          },
+          child: Text(
+            "Skip",
+            style: TextStyle(
+              fontSize: 20,
+              color: Color.fromARGB(255, 184, 181, 181),
+            ),
+          ),
+        ),
       ),
       body: Container(
         width: double.maxFinite,
@@ -39,9 +43,7 @@ class ThreeSplah extends StatelessWidget {
                   "S H I F T     S W I F T",
                   style: TextStyle(fontSize: 25, color: Colors.white),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: 20),
                 Container(
                   padding: EdgeInsets.all(15),
                   width: 360,
@@ -61,45 +63,37 @@ class ThreeSplah extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 10,
+                SizedBox(height: 10),
+                Text(
+                  "We make it easy for you to\nget the job!",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 24, color: Colors.white),
                 ),
-                Text("We make it easy for you to\nget the job!",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.white
-
+                SizedBox(height: 40),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AnimationLogo()),
+                    );
+                  },
+                  child: Container(
+                    width: 62,
+                    height: 62,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(color: Colors.black26, blurRadius: 10),
+                      ],
+                    ),
+                    child: Icon(
+                      Icons.arrow_forward,
+                      color: Color(0xFF0D1B2A),
+                      size: 30,
+                    ),
+                  ),
                 ),
-                ),
-                SizedBox(
-                  height: 40,
-                ),
-             GestureDetector(
-      onTap: () {
-  Navigator.push(context, MaterialPageRoute(builder: (context) =>
-               LoginHome()
-              ));
-      },
-      child: Container(
-        width: 62,
-        height: 62,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              blurRadius: 10
-            )
-          ]
-        ),
-        child: Icon(Icons.arrow_forward,color: Color(0xFF0D1B2A), size: 30,),
-      ),
-             ),
-
-                
-                
               ],
             ),
           ),
