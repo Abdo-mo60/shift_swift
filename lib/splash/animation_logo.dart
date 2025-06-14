@@ -53,7 +53,7 @@ class _AnimatedSequencePageState extends State<AnimationLogo> {
               duration: const Duration(seconds: 1),
               curve: Curves.easeOut,
               child: Image.asset(
-                'asstes/logo.png', // ← غيّر إلى مسار الصورة عندك
+                'asstes/lo.png', // ← غيّر إلى مسار الصورة عندك
                 width: 350,
                 height: 350,
               ),
