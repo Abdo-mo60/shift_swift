@@ -117,10 +117,7 @@ class _HomeViewItemCompanyColumnState extends State<HomeViewItemCompanyColumn> {
         builder: (context, state) {
           if (state is GetCompanyJobPostsSuccess) {
             if (state.jobPostList[0].message == null) {
-              //         final avgRatingScore =
-              // BlocProvider.of<ReviewsCubit>(context).reviewsList![0].avgScore;
-              //                    final numberOfReviews =
-              // BlocProvider.of<ReviewsCubit>(context).reviewsList!.length;
+  
               jobPostList = state.jobPostList;
               final sortedJobPostList =
                   jobPostList
@@ -142,15 +139,10 @@ class _HomeViewItemCompanyColumnState extends State<HomeViewItemCompanyColumn> {
               //no jobs found
               return NoJobsView();
             }
-            // List<CompanyJobPostModel> jobPostList= BlocProvider.of<CompanyJobPostsCubit>(context).jobPostsList!;
           } else if (state is DeleteCompanyJobPostsSuccess) {
             if (jobPostList.isEmpty) {
               return NoJobsView();
             } else if (jobPostList.isNotEmpty) {
-              //         final avgRatingScore =
-              // BlocProvider.of<ReviewsCubit>(context).reviewsList![0].avgScore;
-              //          final numberOfReviews =
-              // BlocProvider.of<ReviewsCubit>(context).reviewsList!.length;
               return Column(
                 children: List.generate(jobPostList.length, (index) {
                   return Padding(
@@ -196,7 +188,8 @@ class _HomeViewItemState extends State<HomeViewItem> {
     super.initState();
     BlocProvider.of<PictureCubit>(context).getPicUrl();
   }
- late String picUrl;
+
+  late String picUrl;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -210,17 +203,17 @@ class _HomeViewItemState extends State<HomeViewItem> {
         child: Padding(
           padding: const EdgeInsets.all(8),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               BlocBuilder<PictureCubit, PictureState>(
                 builder: (context, state) {
                   if (state is GetPictureSuccess) {
-                picUrl=     BlocProvider.of<PictureCubit>(context).picModel!.picUrl;
+                    picUrl =
+                        BlocProvider.of<PictureCubit>(context).picModel!.picUrl;
                     UserInfoModel userInfoModel =
                         BlocProvider.of<UserInfoCubit>(context).userModel!;
                     return HomeViewItemTopCompany(
-                      imageUrl:
-                          state.picUrl.picUrl 
-                             ,
+                      imageUrl: state.picUrl.picUrl,
                       title: '${widget.jobPostModel.title}',
                       companyName:
                           '${userInfoModel.firstName} ${userInfoModel.lastName}',
@@ -258,69 +251,92 @@ class _HomeViewItemState extends State<HomeViewItem> {
                 review: widget.numberOfReviews,
               ),
               SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  SizedBox(
-                    height: 40,
-                    width: 145,
-                    child: OutlinedButton(
-                      onPressed: () {
-                        BlocProvider.of<CompanyJobPostsCubit>(
-                          context,
-                        ).deleteJobPostForCompany(
-                          jobId: '${widget.jobPostModel.jobId}',
+              CustomButton(
+                text: 'View Applicants',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return MultiBlocProvider(
+                          providers: [
+                            BlocProvider(create: (context) => ReviewsCubit()),
+                          ],
+
+                          child: JobDescriptionViewCompany(
+                            imageUrl: picUrl,
+                            jobPostModel: widget.jobPostModel,
+                          ),
                         );
                       },
-                      style: OutlinedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        side: const BorderSide(color: AppColors.blue),
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          const Text(
-                            "Delete",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Icon(FontAwesomeIcons.trash),
-                        ],
-                      ),
                     ),
-                  ),
-                  CustomButton(
-                    text: 'View',
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return MultiBlocProvider(
-                              providers: [
-                                BlocProvider(
-                                  create: (context) => ReviewsCubit(),
-                                ),
-                              ],
-
-                              child: JobDescriptionViewCompany(
-                                imageUrl:picUrl,
-                                jobPostModel: widget.jobPostModel,
-                              ),
-                            );
-                          },
-                        ),
-                      );
-                    },
-                  ),
-                ],
+                  );
+                },
               ),
-              SizedBox(height: 30),
+
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //   children: [
+              //     SizedBox(
+              //       height: 40,
+              //       width: 145,
+              //       child: OutlinedButton(
+              //         onPressed: () {
+              //           BlocProvider.of<CompanyJobPostsCubit>(
+              //             context,
+              //           ).deleteJobPostForCompany(
+              //             jobId: '${widget.jobPostModel.jobId}',
+              //           );
+              //         },
+              //         style: OutlinedButton.styleFrom(
+              //           shape: RoundedRectangleBorder(
+              //             borderRadius: BorderRadius.circular(30),
+              //           ),
+              //           side: const BorderSide(color: AppColors.blue),
+              //           padding: const EdgeInsets.symmetric(horizontal: 24),
+              //         ),
+              //         child: Row(
+              //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //           children: [
+              //             const Text(
+              //               "Delete",
+              //               style: TextStyle(
+              //                 fontSize: 16,
+              //                 fontWeight: FontWeight.bold,
+              //               ),
+              //             ),
+              //             Icon(FontAwesomeIcons.trash),
+              //           ],
+              //         ),
+              //       ),
+              //     ),
+              //     CustomButton(
+              //       text: 'View',
+              //       onTap: () {
+              //         Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //             builder: (context) {
+              //               return MultiBlocProvider(
+              //                 providers: [
+              //                   BlocProvider(
+              //                     create: (context) => ReviewsCubit(),
+              //                   ),
+              //                 ],
+
+              //                 child: JobDescriptionViewCompany(
+              //                   imageUrl:picUrl,
+              //                   jobPostModel: widget.jobPostModel,
+              //                 ),
+              //               );
+              //             },
+              //           ),
+              //         );
+              //       },
+              //     ),
+              //   ],
+              // ),
+              SizedBox(height: 20),
             ],
           ),
         ),
@@ -330,7 +346,11 @@ class _HomeViewItemState extends State<HomeViewItem> {
 }
 
 class JobDescriptionViewCompany extends StatefulWidget {
-  const JobDescriptionViewCompany({super.key, required this.jobPostModel,required this.imageUrl});
+  const JobDescriptionViewCompany({
+    super.key,
+    required this.jobPostModel,
+    required this.imageUrl,
+  });
   final CompanyJobPostModel jobPostModel;
   final String imageUrl;
 
@@ -363,14 +383,14 @@ class _JobDescriptionViewCompanyState extends State<JobDescriptionViewCompany> {
         child: ListView(
           children: [
             CallCenterWidgetCompany(
-              imageUrl:widget.imageUrl ,
+              imageUrl: widget.imageUrl,
               title: '${widget.jobPostModel.title}',
               companyName:
                   '${userInfoModel.firstName} ${userInfoModel.lastName}',
             ),
-            SizedBox(height: 8),
-            StatusRowWidget(postedOn: DateTime.now()),
-            SizedBox(height: 8),
+            // SizedBox(height: 8),
+            // StatusRowWidget(postedOn: DateTime.now()),
+            // SizedBox(height: 8),
             JobDescriptionCard(
               description: '${widget.jobPostModel.description}',
               location: '${widget.jobPostModel.location}',
@@ -486,8 +506,8 @@ class _JobDescriptionViewCompanyState extends State<JobDescriptionViewCompany> {
               },
             ),
             SizedBox(height: 24),
-            HiringTeamCard(),
-            SizedBox(height: 24),
+            // HiringTeamCard(),
+            // SizedBox(height: 24),
             JobInfoSection(onLearnMore: () {}, onReportJob: () {}),
             ElevatedButton(
               onPressed: () {
@@ -498,7 +518,6 @@ class _JobDescriptionViewCompanyState extends State<JobDescriptionViewCompany> {
                         (context) => BlocProvider(
                           create: (context) => ApplicantDetailsCubit(),
                           child: MyJobViewCompany(
-                            
                             jobId: widget.jobPostModel.jobId,
                             jobModel: widget.jobPostModel,
                           ),
@@ -619,7 +638,7 @@ class CallCenterWidgetCompany extends StatelessWidget {
             child:
                 imageUrl == ''
                     ? Image.asset('asstes/images.jpg')
-                    : Image.network(imageUrl!,width:80,),
+                    : Image.network(imageUrl!, width: 80),
           ),
           SizedBox(height: 16),
           Row(

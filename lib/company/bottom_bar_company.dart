@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shiftswift/company/Home/home_view_combany_bode.dart';
+import 'package:shiftswift/company/Home/home_view_combany_body.dart';
 import 'package:shiftswift/company/my_jop/widget/myjob_company.dart';
 import 'package:shiftswift/core/app_colors.dart';
 import 'package:shiftswift/core/styles.dart';

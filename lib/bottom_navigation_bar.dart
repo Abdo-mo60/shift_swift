@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shiftswift/company/Home/home_view_combany_bode.dart';
+import 'package:shiftswift/company/Home/home_view_combany_body.dart';
 import 'package:shiftswift/company/Home/post_new_job.dart';
 import 'package:shiftswift/company/models/company_job_post_model.dart';
 import 'package:shiftswift/constant.dart';

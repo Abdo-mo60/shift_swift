@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shiftswift/company/Home/home_view_combany_bode.dart';
+import 'package:shiftswift/company/Home/home_view_combany_body.dart';
 
 
 class HomeViewcompany extends StatelessWidget {

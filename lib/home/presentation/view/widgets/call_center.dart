@@ -40,11 +40,12 @@ class CallCenterWidget extends StatelessWidget {
             ],
           ),
           SizedBox(height: 8),
+          if(companyName!='null null')...[
           Text(
             companyName,
             style: TextStyle(fontSize: 16, color: Colors.grey),
             textAlign: TextAlign.center,
-          ),
+          ),] 
         ],
       ),
     );

@@ -18,7 +18,7 @@ class _CompanyInfoPageState extends State<CompanyInfoPage> {
   String? city;
   String? area;
 
-  final List<String> nationalities = ['Egypt', 'Libya', 'Iraq'];
+  final List<String> nationalities = ['Egypt', 'Libya', 'Iraq','UAE','Qatar','Saudia Arabia'];
   final List<String> cities = ['Cairo', "Alex", 'Sohag'];
   final List<String> areas = ['Imbaba', "Sheikh Zayed", '6th Octobor'];
 
@@ -270,6 +270,8 @@ class _CompanyInfoPageState extends State<CompanyInfoPage> {
                             },
                           ),
                         ),
+                        SizedBox(width: 16),
+
                         Expanded(
                           child: TextFormField(
                             controller: lastNameControlloer,
