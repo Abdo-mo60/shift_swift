@@ -25,7 +25,7 @@ class ProfilePicService {
   }
   
 Future<void> uploadProfilePicture({required File imageFile}) async {
-  final uri = Uri.parse('http://shiftswift.tryasp.net/api/Account/AddOrUpdateProfilePicture');
+  final uri = Uri.parse('$accountBaseUrl/AddOrUpdateProfilePicture');
 
   // Create the request
   var request = http.MultipartRequest('POST', uri);
