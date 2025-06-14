@@ -56,3 +56,19 @@ final class ApplicantShortListedFailure extends AllSpecificApplicantsState {
 }
 
 final class NoApplicantShortListed extends AllSpecificApplicantsState {}
+
+final class GetAcceptedApplicantsLoading extends AllSpecificApplicantsState {}
+
+final class GetAccpetedApplicantsSuccess extends AllSpecificApplicantsState {
+  final List<AcceptedApplicantModel> acceptedapplicantsList;
+
+  GetAccpetedApplicantsSuccess({required this.acceptedapplicantsList});
+}
+
+final class GetAcceptedApplicantsFailure extends AllSpecificApplicantsState {
+  final String errorMessage;
+
+  GetAcceptedApplicantsFailure({required this.errorMessage});
+}
+
+final class NoAcceptedApplicants extends AllSpecificApplicantsState {}

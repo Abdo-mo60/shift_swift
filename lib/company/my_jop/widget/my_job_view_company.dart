@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shiftswift/company/models/company_job_post_model.dart';
+import 'package:shiftswift/company/my_jop/widget/accepted_apllicants.dart';
 import 'package:shiftswift/company/my_jop/widget/my_job_received.dart';
 import 'package:shiftswift/company/my_jop/widget/my_job_shortlist.dart';
 import 'package:shiftswift/core/app_colors.dart';
@@ -33,6 +34,13 @@ class _MyJobViewBodyState extends State<MyJobViewCompanyBody> {
         widget: ShortListPage(
           jobId: widget.jobId,
           jobPostModel: widget.jobModel,
+        ),
+      ),
+       TapBarModel(
+        text: 'Accepted',
+        widget: AcceptedApllicants(
+          jobId: widget.jobId,
+          jobModel: widget.jobModel,
         ),
       ),
     ];

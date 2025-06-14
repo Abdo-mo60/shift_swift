@@ -11,7 +11,6 @@ import 'package:shiftswift/company/widgets/no_jobs_view.dart';
 import 'package:shiftswift/constant.dart';
 import 'package:shiftswift/core/app_colors.dart';
 import 'package:shiftswift/core/styles.dart';
-import 'package:shiftswift/home/presentation/view/widgets/call_center.dart';
 import 'package:shiftswift/home/presentation/view/widgets/custom_app_bar.dart';
 import 'package:shiftswift/home/presentation/view/widgets/custom_button.dart';
 import 'package:shiftswift/home/presentation/view/widgets/custom_container_app_bar.dart';

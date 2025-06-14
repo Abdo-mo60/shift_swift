@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:shiftswift/company/models/accepted_applicant_model.dart';
 import 'package:shiftswift/company/models/applicant_model.dart';
 import 'package:shiftswift/company/services/all_applicants_specific_job.dart';
 
@@ -15,13 +16,13 @@ class AllSpecificApplicantsCubit extends Cubit<AllSpecificApplicantsState> {
         applicantsList = await AllApplicantsForSpecificJobService()
             .getAllAplicantsForSpecificJob(jobId: jobId);
         if (applicantsList!.isNotEmpty) {
-          print('Applicants List length=>${applicantsList!.length}');
+          print('Recieved Applicants List length=>${applicantsList!.length}');
 
           emit(
             AllSpecificApplicantsSuccess(applicantModelList: applicantsList!),
           );
         } else {
-          print('Applicants List length=>${applicantsList!.length}');
+          print('Recieved Applicants List length=>${applicantsList!.length}');
 
           emit(NoApplicantsAppliedForJob());
         }
@@ -37,23 +38,23 @@ class AllSpecificApplicantsCubit extends Cubit<AllSpecificApplicantsState> {
     }
   }
 
-  Future<void> getShortListedApplicnts({required String jobID}) async {
-    if (jobID.isNotEmpty) {
-      try {
-        applicantsList = await AllApplicantsForSpecificJobService()
-            .getShortListedApplicnts(jobID: jobID);
-        if (applicantsList!.isNotEmpty) {
-          emit(GetApplicantShortListedSuccess(applicantsList: applicantsList!));
-        } else {
-          emit(NoApplicantShortListed());
-        }
-      } catch (e) {
-        emit(ApplicantShortListedFailure(errorMessage: e.toString()));
-      }
-    } else {
-      emit(GetShortListInitial());
-    }
-  }
+  // Future<void> getShortListedApplicnts({required String jobID}) async {
+  //   if (jobID.isNotEmpty) {
+  //     try {
+  //       applicantsList = await AllApplicantsForSpecificJobService()
+  //           .getShortListedApplicnts(jobID: jobID);
+  //       if (applicantsList!.isNotEmpty) {
+  //         emit(GetApplicantShortListedSuccess(applicantsList: applicantsList!));
+  //       } else {
+  //         emit(NoApplicantShortListed());
+  //       }
+  //     } catch (e) {
+  //       emit(ApplicantShortListedFailure(errorMessage: e.toString()));
+  //     }
+  //   } else {
+  //     emit(GetShortListInitial());
+  //   }
+  // }
 
   Future<void> applyApplicant({
     required String jobId,

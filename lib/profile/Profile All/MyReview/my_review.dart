@@ -183,23 +183,48 @@ class _MyReviewsPageState extends State<MyReviewsPage> {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
-      child: OutlinedButton.icon(
-        onPressed: () {
-          setState(() {
-            selectedFilter = filter;
-          });
-        },
-        style: OutlinedButton.styleFrom(
-          backgroundColor: isSelected ? AppColors.blue : Colors.white,
-          side: BorderSide(color: AppColors.blue),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
+      child: SizedBox(
+        width: 110,
+        child: OutlinedButton(
+          onPressed: () {
+            setState(() {
+              selectedFilter = filter;
+            });
+          },
+          style: OutlinedButton.styleFrom(
+            backgroundColor: isSelected ? AppColors.blue : Colors.white,
+            side: BorderSide(color: AppColors.blue),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            minimumSize: const Size(
+              100,
+              40,
+            ), // Set desired button width and height
+            padding: const EdgeInsets.symmetric(horizontal: 12),
           ),
-        ),
-        icon: const Icon(Icons.star, size: 16, color: Colors.amber),
-        label: Text(
-          filter,
-          style: TextStyle(color: isSelected ? Colors.white : Colors.black),
+          child: SizedBox(
+            width: 30,
+            child: Container(
+              // padding: EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                color: AppColors.lightyellow,
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    filter,
+                    style: TextStyle(fontSize: 14, color: Colors.black),
+                  ),
+                  if (filter != 'All') ...[
+                    Icon(Icons.star, color: Colors.amber, size: 16),
+                  ],
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -225,9 +250,10 @@ class _MyReviewsPageState extends State<MyReviewsPage> {
             children: [
               CircleAvatar(
                 radius: 32,
-                backgroundImage:(imageUrl=='')?AssetImage('asstes/profile.png'): NetworkImage(
-                  imageUrl,
-                ),
+                backgroundImage:
+                    (imageUrl == '')
+                        ? AssetImage('asstes/profile.png')
+                        : NetworkImage(imageUrl),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -237,7 +263,7 @@ class _MyReviewsPageState extends State<MyReviewsPage> {
                     Text(
                       name,
                       style: const TextStyle(
-                        fontSize: 26,
+                        fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

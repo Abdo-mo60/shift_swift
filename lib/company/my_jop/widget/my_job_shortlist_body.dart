@@ -11,15 +11,15 @@ import 'package:shiftswift/home/presentation/view/widgets/information_item.dart'
 import 'package:shiftswift/home/presentation/view/widgets/title_widget.dart';
 import 'package:shiftswift/profile/Cubits/picture%20cubit/picture_cubit.dart';
 
-class ReceivedViewCompanyBody extends StatelessWidget {
-  const ReceivedViewCompanyBody({
+class ShortListViewCompanyBody extends StatelessWidget {
+  const ShortListViewCompanyBody({
     super.key,
     required this.applicantModel,
     required this.jobModel,
   });
 
   final ApplicantModel applicantModel;
-  final CompanyJobPostModel? jobModel;
+  final CompanyJobPostModel jobModel;
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +35,11 @@ class ReceivedViewCompanyBody extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           child: Column(
             children: [
+              /// Top Row: Name + Job + Image
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  /// Name & Job Title
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,10 +50,12 @@ class ReceivedViewCompanyBody extends StatelessWidget {
                                   ? applicantModel.userName
                                   : applicantModel.fullName,
                         ),
-                        Text('${jobModel!.title}'),
+                        Text(jobModel.title ?? ''),
                       ],
                     ),
                   ),
+
+                  /// Applicant Image
                   Container(
                     width: 74,
                     height: 64,
@@ -79,12 +83,15 @@ class ReceivedViewCompanyBody extends StatelessWidget {
                   ),
                 ],
               ),
+
               const Divider(
                 color: Color(0xff95948F),
                 indent: 10,
                 endIndent: 10,
                 height: 20,
               ),
+
+              /// Info Items
               if (applicantModel.location != '') ...[
                 InformationItem(
                   text: applicantModel.location,
@@ -105,18 +112,11 @@ class ReceivedViewCompanyBody extends StatelessWidget {
                 ),
               ],
               const SizedBox(height: 10),
-              // ReceivedViewButtons(
-              //   jobModel: jobModel,
-              //   jobId: jobModel!.jobId!,
-              //   memberId: applicantModel.memberId,
-              // ),
+
+              /// Buttons
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  // BlocProvider(
-                  //   create: (context) => AllSpecificApplicantsCubit(),
-                  //   child: ShortListBlocConsumerButton(jobId: jobId, memberId: memberId),
-                  // ),
                   SizedBox(
                     height: 40,
                     width: 160,
@@ -125,9 +125,9 @@ class ReceivedViewCompanyBody extends StatelessWidget {
                         BlocProvider.of<AllSpecificApplicantsCubit>(
                           context,
                         ).shortListApplicant(
-                          jobId: jobModel!.jobId!,
+                          jobId: jobModel.jobId!,
                           memberId: applicantModel.memberId,
-                          status: 4,
+                          status: 5,
                         );
                       },
                       style: OutlinedButton.styleFrom(
@@ -138,8 +138,11 @@ class ReceivedViewCompanyBody extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 4),
                       ),
                       child: const Text(
-                        "Move To Short List",
-                        style: TextStyle(fontSize: 15),
+                        "Remove From Short List",
+                        style: TextStyle(
+                          fontSize: 13,
+                          // fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
@@ -154,29 +157,26 @@ class ReceivedViewCompanyBody extends StatelessWidget {
                             return MultiBlocProvider(
                               providers: [
                                 BlocProvider(
-                                  create: (context) => ApplicantDetailsCubit(),
+                                  create: (_) => ApplicantDetailsCubit(),
                                 ),
                                 BlocProvider(
-                                  create:
-                                      (context) => AllSpecificApplicantsCubit(),
+                                  create: (_) => AllSpecificApplicantsCubit(),
                                 ),
-                                BlocProvider(
-                                  create: (context) => PictureCubit(),
-                                ),
+                                BlocProvider(create: (_) => PictureCubit()),
                               ],
                               child: ApplicantProfile(
                                 jobModel: jobModel,
-                                jobId: jobModel!.jobId!,
+                                jobId: jobModel.jobId!,
                                 applicantId: applicantModel.memberId,
                               ),
                             );
                           },
                         ),
-                      ).then((value) {
+                      ).then((_) {
                         BlocProvider.of<AllSpecificApplicantsCubit>(
                           context,
                         ).getAllApplicantsForSpecificJob(
-                          jobId: jobModel!.jobId!,
+                          jobId: jobModel.jobId!,
                         );
                       });
                     },

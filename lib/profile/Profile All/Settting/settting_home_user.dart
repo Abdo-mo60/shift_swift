@@ -4,8 +4,6 @@ import 'package:shiftswift/core/app_colors.dart';
 import 'package:shiftswift/profile/Models/user_info_model.dart';
 import 'package:shiftswift/profile/Profile%20All/Settting/device_managment.dart';
 import 'package:shiftswift/profile/Profile%20All/Settting/change_Email.dart';
-import 'package:shiftswift/profile/Profile%20All/Settting/delet_account.dart';
-import 'package:shiftswift/profile/Profile%20All/Settting/manage_2fa.dart';
 import 'package:shiftswift/profile/Cubits/user%20info%20cubit/user_info_cubit.dart';
 
 class SettingsScreen extends StatelessWidget {
