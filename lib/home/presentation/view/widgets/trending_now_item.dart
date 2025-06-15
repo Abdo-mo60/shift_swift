@@ -17,7 +17,7 @@ class TrendingNowItem extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Icon(Icons.access_alarm, size: 16),
+          Icon(Icons.trending_up_outlined, size: 16),
           SizedBox(width: 8),
           Text(
             'Trending Now',

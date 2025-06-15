@@ -145,7 +145,7 @@ class _JobOptionsSelectionState extends State<JobOptionsSelection> {
               labelStyle: TextStyle(
                 color: isSelected ? Colors.white : Colors.black,
               ),
-              backgroundColor: Colors.grey[200],
+              backgroundColor: Colors.white,
               onSelected: (_) {
                 setState(() {
                   selectedOption = type;
