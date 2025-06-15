@@ -37,7 +37,7 @@ class ApplicantLastWork extends StatelessWidget {
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 Text(description),
-                Text(postedOn),
+                // Text(postedOn),
                 // Row(
                 //   children: List.generate(
                 //     5,

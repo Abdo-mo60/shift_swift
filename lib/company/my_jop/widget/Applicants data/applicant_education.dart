@@ -22,11 +22,11 @@ final String levelOfEducation;
           ],
         ),
         Text(
-          'Field of study: $fieldOfStudy',
+          fieldOfStudy,
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
-        Text('School Name: $schoolName'),
-        Text('Level: $levelOfEducation'),
+        Text(schoolName),
+        // Text('Level: $levelOfEducation'),
       ],
     );
   }

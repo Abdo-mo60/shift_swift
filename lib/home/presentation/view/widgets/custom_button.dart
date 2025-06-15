@@ -20,7 +20,7 @@ class CustomButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         alignment: Alignment.center,
-        width: 160,
+        width: 165,
         height: 40,
         decoration: BoxDecoration(
           color: isIcon ? Colors.transparent : AppColors.blue,
