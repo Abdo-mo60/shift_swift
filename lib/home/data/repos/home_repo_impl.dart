@@ -17,12 +17,13 @@ class HomeRepoImpl implements HomeRepo {
   Future<List<JobDataModel>> getAllJopPosts() async {
     var response = await apiService.get(
       endPoint:
-          'Home/GetRandomJobs?PageNumber=1&PageSize=10&SortBy=JobType&SortOrder=asc&JobTypeIdFilterValue=0&SalaryTypeIdFilterValue=0',
+          'Home/GetRandomJobs?PageNumber=1&PageSize=50&SortBy=JobType&SortOrder=asc&JobTypeIdFilterValue=0&SalaryTypeIdFilterValue=0',
     ); // Corrected the variable name
 
     List<dynamic> dataList = response['data']['data'];
     List<JobDataModel> jobs =
         dataList.map((job) => JobDataModel.fromJson(job)).toList();
+    jobs.sort((a, b) => b.postedOn!.compareTo(a.postedOn!));
 
     return (jobs);
   }

@@ -38,6 +38,7 @@ class CompanyPostsService {
           );
           allJobPostsList.add(jobModel);
         }
+        allJobPostsList.sort((a, b) => b.postedOn!.compareTo(a.postedOn!));
         print('jobs list$allJobPostsList');
         return allJobPostsList;
       }
