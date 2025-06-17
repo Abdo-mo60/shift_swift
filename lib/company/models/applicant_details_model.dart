@@ -20,6 +20,8 @@ class ApplicantDetailsModel {
   String? lastWorkCompanyPic;
   String? imageUrl;
   String? fullName;
+  String?companyFirstName;
+  String?companyLastName;
   String? location;
   // int? genderId;
 
@@ -42,6 +44,8 @@ class ApplicantDetailsModel {
     // required this.experienceDescription,
     // this.skills,
     this.lastWorkCompanyPic,
+    this.companyFirstName,
+    this.companyLastName,
     this.fullName,
     this.location,
     this.imageUrl,
@@ -83,6 +87,8 @@ class ApplicantDetailsModel {
       email: data['email'],
       fullName: (data['fullName'] == ' ') ? data['userName'] : data['fullName'],
       location: (data['location'] == null) ? '' : data['location'],
+      companyFirstName: (data['companyFirstName'] == null) ? '' : data['companyFirstName'],
+      companyLastName: (data['companyLastName'] == null) ? '' : data['companyLastName'],
       lastWorkCompanyPic: (data['companyImageUrl'] == null) ? '' : data['companyImageUrl'],
       imageUrl: (data['memberImageUrl'] == null) ? '' : data['memberImageUrl'],
       schoolName: (educations.isEmpty) ? '' : educations[0]['universityName'],

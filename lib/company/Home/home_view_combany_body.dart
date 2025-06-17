@@ -399,57 +399,33 @@ class _JobDescriptionViewCompanyState extends State<JobDescriptionViewCompany> {
               jobType:
                   '${widget.jobPostModel.jobType}/${widget.jobPostModel.workMode}',
             ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 10),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: Card(
-                      color: AppColors.grey200,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      elevation: 0.5,
-                      margin: EdgeInsets.all(5),
-                      child: Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Job Requirments",
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 6),
-                                  child: Icon(
-                                    Icons.circle,
-                                    size: 8,
-                                    color: AppColors.grey400,
-                                  ),
-                                ),
-                                SizedBox(width: 8),
-                                Text(
-                                  '${widget.jobPostModel.requirements}',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.grey[700],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
+           Center(
+              child: Card(
+                color: AppColors.grey200,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                elevation: 0.5,
+                margin: EdgeInsets.all(5),
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Job Description",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ),
+                      SizedBox(height: 8),
+                      ..._buildJobResponsibilities(
+                        description: widget.jobPostModel.description!,
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
             SizedBox(height: 8),
@@ -541,6 +517,33 @@ class _JobDescriptionViewCompanyState extends State<JobDescriptionViewCompany> {
       ),
     );
   }
+}
+
+List<Widget> _buildJobResponsibilities({required String description}) {
+  List<String> responsibilities = [description];
+  return responsibilities
+      .map(
+        (text) => Padding(
+          padding: EdgeInsets.only(bottom: 10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 6),
+                child: Icon(Icons.circle, size: 8, color: AppColors.grey400),
+              ),
+              SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  text,
+                  style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+                ),
+              ),
+            ],
+          ),
+        ),
+      )
+      .toList();
 }
 
 class ReviewCards extends StatelessWidget {

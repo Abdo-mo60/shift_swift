@@ -41,7 +41,7 @@ class JobDescriptionView extends StatelessWidget {
               companyName: '${job.companyFirstName} ${job.companyLastName}',
               imageUrl: job.imageUrl!,
               title: job.title,
-              ),
+            ),
             // SizedBox(height: 8),
             // StatusRowWidget(postedOn: job.postedOn!),
             // SizedBox(height: 8),
@@ -52,6 +52,35 @@ class JobDescriptionView extends StatelessWidget {
               salaryType: job.salaryTypeId.name,
               jobType: job.jobTypeTd,
             ),
+            Center(
+              child: Card(
+                color: AppColors.grey200,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                elevation: 0.5,
+                margin: EdgeInsets.all(5),
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Job Description",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      ..._buildJobResponsibilities(
+                        description: job.description,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
             SizedBox(height: 8),
             ReviewsHeader(
               onViewAllPressed: () {
@@ -61,7 +90,7 @@ class JobDescriptionView extends StatelessWidget {
                     builder:
                         (context) => BlocProvider(
                           create: (context) => ReviewsCubit(),
-                          child: MyReviewsPage(companyId: job.companyId,),
+                          child: MyReviewsPage(companyId: job.companyId),
                         ),
                   ),
                 );
@@ -78,4 +107,31 @@ class JobDescriptionView extends StatelessWidget {
       ),
     );
   }
+}
+
+List<Widget> _buildJobResponsibilities({required String description}) {
+  List<String> responsibilities = [description];
+  return responsibilities
+      .map(
+        (text) => Padding(
+          padding: EdgeInsets.only(bottom: 10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 6),
+                child: Icon(Icons.circle, size: 8, color: AppColors.grey400),
+              ),
+              SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  text,
+                  style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+                ),
+              ),
+            ],
+          ),
+        ),
+      )
+      .toList();
 }

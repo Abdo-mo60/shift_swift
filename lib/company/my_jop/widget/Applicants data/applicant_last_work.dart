@@ -4,14 +4,14 @@ class ApplicantLastWork extends StatelessWidget {
   const ApplicantLastWork({
     super.key,
     required this.title,
-    required this.description,
+    required this.companyName,
     required this.postedOn,
     required this.sectionTitle,
     required this.icon,
     this.imageUrl,
   });
   final String title;
-  final String description;
+  final String companyName;
   final String postedOn;
   final String sectionTitle;
   final Icon icon;
@@ -21,12 +21,14 @@ class ApplicantLastWork extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(children: [icon, Text(sectionTitle,style: TextStyle(fontSize: 17),)]),
+        Row(
+          children: [icon, Text(sectionTitle, style: TextStyle(fontSize: 17))],
+        ),
         Row(
           children: [
             (imageUrl == '')
                 ? Image.asset('asstes/images.jpg', width: 40, height: 40)
-                : Image.network(imageUrl!,width: 40,height: 40,),
+                : Image.network(imageUrl!, width: 40, height: 40),
             SizedBox(width: 8),
 
             Column(
@@ -36,7 +38,7 @@ class ApplicantLastWork extends StatelessWidget {
                   title,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
-                Text(description),
+              Text(companyName),
                 // Text(postedOn),
                 // Row(
                 //   children: List.generate(

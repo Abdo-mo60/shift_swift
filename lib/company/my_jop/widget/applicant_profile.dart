@@ -157,6 +157,8 @@ class _ApplicantProfileState extends State<ApplicantProfile> {
           return BlocBuilder<ApplicantDetailsCubit, ApplicantDetailsState>(
             builder: (context, state) {
               if (state is ApplicantDetailsSuccess) {
+                String companyName =
+                    '${state.applicantDetailsModel.companyFirstName} ${state.applicantDetailsModel.companyLastName}';
                 return Column(
                   children: [
                     ViewApplicantUserNameImage(
@@ -173,33 +175,33 @@ class _ApplicantProfileState extends State<ApplicantProfile> {
                           BlocBuilder<PictureCubit, PictureState>(
                             builder: (context, state) {
                               if (state is GetPictureSuccess) {
-                                
-                              return ApplicantLastWork(
-                                sectionTitle: 'Request Received',
-                                icon: Icon(Icons.edit_document),
-                                title: '${widget.jobModel!.title}',
-                                description: '${widget.jobModel!.description}',
-                                postedOn: '${widget.jobModel!.postedOn}',
-                                imageUrl: state.picUrl.picUrl,
-                              );
-                              }
-                              else{
+                                return ApplicantLastWork(
+                                  sectionTitle: 'Request Received',
+                                  icon: Icon(Icons.edit_document),
+                                  title: '${widget.jobModel!.title}',
+                                  companyName: companyName,
+                                  postedOn: '${widget.jobModel!.postedOn}',
+                                  imageUrl: state.picUrl.picUrl,
+                                );
+                              } else {
                                 return CircularProgressIndicator();
                               }
-                            }
-                            ,
+                            },
                           ),
 
                           if (state.applicantDetailsModel.title != '') ...[
-                            SizedBox(height: 16,),
+                            SizedBox(height: 16),
                             ApplicantLastWork(
                               sectionTitle: 'Last Work',
                               icon: Icon(Icons.reply),
                               title: state.applicantDetailsModel.title!,
-                              description:
-                                  state.applicantDetailsModel.description!,
+                              companyName:
+                                  '${state.applicantDetailsModel.companyFirstName} ${state.applicantDetailsModel.companyLastName}',
                               postedOn: state.applicantDetailsModel.postedOn!,
-                              imageUrl: state.applicantDetailsModel.lastWorkCompanyPic,
+                              imageUrl:
+                                  state
+                                      .applicantDetailsModel
+                                      .lastWorkCompanyPic,
                             ),
                           ],
                           const Divider(height: 20),
