@@ -77,7 +77,26 @@ class PersonalInfoPagestate extends State<PersonalInfoPage> {
     'South Sinai',
     'Suez',
   ];
-  final List<String> areas = ['Imbaba', "Sheikh Zayed", '6th Octobor'];
+  final List<String> areas = [
+    "Zamalek",
+    "Maadi",
+    "Heliopolis",
+    "Dokki",
+    "Al Haram",
+    "6th of October",
+    "Manshiya",
+    "Sidi Gaber",
+    "Montaza",
+    "Banha",
+    "Qalyub",
+    "Shubra El Kheima",
+    "West Asyut",
+    "El Hamraa",
+    "El Fath",
+    "Al Awamiya",
+    "El Karnak",
+    "Central Luxor",
+  ];
   final List<String> months = [
     'January',
     'February',
@@ -588,7 +607,7 @@ class PersonalInfoPagestate extends State<PersonalInfoPage> {
                                 level: level!,
                                 faculty: facultyController.text,
                                 universityName: universityNameController.text,
-                                phoneNumber:'+2${mobileNumberController.text}',
+                                phoneNumber: '+2${mobileNumberController.text}',
                                 alternativePhoneNumber:
                                     '+2${alternativemobileNumberController.text}',
                                 city: city!,

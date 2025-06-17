@@ -18,9 +18,58 @@ class _CompanyInfoPageState extends State<CompanyInfoPage> {
   String? city;
   String? area;
 
-  final List<String> nationalities = ['Egypt', 'Libya', 'Iraq','UAE','Qatar','Saudia Arabia'];
-  final List<String> cities = ['Cairo', "Alex", 'Sohag'];
-  final List<String> areas = ['Imbaba', "Sheikh Zayed", '6th Octobor'];
+  final List<String> nationalities = [
+    'Egypt',
+  ];
+  final List<String> cities = [
+    'Alexandria',
+    'Aswan',
+    'Asyut',
+    'Beheira',
+    'Beni Suef',
+    'Cairo',
+    'Dakahlia',
+    'Damietta',
+    'Fayoum',
+    'Gharbia',
+    'Giza',
+    'Ismailia',
+    'Kafr El Sheikh',
+    'Luxor',
+    'Matrouh',
+    'Minya',
+    'Monufia',
+    'New Valley',
+    'North Sinai',
+    'Port Said',
+    'Qalyubia',
+    'Qena',
+    'Red Sea',
+    'Sharqia',
+    'Sohag',
+    'South Sinai',
+    'Suez',
+  ];
+  final List<String> areas = [
+  "Zamalek",
+  "Maadi",
+  "Heliopolis",
+  "Dokki",
+  "Al Haram",
+  "6th of October",
+  "Manshiya",
+  "Sidi Gaber",
+  "Montaza",
+  "Banha",
+  "Qalyub",
+  "Shubra El Kheima",
+  "West Asyut",
+  "El Hamraa",
+  "El Fath",
+  "Al Awamiya",
+  "El Karnak",
+  "Central Luxor"
+  ];
 
   final firstNameController = TextEditingController();
   final lastNameControlloer = TextEditingController();
