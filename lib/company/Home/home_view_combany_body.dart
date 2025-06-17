@@ -413,7 +413,7 @@ class _JobDescriptionViewCompanyState extends State<JobDescriptionViewCompany> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Job Description",
+                        "Requirements",
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -421,7 +421,7 @@ class _JobDescriptionViewCompanyState extends State<JobDescriptionViewCompany> {
                       ),
                       SizedBox(height: 8),
                       ..._buildJobResponsibilities(
-                        description: widget.jobPostModel.description!,
+                        description: widget.jobPostModel.requirements!,
                       ),
                     ],
                   ),
