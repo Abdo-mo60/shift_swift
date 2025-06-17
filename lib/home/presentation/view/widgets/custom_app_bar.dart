@@ -21,13 +21,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         icon: Icon(Icons.close, color: Colors.grey),
         onPressed: onClose,
       ),
-      actions: [
-        IconButton(
-          icon: Icon(Icons.more_vert, color: Colors.grey),
-          onPressed: onMorePressed,
-        ),
-      ],
-    );
+    //   actions: [
+    //     IconButton(
+    //       icon: Icon(Icons.more_vert, color: Colors.grey),
+    //       onPressed: onMorePressed,
+    //     ),
+    //   ],
+     );
   }
 
   @override

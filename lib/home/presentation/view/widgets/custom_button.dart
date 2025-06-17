@@ -35,7 +35,7 @@ class CustomButton extends StatelessWidget {
             Text(
               text,
               style: GoogleFonts.lato(
-                textStyle: AppStyles.medium18.copyWith(
+                textStyle: AppStyles.medium16.copyWith(
                   color: isIcon ? AppColors.blue : AppColors.main,
                 ),
               ),
