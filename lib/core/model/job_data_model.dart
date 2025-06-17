@@ -27,8 +27,8 @@ class JobDataModel {
     salaryTypeId: SalaryTypeExtension.fromId(json['salaryTypeId']),
     salary: json['salary'],
     jobTypeTd: JobTypeExtension.fromId(json['jobTypeTd']).name, 
-    companyFirstName: json['companyFirstName'], 
-    companyLastName: json['companyLastName'],
+    companyFirstName: json['companyFirstName']??'', 
+    companyLastName: json['companyLastName']??'',
   );
 
   JobDataModel(  {
