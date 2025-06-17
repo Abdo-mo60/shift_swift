@@ -119,7 +119,7 @@ class AuthCubit extends Cubit<AuthState> {
       } else {
         List<dynamic> erorrData = responseBody['data'];
         emit(
-          FailedTOLoginState(errorMessage: '${erorrData[0]} or Account Type'),
+          FailedTOLoginState(errorMessage: '${erorrData[0]}or Account Type'),
         );
       }
     } catch (e) {

@@ -29,7 +29,7 @@ class PersonalInfoPagestate extends State<PersonalInfoPage> {
   final birthDateController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
-  
+
   final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
 
   Future<void> _selectDate(
@@ -47,8 +47,36 @@ class PersonalInfoPagestate extends State<PersonalInfoPage> {
     }
   }
 
-  final List<String> nationalities = ['Egypt', 'Libya', 'Iraq'];
-  final List<String> cities = ['Cairo', "Alex", 'Sohag'];
+  final List<String> nationalities = ['Egypt'];
+  final List<String> cities = [
+    'Alexandria',
+    'Aswan',
+    'Asyut',
+    'Beheira',
+    'Beni Suef',
+    'Cairo',
+    'Dakahlia',
+    'Damietta',
+    'Fayoum',
+    'Gharbia',
+    'Giza',
+    'Ismailia',
+    'Kafr El Sheikh',
+    'Luxor',
+    'Matrouh',
+    'Minya',
+    'Monufia',
+    'New Valley',
+    'North Sinai',
+    'Port Said',
+    'Qalyubia',
+    'Qena',
+    'Red Sea',
+    'Sharqia',
+    'Sohag',
+    'South Sinai',
+    'Suez',
+  ];
   final List<String> areas = ['Imbaba', "Sheikh Zayed", '6th Octobor'];
   final List<String> months = [
     'January',
@@ -560,9 +588,9 @@ class PersonalInfoPagestate extends State<PersonalInfoPage> {
                                 level: level!,
                                 faculty: facultyController.text,
                                 universityName: universityNameController.text,
-                                phoneNumber: mobileNumberController.text,
+                                phoneNumber:'+2${mobileNumberController.text}',
                                 alternativePhoneNumber:
-                                    alternativemobileNumberController.text,
+                                    '+2${alternativemobileNumberController.text}',
                                 city: city!,
                                 area: area!,
                                 dateOfBirth: birthDateController.text,

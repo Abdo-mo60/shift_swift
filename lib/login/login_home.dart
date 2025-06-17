@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shiftswift/bottom_navigation_bar.dart';
 import 'package:shiftswift/core/app_colors.dart';
+import 'package:shiftswift/core/styles.dart';
 import 'package:shiftswift/login/authentication%20cubit/auth_cubit.dart';
 import 'package:shiftswift/login/helper/text_filed.dart';
 import 'package:shiftswift/login/helper/password_field.dart';
@@ -31,24 +33,38 @@ class _LoginHomeState extends State<LoginHome> {
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is LoginSuccessState) {
-          Navigator.pushReplacement(
+          Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
               builder: (context) => CustomBottomNavigationBar(),
-            ),
+            ),(Route<dynamic> route) => false,
           );
         } else if (state is FailedTOLoginState) {
           showDialog(
-            context: context,
-            builder:
-                (context) => AlertDialog(
-                  content: Text(
-                    ' ${state.errorMessage}',
-                    style: const TextStyle(color: Colors.white),
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              backgroundColor: Colors.white,
+              title: CircleAvatar(
+                backgroundColor: Colors.white,
+                radius: 27,
+                child: Icon(Icons.warning, size: 50, color: AppColors.blue),
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    state.errorMessage,
+                    style: GoogleFonts.lato(textStyle: AppStyles.bold16),
+                    textAlign: TextAlign.center,
                   ),
-                  backgroundColor: AppColors.blue,
-                ),
-          );
+                ],
+              ),
+              actionsAlignment: MainAxisAlignment.center,
+              
+            );
+          },
+        );
         }
       },
       child: Scaffold(

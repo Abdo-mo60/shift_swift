@@ -1,10 +1,11 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shiftswift/constant.dart';
 import 'package:shiftswift/core/app_colors.dart';
+import 'package:shiftswift/core/styles.dart';
 import 'package:shiftswift/login/authentication%20cubit/auth_cubit.dart';
 import 'package:shiftswift/login/login_home.dart';
 import 'package:shiftswift/profile/Cubits/picture%20cubit/picture_cubit.dart';
@@ -86,10 +87,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     BlocProvider.of<PictureCubit>(context).getPicUrl();
- 
   }
 
   @override
@@ -97,21 +96,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is LogOutStateSuccessfully) {
-          Navigator.pushReplacement(
+          Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (context) => LoginHome()),
+            (Route<dynamic> route) => false,
           );
         } else if (state is FailedToLogOutState) {
           showDialog(
             context: context,
-            builder:
-                (context) => AlertDialog(
-                  content: Text(
-                    'Failed to sign out...Try Again',
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                  backgroundColor: AppColors.blue,
+            builder: (context) {
+              return AlertDialog(
+                backgroundColor: Colors.white,
+                title: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  radius: 30,
+                  child: Icon(Icons.warning, size: 55, color: AppColors.red),
                 ),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Failed to Sign out...Please Try Again!",
+                      style: GoogleFonts.lato(textStyle: AppStyles.bold14),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+                actionsAlignment: MainAxisAlignment.center,
+              );
+            },
           );
         }
       },
@@ -145,7 +158,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               content: Text('Success picture!'),
                             ),
                           );
-                        } else if(state is AddPictureLoading){
+                        } else if (state is AddPictureLoading) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               behavior: SnackBarBehavior.floating,
@@ -199,8 +212,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   //     context,
                   //     ProfilePerson(),
                   //   ),
-                  // ] 
-                  if(accType=='Company') ...[
+                  // ]
+                  if (accType == 'Company') ...[
                     _buildProfileOption(
                       Icons.star,
                       "My Review",
@@ -210,7 +223,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: MyReviewsPage(companyId: currentId!),
                       ),
                     ),
-                  SizedBox(height: 15),
+                    SizedBox(height: 15),
                   ],
 
                   _buildProfileOption(
@@ -272,7 +285,57 @@ Widget _buildProfileOption(
     trailing: Icon(Icons.arrow_forward_ios, size: 20, color: AppColors.grey400),
     onTap: () {
       if (isLogout == true) {
-        BlocProvider.of<AuthCubit>(context).logOut();
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              backgroundColor: Colors.white,
+              title: CircleAvatar(
+                backgroundColor: Colors.white,
+                radius: 27,
+                child: Icon(Icons.warning, size: 50, color: AppColors.blue),
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Are you sure you want to sign out?",
+                    style: GoogleFonts.lato(textStyle: AppStyles.bold16),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+              actionsAlignment: MainAxisAlignment.center,
+              actions: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    "Cancel",
+                    style: TextStyle(color: AppColors.blue, fontSize: 20),
+                  ),
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.blue,
+                  ),
+                  onPressed: () {
+                    BlocProvider.of<AuthCubit>(context).logOut();
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    "Yes",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                ),
+              ],
+            );
+          },
+        );
       } else {
         Navigator.push(context, MaterialPageRoute(builder: (context) => page));
       }
