@@ -118,14 +118,17 @@ class SavedView extends StatelessWidget {
                                   children: [
                                     // SavedBlocConsumerButton(jobId: job.jobDataModel.id),
                                     CustomButton(
-                                      text: 'Save',
+                                      text: 'UnSave',
                                       isIcon: true,
                                       onTap: () {
                                         BlocProvider.of<MyJobCubit>(
                                           context,
                                         ).removeFromSave(
                                           jobId:
-                                              state.jobs[index].jobDataModel.jobId,
+                                              state
+                                                  .jobs[index]
+                                                  .jobDataModel
+                                                  .jobId,
                                         );
                                       },
                                     ),

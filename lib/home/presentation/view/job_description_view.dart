@@ -66,7 +66,7 @@ class JobDescriptionView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Job Description",
+                        "Requirements",
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -74,7 +74,7 @@ class JobDescriptionView extends StatelessWidget {
                       ),
                       SizedBox(height: 8),
                       ..._buildJobResponsibilities(
-                        description: job.description,
+                        description: job.requirements,
                       ),
                     ],
                   ),

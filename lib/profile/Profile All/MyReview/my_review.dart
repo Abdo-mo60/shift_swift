@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shiftswift/constant.dart';
 import 'package:shiftswift/core/app_colors.dart';
 import 'package:shiftswift/profile/Cubits/reviews%20cubit/reviews_cubit.dart';
 import 'package:shiftswift/profile/Models/reviews_model.dart';
@@ -77,9 +78,9 @@ class _MyReviewsPageState extends State<MyReviewsPage> {
         ),
         backgroundColor: Colors.white,
         elevation: 0,
-        title: const Text(
-          "My Reviews",
-          style: TextStyle(color: AppColors.blue, fontWeight: FontWeight.bold),
+        title: Text((accType=='Member')?
+           "Reviews":'My Reviews',
+          style: const TextStyle(color: AppColors.blue, fontWeight: FontWeight.bold),
         ),
         centerTitle: false,
       ),
