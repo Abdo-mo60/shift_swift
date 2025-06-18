@@ -607,9 +607,9 @@ class PersonalInfoPagestate extends State<PersonalInfoPage> {
                                 level: level!,
                                 faculty: facultyController.text,
                                 universityName: universityNameController.text,
-                                phoneNumber: '+2${mobileNumberController.text}',
+                                phoneNumber: '${mobileNumberController.text}',
                                 alternativePhoneNumber:
-                                    '+2${alternativemobileNumberController.text}',
+                                    '${alternativemobileNumberController.text}',
                                 city: city!,
                                 area: area!,
                                 dateOfBirth: birthDateController.text,
