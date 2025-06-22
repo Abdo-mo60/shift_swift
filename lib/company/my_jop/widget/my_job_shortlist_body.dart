@@ -56,31 +56,32 @@ class ShortListViewCompanyBody extends StatelessWidget {
                   ),
 
                   /// Applicant Image
-                  Container(
-                    width: 74,
-                    height: 64,
-                    decoration: BoxDecoration(
-                      color: AppColors.white,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(
-                        width: 0.5,
-                        color: AppColors.borderColor,
+                if (applicantModel.memberImageUrl == '') ...[
+                    CircleAvatar(
+                      radius: 30,
+                      backgroundImage: AssetImage('asstes/profile.png'),
+                    ),
+                  ] else ...[
+                    Container(
+                      width: 74,
+                      height: 64,
+                      decoration: BoxDecoration(
+                        color: AppColors.white,
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(
+                          width: 0.5,
+                          color: AppColors.borderColor,
+                        ),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.network(
+                          applicantModel.memberImageUrl!,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child:
-                          applicantModel.memberImageUrl == ''
-                              ? Image.asset(
-                                'asstes/images.jpg',
-                                fit: BoxFit.cover,
-                              )
-                              : Image.network(
-                                applicantModel.memberImageUrl!,
-                                fit: BoxFit.cover,
-                              ),
-                    ),
-                  ),
+                  ],
                 ],
               ),
 

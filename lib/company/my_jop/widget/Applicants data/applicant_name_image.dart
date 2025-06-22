@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:shiftswift/core/app_colors.dart';
 
 class ViewApplicantUserNameImage extends StatelessWidget {
-  const ViewApplicantUserNameImage({super.key, required this.userName, required this.imageUrl});
+  const ViewApplicantUserNameImage({
+    super.key,
+    required this.userName,
+    required this.imageUrl,
+  });
   final String userName;
   final String imageUrl;
   @override
@@ -30,8 +34,11 @@ class ViewApplicantUserNameImage extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 30),
                 child: CircleAvatar(
                   radius: 35,
-                  
-                  backgroundImage:(imageUrl=='')? AssetImage('asstes/images.jpg'): NetworkImage(imageUrl),
+
+                  backgroundImage:
+                      (imageUrl == '')
+                          ? AssetImage('asstes/profile.png')
+                          : NetworkImage(imageUrl),
                 ),
               ),
               Text(

@@ -5,6 +5,7 @@ import 'package:shiftswift/company/Cubits/all%20applicants%20for%20specific%20jo
 import 'package:shiftswift/company/Cubits/applicant%20details/applicant_details_cubit.dart';
 import 'package:shiftswift/company/models/company_job_post_model.dart';
 import 'package:shiftswift/company/my_jop/widget/Applicants%20data/applicant_education.dart';
+import 'package:shiftswift/company/my_jop/widget/Applicants%20data/applicant_experience.dart';
 import 'package:shiftswift/company/my_jop/widget/Applicants%20data/applicant_last_work.dart';
 import 'package:shiftswift/company/my_jop/widget/Applicants%20data/applicant_name_image.dart';
 import 'package:shiftswift/company/my_jop/widget/Applicants%20data/applicants_contacts.dart';
@@ -218,28 +219,29 @@ class _ApplicantProfileState extends State<ApplicantProfile> {
                             const Divider(height: 20),
                           ],
 
-                          // if (state.applicantDetailsModel.experienceTitle
-                          //     is String) ...[
-                          //   ApplicantExperience(
-                          //     companyName:
-                          //         state
-                          //             .applicantDetailsModel
-                          //             .experienceCompanyName,
-                          //     title:
-                          //         state.applicantDetailsModel.experienceTitle,
-                          //     description:
-                          //         state
-                          //             .applicantDetailsModel
-                          //             .experienceDescription,
-                          //     startDateParsed:
-                          //         state
-                          //             .applicantDetailsModel
-                          //             .experienceStartDate,
-                          //     endDateParsed:
-                          //         state.applicantDetailsModel.experienceEndDate,
-                          //   ),
-                          //   const Divider(height: 20),
-                          // ],
+
+                          if (state.applicantDetailsModel.experienceTitle
+                              is String) ...[
+                            ApplicantExperience(
+                              companyName:
+                                  state
+                                      .applicantDetailsModel
+                                      .experienceCompanyName,
+                              title:
+                                  state.applicantDetailsModel.experienceTitle,
+                              description:
+                                  state
+                                      .applicantDetailsModel
+                                      .experienceDescription,
+                              startDateParsed:
+                                  state
+                                      .applicantDetailsModel
+                                      .experienceStartDate,
+                              endDateParsed:
+                                  state.applicantDetailsModel.experienceEndDate,
+                            ),
+                            const Divider(height: 20),
+                          ],
                           // if (state.applicantDetailsModel.skills is String) ...[
                           //   ApplicantSkills(
                           //     skillName: state.applicantDetailsModel.skills,

@@ -46,7 +46,7 @@ class _CustomContainerAppBarState extends State<CustomContainerAppBar> {
                
               },
             ),
-          //  Icon(Icons.notifications_outlined, color: AppColors.main),
+           Icon(Icons.notifications_outlined, color: AppColors.main),
           ],
         ),
       ),

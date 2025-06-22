@@ -20,7 +20,7 @@ class ProfilePicService {
       return PicModel.fromJson(jsonDecode(response.body));
     } catch (e) {
       
-      throw (e.toString());
+      throw ('Picture Error${e.toString()}');
     }
   }
   

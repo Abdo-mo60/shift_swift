@@ -323,315 +323,244 @@ class PersonalInfoPagestate extends State<PersonalInfoPage> {
         },
         builder: (context, state) {
           if (state is GetPersonInfoSuccess) {
-            return SingleChildScrollView(
-              padding: const EdgeInsets.all(16),
-              child: Form(
-                key: formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Your Name *",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.blue,
-                        fontSize: 20,
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: TextFormField(
-                            controller: firstNameController,
-
-                            decoration: getOutlinedDecoration(
-                              'First Name',
-                              hintText:
-                                  firstNameController.text.isEmpty
-                                      ? 'Enter First name'
-                                      : null,
-                            ),
-                            validator: (input) {
-                              if (firstNameController.text.isEmpty) {
-                                return 'First Name must not be empty';
-                              } else {
-                                return null;
-                              }
-                            },
-                          ),
+            return Scaffold(
+              appBar: AppBar(title: Text('Edit Personal Info')),
+              body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Your Name *",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.blue,
+                          fontSize: 20,
                         ),
-                        SizedBox(width: 16),
-                        Expanded(
-                          child: TextFormField(
-                            controller: lastNameControlloer,
-
-                            decoration: getOutlinedDecoration(
-                              'Last Name',
-                              hintText:
-                                  lastNameControlloer.text.isEmpty
-                                      ? 'Enter Last name'
-                                      : null,
-                            ),
-                            validator: (input) {
-                              if (lastNameControlloer.text.isEmpty) {
-                                return 'Last Name must not be empty';
-                              } else {
-                                return null;
-                              }
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    const SizedBox(height: 16),
-                    const Text(
-                      "Gender *",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: AppColors.blue,
                       ),
-                    ),
-                    FormField<String>(
-                      validator: _validateGenderSelection,
-                      builder: (FormFieldState<String> state) {
-                        return Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                _buildRadioOption(value: 'Male'),
-                                _buildRadioOption(value: 'Female'),
-                              ],
-                            ),
-                            if (state.hasError)
-                              Padding(
-                                padding: const EdgeInsets.only(top: 8.0),
-                                child: Text(
-                                  state.errorText!,
-                                  style: TextStyle(color: Colors.red),
-                                ),
+                      const SizedBox(height: 6),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: TextFormField(
+                              controller: firstNameController,
+
+                              decoration: getOutlinedDecoration(
+                                'First Name',
+                                hintText:
+                                    firstNameController.text.isEmpty
+                                        ? 'Enter First name'
+                                        : null,
                               ),
-                          ],
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 10),
-                    TextFormField(
-                      controller: mobileNumberController,
-                      decoration: getOutlinedDecoration('Mobile Number'),
-                      keyboardType: TextInputType.phone,
-                      validator: (input) {
-                        if (mobileNumberController.text.isEmpty) {
-                          return 'Mobile number must not be empty';
-                        } else {
-                          return null;
-                        }
-                      },
-                    ),
-                    const SizedBox(height: 16),
-
-                    TextFormField(
-                      controller: alternativemobileNumberController,
-                      decoration: getOutlinedDecoration(
-                        'Alternative Mobile Number',
-                      ),
-                      keyboardType: TextInputType.phone,
-                      validator: (input) {
-                        if (alternativemobileNumberController.text.isEmpty) {
-                          return 'Mobile number must not be empty';
-                        } else {
-                          return null;
-                        }
-                      },
-                    ),
-                    const SizedBox(height: 16),
-
-                    // Nationality, City, Area
-                    buildLabelDropdownRow(
-                      'Nationality',
-                      nationalities,
-                      nationality,
-                      (val) => setState(() => nationality = val),
-                    ),
-                    buildLabelDropdownRow(
-                      'city',
-                      cities,
-                      city,
-                      (val) => setState(() => city = val),
-                    ),
-                    buildLabelDropdownRow(
-                      'Area',
-                      areas,
-                      area,
-                      (val) => setState(() => area = val),
-                    ),
-
-                    const SizedBox(height: 10),
-                    const Text(
-                      "Add Education",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    Text('Level'),
-                    DropdownButtonFormField<String>(
-                      value: level,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 14,
-                        ),
-                      ),
-                      items:
-                          levels
-                              .map(
-                                (e) =>
-                                    DropdownMenuItem(value: e, child: Text(e)),
-                              )
-                              .toList(),
-                      onChanged: (val) => setState(() => level = val),
-                      validator: (input) {
-                        if (input == null || input.isEmpty) {
-                          return 'Level must not be empty';
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(height: 12),
-                    Text('Faculty'),
-                    SizedBox(height: 10),
-
-                    TextFormField(
-                      controller: facultyController,
-
-                      decoration: getOutlinedDecoration(
-                        'Faculty',
-                        hintText:
-                            facultyController.text.isEmpty
-                                ? 'Enter Faculty'
-                                : null,
-                      ),
-                      validator: (input) {
-                        if (facultyController.text.isEmpty) {
-                          return 'Faculty must not be empty';
-                        } else {
-                          return null;
-                        }
-                      },
-                    ),
-                    SizedBox(height: 12),
-                    Text('University Name'),
-                    SizedBox(height: 10),
-                    TextFormField(
-                      controller: universityNameController,
-
-                      decoration: getOutlinedDecoration(
-                        'University Name',
-                        hintText:
-                            firstNameController.text.isEmpty
-                                ? 'Enter University Name'
-                                : null,
-                      ),
-                      validator: (input) {
-                        if (universityNameController.text.isEmpty) {
-                          return 'University Name must not be empty';
-                        } else {
-                          return null;
-                        }
-                      },
-                      // initialValue: companyNameController.text,
-                    ),
-                    SizedBox(height: 12),
-
-                    // Row(
-                    //   children: [
-                    //     Checkbox(
-                    //       value: currentlyEnrolled,
-                    //       onChanged:
-                    //           (value) =>
-                    //               setState(() => currentlyEnrolled = value!),
-                    //     ),
-                    //     const Text(
-                    //       "Currently Enrolled",
-                    //       style: TextStyle(fontSize: 16),
-                    //     ),
-                    //   ],
-                    // ),
-                    const SizedBox(height: 10),
-                    const Text(
-                      "Date Of Birth",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 6),
-
-                    GestureDetector(
-                      onTap: () => _selectDate(context, birthDateController),
-                      child: AbsorbPointer(
-                        child: TextFormField(
-                          controller: birthDateController,
-                          decoration: getOutlinedDecoration('Birth Date'),
-                          validator: (input) {
-                            if (birthDateController.text.isEmpty) {
-                              return 'Birth Date must not be empty';
-                            } else {
-                              return null;
-                            }
-                          },
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      child: SizedBox(
-                        width: double.infinity,
-                        height: 50,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            if (formKey.currentState!.validate()) {
-                              int genderValue = getGenderValue(gender);
-                              BlocProvider.of<AddUpdatePersonInfoCubit>(
-                                context,
-                              ).addUpdatePersonData(
-                                firstName: firstNameController.text,
-                                lastName: lastNameControlloer.text,
-                                country: nationality!,
-                                gender: genderValue,
-                                level: level!,
-                                faculty: facultyController.text,
-                                universityName: universityNameController.text,
-                                phoneNumber: '${mobileNumberController.text}',
-                                alternativePhoneNumber:
-                                    '${alternativemobileNumberController.text}',
-                                city: city!,
-                                area: area!,
-                                dateOfBirth: birthDateController.text,
-                              );
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.blue,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                              validator: (input) {
+                                if (firstNameController.text.isEmpty) {
+                                  return 'First Name must not be empty';
+                                } else {
+                                  return null;
+                                }
+                              },
                             ),
                           ),
-                          child: Text(
-                            (state is AddUpdatePersonInfoLoading)
-                                ? '...'
-                                : "Save Changes",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          SizedBox(width: 16),
+                          Expanded(
+                            child: TextFormField(
+                              controller: lastNameControlloer,
+
+                              decoration: getOutlinedDecoration(
+                                'Last Name',
+                                hintText:
+                                    lastNameControlloer.text.isEmpty
+                                        ? 'Enter Last name'
+                                        : null,
+                              ),
+                              validator: (input) {
+                                if (lastNameControlloer.text.isEmpty) {
+                                  return 'Last Name must not be empty';
+                                } else {
+                                  return null;
+                                }
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      const SizedBox(height: 16),
+                      const Text(
+                        "Gender *",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: AppColors.blue,
+                        ),
+                      ),
+                      FormField<String>(
+                        validator: _validateGenderSelection,
+                        builder: (FormFieldState<String> state) {
+                          return Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  _buildRadioOption(value: 'Male'),
+                                  _buildRadioOption(value: 'Female'),
+                                ],
+                              ),
+                              if (state.hasError)
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 8.0),
+                                  child: Text(
+                                    state.errorText!,
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                ),
+                            ],
+                          );
+                        },
+                      ),
+                      const SizedBox(height: 10),
+                      TextFormField(
+                        controller: mobileNumberController,
+                        decoration: getOutlinedDecoration('Mobile Number'),
+                        keyboardType: TextInputType.phone,
+                        validator: (input) {
+                          if (mobileNumberController.text.isEmpty) {
+                            return 'Mobile number must not be empty';
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      const SizedBox(height: 16),
+
+                      TextFormField(
+                        controller: alternativemobileNumberController,
+                        decoration: getOutlinedDecoration(
+                          'Alternative Mobile Number',
+                        ),
+                        keyboardType: TextInputType.phone,
+                        validator: (input) {
+                          if (alternativemobileNumberController.text.isEmpty) {
+                            return 'Mobile number must not be empty';
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      const SizedBox(height: 16),
+
+                      // Nationality, City, Area
+                      buildLabelDropdownRow(
+                        'Nationality',
+                        nationalities,
+                        nationality,
+                        (val) => setState(() => nationality = val),
+                      ),
+                      buildLabelDropdownRow(
+                        'city',
+                        cities,
+                        city,
+                        (val) => setState(() => city = val),
+                      ),
+                      buildLabelDropdownRow(
+                        'Area',
+                        areas,
+                        area,
+                        (val) => setState(() => area = val),
+                      ),
+
+                      SizedBox(height: 12),
+
+                      // Row(
+                      //   children: [
+                      //     Checkbox(
+                      //       value: currentlyEnrolled,
+                      //       onChanged:
+                      //           (value) =>
+                      //               setState(() => currentlyEnrolled = value!),
+                      //     ),
+                      //     const Text(
+                      //       "Currently Enrolled",
+                      //       style: TextStyle(fontSize: 16),
+                      //     ),
+                      //   ],
+                      // ),
+                      const SizedBox(height: 10),
+                      const Text(
+                        "Date Of Birth",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 6),
+
+                      GestureDetector(
+                        onTap: () => _selectDate(context, birthDateController),
+                        child: AbsorbPointer(
+                          child: TextFormField(
+                            controller: birthDateController,
+                            decoration: getOutlinedDecoration('Birth Date'),
+                            validator: (input) {
+                              if (birthDateController.text.isEmpty) {
+                                return 'Birth Date must not be empty';
+                              } else {
+                                return null;
+                              }
+                            },
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 20),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        child: SizedBox(
+                          width: double.infinity,
+                          height: 50,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              if (formKey.currentState!.validate()) {
+                                int genderValue = getGenderValue(gender);
+                                BlocProvider.of<AddUpdatePersonInfoCubit>(
+                                  context,
+                                ).addUpdatePersonData(
+                                  firstName: firstNameController.text,
+                                  lastName: lastNameControlloer.text,
+                                  country: nationality!,
+                                  gender: genderValue,
+                                  level: level!,
+                                  faculty: facultyController.text,
+                                  universityName: universityNameController.text,
+                                  phoneNumber: mobileNumberController.text,
+                                  alternativePhoneNumber:
+                                      alternativemobileNumberController.text,
+                                  city: city!,
+                                  area: area!,
+                                  dateOfBirth: birthDateController.text,
+                                );
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.blue,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                            child: Text(
+                              (state is AddUpdatePersonInfoLoading)
+                                  ? '...'
+                                  : "Save Changes",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );

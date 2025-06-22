@@ -47,7 +47,8 @@ class HomeViewItemTopCompany extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             child:
                 (imageUrl == '')
-                    ? Image.asset('asstes/images.jpg',fit: BoxFit.cover,)
+                    ?
+                     Image.asset('asstes/images.jpg',fit: BoxFit.cover,)
                     : Image.network(imageUrl!, fit: BoxFit.cover),
           ),
         ),

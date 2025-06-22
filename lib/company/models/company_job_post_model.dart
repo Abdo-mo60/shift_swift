@@ -18,6 +18,7 @@ class CompanyJobPostModel {
   String? message;
   dynamic avgRatingScore;
   int? numberOfReviews;
+  String ? image;
 
 
   CompanyJobPostModel({
@@ -36,6 +37,7 @@ class CompanyJobPostModel {
     this.message,
     this.avgRatingScore,
     this.numberOfReviews,
+    this.image,
   });
   factory CompanyJobPostModel.fromJson({job,avgRating, numOfreviews}) {
     if (job is Map<String, dynamic>) {
@@ -64,6 +66,7 @@ class CompanyJobPostModel {
         keyWords: job['keywords'],
         avgRatingScore: avgRating,
         numberOfReviews:numOfreviews ,
+        image: job['imageUrl']??'',
       );
     } else if (job is List) {
       return CompanyJobPostModel(message: job[0]);

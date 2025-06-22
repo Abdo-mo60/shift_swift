@@ -15,6 +15,7 @@ import 'package:shiftswift/profile/Profile%20All/Edit%20profile/Edit_profile_hom
 import 'package:shiftswift/profile/Profile%20All/HelpCenter/help_center.dart';
 import 'package:shiftswift/profile/Profile%20All/MyReview/my_review.dart';
 import 'package:shiftswift/profile/Profile%20All/Settting/settting_home_user.dart';
+import 'package:shiftswift/profile/Profile%20All/profile_person.dart';
 import 'package:shiftswift/profile/Services/get_profile_pic_service.dart';
 import 'package:shiftswift/profile/widgets/user_profile_data.dart';
 
@@ -205,15 +206,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Expanded(
               child: ListView(
                 children: [
-                  // if (accType == 'Member') ...[
-                  //   _buildProfileOption(
-                  //     Icons.person,
-                  //     "View Profile",
-                  //     context,
-                  //     ProfilePerson(),
-                  //   ),
-                  // ]
-                  if (accType == 'Company') ...[
+                  if (accType == 'Member') ...[
+                    _buildProfileOption(
+                      Icons.person,
+                      "View Profile",
+                      context,
+                      ProfilePerson(),
+                    ),
+                  ] else if (accType == 'Company') ...[
                     _buildProfileOption(
                       Icons.star,
                       "My Review",

@@ -11,11 +11,11 @@ class ApplicantDetailsModel {
    String ?title;
    String? description;
    String? postedOn;
-  // dynamic experienceTitle;
-  // dynamic experienceCompanyName;
-  // dynamic experienceStartDate;
-  // dynamic experienceEndDate;
-  // dynamic experienceDescription;
+  dynamic experienceTitle;
+  dynamic experienceCompanyName;
+  dynamic experienceStartDate;
+  dynamic experienceEndDate;
+  dynamic experienceDescription;
   // dynamic skills;
   String? lastWorkCompanyPic;
   String? imageUrl;
@@ -37,11 +37,11 @@ class ApplicantDetailsModel {
     required this.description,
     required this.postedOn,
 
-    // required this.experienceTitle,
-    // required this.experienceCompanyName,
-    // required this.experienceStartDate,
-    // required this.experienceEndDate,
-    // required this.experienceDescription,
+    required this.experienceTitle,
+    required this.experienceCompanyName,
+    required this.experienceStartDate,
+    required this.experienceEndDate,
+    required this.experienceDescription,
     // this.skills,
     this.lastWorkCompanyPic,
     this.companyFirstName,
@@ -55,15 +55,15 @@ class ApplicantDetailsModel {
   factory ApplicantDetailsModel.fromJson(Map<String, dynamic> json) {
     final data = json['data'];
     final List educations = data['educations'];
-    // final dynamic experienceList = data['experiences'];
+    final dynamic experienceList = data['experiences'];
 
     // final dynamic skillList = data['skills'];
-    // dynamic getExperienceField(dynamic experienceList, String key) {
+    dynamic getExperienceField(dynamic experienceList, String key) {
 
-    //   return (experienceList is List&&  experienceList.isNotEmpty)
-    //       ? experienceList[0][key]
-    //       : []; // Return empty string if not found or empty list
-    // }
+      return (experienceList is List&&  experienceList.isNotEmpty)
+          ? experienceList[0][key]
+          : []; // Return empty string if not found or empty list
+    }
     // dynamic getSkillField(dynamic skillList, String key) {
     //   return (skillList is List&&  skillList.isNotEmpty)
     //       ? skillList[0][key]
@@ -97,11 +97,11 @@ class ApplicantDetailsModel {
       title: (data['lastWorkInJob']==null )?'': data['lastWorkInJob']['title'],
       description:  (data['lastWorkInJob']==null )?'': data['lastWorkInJob']['description'],
       postedOn:  formattedDate,
-      // experienceTitle: getExperienceField(experienceList, 'title'),
-      // experienceCompanyName: getExperienceField(experienceList, 'companyName'),
-      // experienceStartDate: getExperienceField(experienceList, 'startDate'),
-      // experienceEndDate: getExperienceField(experienceList, 'endDate'),
-      // experienceDescription: getExperienceField(experienceList, 'description'),
+      experienceTitle: getExperienceField(experienceList, 'title'),
+      experienceCompanyName: getExperienceField(experienceList, 'companyName'),
+      experienceStartDate: getExperienceField(experienceList, 'startDate'),
+      experienceEndDate: getExperienceField(experienceList, 'endDate'),
+      experienceDescription: getExperienceField(experienceList, 'description'),
       // skills:getSkillField(skillList, 'name')
 
       //   fullName: data['fullName'] ?? '',
